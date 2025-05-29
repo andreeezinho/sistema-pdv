@@ -1,0 +1,6 @@
+public/img/user/icons/**
+!public/img/user/icons/default.png
+src/env/app.php
+.phpunit.cache
+vendor
+vendor/**
