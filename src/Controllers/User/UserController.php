@@ -143,7 +143,7 @@ class UserController extends Controller {
     public function auth(Request $request){
         $data = $request->getBodyParams();
 
-        $user = $this->userRepository->login($data['email'], $data['senha']);
+        $user = $this->userRepository->login($data['usuario'], $data['senha']);
 
         if($this->auth->login($user)){
             return $this->router->redirect('dashboard');
@@ -151,7 +151,7 @@ class UserController extends Controller {
 
         return $this->router->view('login/login', [
             'erro' => 'Usuário não encontrado',
-            'email' => $data['email'] ?? null
+            'usuario' => $data['usuario'] ?? null
         ]);
     }
 

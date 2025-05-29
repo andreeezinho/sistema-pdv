@@ -17,11 +17,26 @@
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <?php
+                if(isset($erro)){
+            ?>
+                <div id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-100 rounded-lg bg-red-50" role="alert">
+                    <div class="flex items-center">
+                        <svg class="shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                        </svg>
+                        <?= $erro ?>
+                    </div>
+                </div>
+            <?php   
+                }
+            ?>
+
             <form class="space-y-6" action="/login" method="POST">
                 <div>
-                    <label for="email" class="block text-sm/6 font-medium text-gray-900">Email</label>
+                    <label for="usuario" class="block text-sm/6 font-medium text-gray-900">Usuário</label>
                     <div class="mt-2">
-                        <input type="email" name="email" id="email" autocomplete="email" required class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                        <input type="text" name="usuario" id="usuario" required value="<?= $usuario ?? null ?>" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
                     </div>
                 </div>
 
@@ -35,7 +50,6 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                         </svg>
-
                     </div>
                     <div class="text-sm mt-3">
                         <span href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Esqueceu sua senha?</span>

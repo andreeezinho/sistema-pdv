@@ -22,14 +22,14 @@ class UserRepository implements IUser {
         $this->model = new User();
     }
 
-    public function login(string $email, string $senha){
-        if(empty($email) || empty($senha)){
+    public function login(string $usuario, string $senha){
+        if(empty($usuario) || empty($senha)){
             return null;
         }
 
         $sql = "SELECT * FROM " . self::TABLE . "
             WHERE 
-                email = :email
+                usuario = :usuario
             AND
                 ativo = 1
         ";
@@ -37,7 +37,7 @@ class UserRepository implements IUser {
         $stmt = $this->conn->prepare($sql);
 
         $stmt->execute([
-            ':email' => $email
+            ':usuario' => $usuario
         ]);
 
         $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, self::CLASS_NAME);

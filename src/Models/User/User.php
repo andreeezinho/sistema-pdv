@@ -10,11 +10,13 @@ class User {
 
     public $id;
     public $uuid;
+    public $usuario;
     public $nome;
     public $email;
     public $cpf;
     public $telefone;
     public $senha;
+    public $is_admin;
     public $ativo;
     public $icone;
     public $created_at;
@@ -26,11 +28,13 @@ class User {
         $user = new User();
         $user->id = $data['id'] ?? null;
         $user->uuid = $data['uuid'] ?? $this->generateUUID();
+        $user->usuario = $data['usuario'] ?? null;
         $user->nome = $data['nome'] ?? null;
         $user->email = $data['email'] ?? null;
         $user->cpf = $data['cpf'] ?? null;
         $user->telefone = $data['telefone'] ?? null;
         $user->senha = password_hash($data['senha'], PASSWORD_BCRYPT);
+        $user->is_admin = ($data['is_admin'] == "") ? 0 : $data['is_admin'];
         $user->ativo = ($data['ativo'] == "") ? 1 : $data['ativo'];
         $user->icone = ($data['icone'] == "") ? "default.png" : $data['icone'];
         $user->created_at = $data['created_at'] ?? null;
