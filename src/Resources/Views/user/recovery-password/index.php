@@ -34,7 +34,7 @@
 
                         <div class="col-12 form-group my-3">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" class="form-control py-2" placeholder="Insira seu email" value="<?= $email ?>">
+                            <input type="email" id="email" name="email" class="form-control py-2" placeholder="Insira seu email" value="<?= $email ?? null ?>">
                         </div>
 
                         <div class="text-center">

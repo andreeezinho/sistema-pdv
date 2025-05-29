@@ -52,7 +52,7 @@
                         </svg>
                     </div>
                     <div class="text-sm mt-3">
-                        <span href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Esqueceu sua senha?</span>
+                        <a href="/recuperar-senha" class="font-semibold text-indigo-600 hover:text-indigo-500">Esqueceu sua senha?</a>
                     </div>
                 </div>
 
