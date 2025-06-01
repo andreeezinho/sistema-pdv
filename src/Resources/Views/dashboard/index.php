@@ -90,12 +90,24 @@
             </div>
 
             <div class="h-[50dvh] overflow-y-scroll">
-                <div class="flex bg-white p-2 border border-gray-200 mb-1">
-                    <p class="w-[25%] text-gray-800 border-r border-gray-200 pl-2">Código</p>
-                    <p class="w-[25%] text-gray-800 border-r border-gray-200 pl-2">Código</p>
-                    <p class="w-[25%] text-gray-800 border-r border-gray-200 pl-2">R$ 0,00</p>
-                    <p class="w-[25%] text-gray-800 pl-2">Código</p>
-                </div>
+                <?php
+                    if(count($last_sales) > 0){
+                        foreach($last_sales as $venda){
+                ?>
+                        <div class="flex bg-white p-2 border border-gray-200 mb-1">
+                            <p class="w-[25%] text-gray-800 border-r border-gray-200 pl-2"><?= $venda->id ?></p>
+                            <p class="w-[25%] text-gray-800 border-r border-gray-200 pl-2"><?= $venda->usuario ?></p>
+                            <p class="w-[25%] text-gray-800 border-r border-gray-200 pl-2">R$ <?= number_format($venda->total,2,",",".") ?></p>
+                            <p class="w-[25%] text-gray-800 pl-2"><?= $venda->id ?></p>
+                        </div>
+                <?php
+                        }
+                    }else{
+                ?>
+
+                <?php
+                    }
+                ?>
             </div>
         </div>
 

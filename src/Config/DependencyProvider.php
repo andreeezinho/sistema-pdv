@@ -10,6 +10,8 @@ use App\Interfaces\Permissao\IPermissao;
 use App\Repositories\Permissao\PermissaoRepository;
 use App\Interfaces\Permissao\IPermissaoUser;
 use App\Repositories\Permissao\PermissaoUserRepository;
+use App\Interfaces\Venda\IVenda;
+use App\Repositories\Venda\VendaRepository;
 
 class DependencyProvider {
 
@@ -43,6 +45,12 @@ class DependencyProvider {
             ->set(
                 IRecoveryPassword::class,
                 new RecoveryPasswordRepository()
+            );
+
+        $this->container
+            ->set(
+                IVenda::class,
+                new VendaRepository()
             );
 
     }
