@@ -89,11 +89,13 @@
                 <p class="w-[25%] text-gray-500 pl-2">Pagamento</p>
             </div>
 
-            <div class="flex bg-white p-2 border border-gray-200 mb-1">
-                <p class="w-[25%] text-gray-800 border-r border-gray-200 pl-2">Código</p>
-                <p class="w-[25%] text-gray-800 border-r border-gray-200 pl-2">Código</p>
-                <p class="w-[25%] text-gray-800 border-r border-gray-200 pl-2">R$</p>
-                <p class="w-[25%] text-gray-800 pl-2">Código</p>
+            <div class="h-[50dvh] overflow-y-scroll">
+                <div class="flex bg-white p-2 border border-gray-200 mb-1">
+                    <p class="w-[25%] text-gray-800 border-r border-gray-200 pl-2">Código</p>
+                    <p class="w-[25%] text-gray-800 border-r border-gray-200 pl-2">Código</p>
+                    <p class="w-[25%] text-gray-800 border-r border-gray-200 pl-2">R$ 0,00</p>
+                    <p class="w-[25%] text-gray-800 pl-2">Código</p>
+                </div>
             </div>
         </div>
 
