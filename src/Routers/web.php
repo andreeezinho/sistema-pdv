@@ -82,5 +82,6 @@ $router->create("POST", "/perfil/deletar", [$userPerfilController, 'destroy'], $
 
 //pdv
 $router->create("GET", "/pdv", [$pdvController, 'index'], $auth);
+$router->create("GET", "/pdv/tal/finalizar", [$pdvController, 'finalizar'], $auth);
 
 return $router;

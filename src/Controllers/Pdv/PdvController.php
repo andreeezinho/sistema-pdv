@@ -22,4 +22,8 @@ class PdvController extends Controller {
         return $this->router->view('pdv/index', []);
     }
 
+    public function finalizar(Request $request){
+        return $this->router->view('pdv/finalizar', []);
+    }
+
 }
