@@ -12,6 +12,8 @@ use App\Interfaces\Permissao\IPermissaoUser;
 use App\Repositories\Permissao\PermissaoUserRepository;
 use App\Interfaces\Venda\IVenda;
 use App\Repositories\Venda\VendaRepository;
+use App\Interfaces\Produto\IProduto;
+use App\Repositories\Produto\ProdutoRepository;
 
 class DependencyProvider {
 
@@ -51,6 +53,12 @@ class DependencyProvider {
             ->set(
                 IVenda::class,
                 new VendaRepository()
+            );
+        
+        $this->container
+            ->set(
+                IProduto::class,
+                new ProdutoRepository()
             );
 
     }

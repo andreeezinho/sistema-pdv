@@ -12,6 +12,7 @@ use App\Controllers\Permissao\PermissaoUserController;
 use App\Controllers\User\UserPerfilController;
 use App\Controllers\User\RecoveryPasswordController;
 use App\Controllers\Pdv\PdvController;
+use App\Controllers\Produto\ProdutoController;
 
 
 $router = new Router();
@@ -29,6 +30,7 @@ $permissaoUserController = $container->get(PermissaoUserController::class);
 $userPerfilController = $container->get(UserPerfilController::class);
 $recoveryPasswordController = $container->get(RecoveryPasswordController::class);
 $pdvController = $container->get(PdvController::class);
+$produtoController = $container->get(ProdutoController::class);
 
 //rotas
 
@@ -83,5 +85,8 @@ $router->create("POST", "/perfil/deletar", [$userPerfilController, 'destroy'], $
 //pdv
 $router->create("GET", "/pdv", [$pdvController, 'index'], $auth);
 $router->create("GET", "/pdv/tal/finalizar", [$pdvController, 'finalizar'], $auth);
+
+//produtos
+$router->create("GET", "/produtos", [$produtoController, 'index'], $auth);
 
 return $router;
