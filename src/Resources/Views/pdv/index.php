@@ -31,20 +31,20 @@
 
                 <div class="h-2/4 p-3 pt-8">
                     <form action="" method="POST">
-                        <div class="grid gap-2  grid-cols-2">
+                        <div class="grid gap-2 grid-cols-2">
                             <div>
                                 <label for="codigo" class="block mb-1 text-sm font-medium text-gray-900">Código</label>
-                                <input type="number" id="codigo" autofocus class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+                                <input type="number" name="codigo" id="codigo" autofocus class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
                             </div>
 
                             <div>
                                 <label for="quantidade" class="block mb-1 text-sm font-medium text-gray-900">Quant.</label>
-                                <input type="number" id="quantidade" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required value="1" />
+                                <input type="number" name="quantidade" id="quantidade" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required value="1" />
                             </div>
 
                             <div>
                                 <label for="desconto" class="block mb-1 text-sm font-medium text-gray-900">Desconto</label>
-                                <input type="number" id="desconto" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value=0 />
+                                <input type="number" name="desconto" id="desconto" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value=0 />
                             </div>
                         </div>
 

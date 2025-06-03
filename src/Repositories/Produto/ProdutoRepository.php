@@ -58,7 +58,7 @@ class ProdutoRepository implements IProduto {
 
     public function create(array $data){
         $produto = $this->model->create($data);
-
+        
         try{
             $sql = "INSERT INTO " . self::TABLE . "
                 SET
@@ -66,9 +66,9 @@ class ProdutoRepository implements IProduto {
                     nome = :nome,
                     codigo = :codigo,
                     preco = :preco,
-                    estoque = estoque,
-                    tipo = tipo,
-                    ativo = ativo
+                    estoque = :estoque,
+                    tipo = :tipo,
+                    ativo = :ativo
             ";
 
             $stmt = $this->conn->prepare($sql);
@@ -80,7 +80,7 @@ class ProdutoRepository implements IProduto {
                 ':preco' => $produto->preco,
                 ':estoque' => $produto->estoque,
                 ':tipo' => $produto->tipo,
-                ':ativo' => $produto->ativo
+                ':ativo' => $produto->ativo ?? 1
             ]);
 
             if(!$create){
@@ -105,9 +105,9 @@ class ProdutoRepository implements IProduto {
                     nome = :nome,
                     codigo = :codigo,
                     preco = :preco,
-                    estoque = estoque,
-                    tipo = tipo,
-                    ativo = ativo
+                    estoque = :estoque,
+                    tipo = :tipo,
+                    ativo = :ativo
                 WHERE 
                     id =:id
             ";
@@ -128,7 +128,7 @@ class ProdutoRepository implements IProduto {
                 return null;
             }
 
-            return $this->findByUId($id);
+            return $this->findById($id);
 
         }catch(\Throwable $th){
             return null;
