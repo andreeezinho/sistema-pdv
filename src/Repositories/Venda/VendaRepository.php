@@ -71,7 +71,7 @@ class VendaRepository implements IVenda {
                     desconto = :desconto,
                     total = :total,
                     situacao = :situacao,
-                    usuarios_id = usuarios_id
+                    usuarios_id = :usuarios_id
             ";
 
             $stmt = $this->conn->prepare($sql);
@@ -98,11 +98,45 @@ class VendaRepository implements IVenda {
     }
 
     public function update(array $data, int $id){
-
+        
     }
 
     public function delete(int $id){
 
+    }
+
+    public function findByLastUserSale(int $usuarios_id){
+        try{
+            $sql = "SELECT * FROM " . self::TABLE . "
+                WHERE 
+                    updated_at <= NOW() 
+                AND 
+                    situacao = 'em andamento'
+                AND
+                    usuarios_id = :usuarios_id
+                ORDER BY 
+                    updated_at DESC 
+                LIMIT 1
+                ";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([':usuarios_id' => $usuarios_id]);
+
+            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, self::CLASS_NAME);
+            $result = $stmt->fetch();
+
+            if(empty($result)){
+                return null;
+            }
+
+            return $result;
+
+        }catch(\Throwable $th){
+            return null;
+        }finally{
+            Database::getInstance()->closeConnection();
+        }
     }
 
 }

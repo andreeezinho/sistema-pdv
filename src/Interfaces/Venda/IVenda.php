@@ -12,6 +12,8 @@ interface IVenda {
 
     public function delete(int $id);
 
+    public function findByLastUserSale(int $usuarios_id);
+
     public function findById(int $id);
 
     public function findByUuid(string $uuid);

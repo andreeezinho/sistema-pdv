@@ -161,4 +161,21 @@ class ProdutoRepository implements IProduto {
         }
     }
 
+    public function findByCode(int $codigo){
+        $stmt = $this->conn->prepare(
+            "SELECT * FROM " . self::TABLE . " WHERE codigo = :codigo AND ativo = 1"
+        );
+
+        $stmt->execute([':codigo' => $codigo]);
+
+        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, self::CLASS_NAME);
+        $result = $stmt->fetch();
+
+        if(empty($result)){
+            return null;
+        }
+
+        return $result;
+    }
+
 }

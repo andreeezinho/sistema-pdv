@@ -12,6 +12,8 @@ interface IProduto {
 
     public function delete(int $id);
 
+    public function findByCode(int $codigo);
+
     public function findById(int $id);
 
     public function findByUuid(string $uuid);
