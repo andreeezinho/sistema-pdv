@@ -54,6 +54,10 @@ class VendaRepository implements IVenda {
 
         $sql .= " ORDER BY created_at ASC";
 
+        if(isset($params['dash']) && !empty($params['dash'])){
+            $sql .= " LIMIT 20";
+        };
+
         $stmt = $this->conn->prepare($sql);
 
         $stmt->execute($bindings);

@@ -25,7 +25,7 @@ class DashboardController extends Controller {
 
         $usuarios = $this->userRepository->all();
 
-        $last_sales = $this->vendaRepository->all(['data' => '2025-06-01', 'situacao' => 'concluida']);
+        $last_sales = $this->vendaRepository->all(['data' => date("Y-m-d"), 'situacao' => 'concluida', 'dash' => true]);
 
         return $this->router->view('dashboard/index', [
             'user' => $user,

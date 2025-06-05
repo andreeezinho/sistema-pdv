@@ -84,9 +84,9 @@
 
             <div class="flex px-2 border-b border-gray-200 my-4">
                 <p class="w-[25%] text-gray-500 border-r border-gray-200 pl-2">Código</p>
-                <p class="w-[25%] text-gray-500 border-r border-gray-200 pl-2">Produtos</p>
+                <p class="w-[25%] text-gray-500 border-r border-gray-200 pl-2">Desconto</p>
                 <p class="w-[25%] text-gray-500 border-r border-gray-200 pl-2">Total</p>
-                <p class="w-[25%] text-gray-500 pl-2">Pagamento</p>
+                <p class="w-[25%] text-gray-500 pl-2">Troco</p>
             </div>
 
             <div class="h-[50dvh] overflow-y-scroll">
@@ -96,9 +96,9 @@
                 ?>
                         <div class="flex bg-white p-2 border border-gray-200 mb-1">
                             <p class="w-[25%] text-gray-800 border-r border-gray-200 pl-2"><?= $venda->id ?></p>
-                            <p class="w-[25%] text-gray-800 border-r border-gray-200 pl-2"><?= $venda->usuario ?></p>
+                            <p class="w-[25%] text-gray-800 border-r border-gray-200 pl-2"><?= $venda->desconto ?>%</p>
                             <p class="w-[25%] text-gray-800 border-r border-gray-200 pl-2">R$ <?= number_format($venda->total,2,",",".") ?></p>
-                            <p class="w-[25%] text-gray-800 pl-2"><?= $venda->id ?></p>
+                            <p class="w-[25%] text-gray-800 pl-2">R$ <?= number_format($venda->troco,2,",",".") ?></p>
                         </div>
                 <?php
                         }
