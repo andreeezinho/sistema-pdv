@@ -103,4 +103,19 @@ class VendaProdutoRepository implements IVendaProduto {
         return $delete;
     }
 
+    public function deleteAllProductsInSale(int $vendas_id){
+        $sql = "DELETE FROM " . self::TABLE . "
+            WHERE
+                vendas_id = :vendas_id
+        ";
+
+        $stmt = $this->conn->prepare($sql);
+
+        $delete = $stmt->execute([
+            ':vendas_id' => $vendas_id
+        ]);
+
+        return $delete;
+    }
+
 }

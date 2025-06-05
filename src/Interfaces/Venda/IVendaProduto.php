@@ -12,6 +12,8 @@ interface IVendaProduto {
 
     public function delete(int $id, $vendas_id, $produtos_id);
 
+    public function deleteAllProductsInSale(int $vendas_id);
+
     public function findByUserId(int $id);
     
     public function findById(int $id);

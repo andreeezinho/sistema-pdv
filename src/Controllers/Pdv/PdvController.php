@@ -109,6 +109,22 @@ class PdvController extends Controller {
         return $this->router->redirect('pdv');
     }
 
+    public function removeAllProducts(Request $request, $uuid){
+        $pdv = $this->vendaRepository->findByUuid($uuid);
+
+        if(!$pdv){
+            return $this->router->redirect('pdv');
+        }
+
+        $removeAllProducts = $this->vendaProdutoRepository->deleteAllProductsInSale($pdv->id);
+        
+        if(!$removeAllProducts){
+            return $this->router->redirect('404');
+        }
+
+        return $this->router->redirect('pdv');
+    }
+
     public function finalizar(Request $request){
         return $this->router->view('pdv/finalizar', []);
     }
