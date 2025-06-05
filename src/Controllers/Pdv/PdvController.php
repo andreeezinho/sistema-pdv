@@ -8,7 +8,9 @@ use App\Config\Auth;
 use App\Interfaces\User\IUser;
 use App\Interfaces\Venda\IVenda;
 use App\Interfaces\Venda\IVendaProduto;
+use App\Interfaces\Venda\IVendaPagamento;
 use App\Interfaces\Produto\IProduto;
+use App\Interfaces\Pagamento\IPagamento;
 
 class PdvController extends Controller {
 
@@ -17,14 +19,18 @@ class PdvController extends Controller {
     protected $vendaRepository;
     protected $vendaProdutoRepository;
     protected $produtoRepository;
+    protected $pagamentoRepository;
+    protected $vendaPagamentoRepository;
 
-    public function __construct(IUser $userRepository, IVenda $vendaRepository, IVendaProduto $vendaProdutoRepository, IProduto $produtoRepository, Auth $auth){
+    public function __construct(IUser $userRepository, IVenda $vendaRepository, IVendaProduto $vendaProdutoRepository, IProduto $produtoRepository, IPagamento $pagamentoRepository, IVendaPagamento $vendaPagamentoRepository, Auth $auth){
         parent::__construct();
         $this->auth = $auth;
         $this->userRepository = $userRepository;
         $this->vendaRepository = $vendaRepository;
         $this->vendaProdutoRepository = $vendaProdutoRepository;
         $this->produtoRepository = $produtoRepository;
+        $this->pagamentoRepository = $pagamentoRepository;
+        $this->vendaPagamentoRepository = $vendaPagamentoRepository;
     }
 
     public function index(Request $request){
@@ -125,7 +131,7 @@ class PdvController extends Controller {
         return $this->router->redirect('pdv');
     }
 
-    public function finalizar(Request $request, $uuid){
+    public function viewSaleInfos(Request $request, $uuid){
         $pdv = $this->vendaRepository->findByUuid($uuid);
 
         if(!$pdv){
@@ -140,10 +146,42 @@ class PdvController extends Controller {
             $totalPriceSale = priceWithDiscount($allProductsInSale);
         }
 
+        $allPayments = $this->pagamentoRepository->all(['ativo' => 1]);
+
+        $pagamento = $this->vendaPagamentoRepository->findBySaleId($pdv->id);
+
+        $pagamento = $this->pagamentoRepository->findById($pagamento->pagamento_id);
+        
         return $this->router->view('pdv/finalizar', [
             'venda' => $pdv,
-            'total' => $totalPriceSale
+            'total' => $totalPriceSale,
+            'allPayments' => $allPayments,
+            'pagamento' => $pagamento
         ]);
+    }
+
+    public function finish(Request $request, $uuid){
+        $pdv = $this->vendaRepository->findByUuid($uuid);
+
+        if(!$pdv){
+            return $this->router->redirect('pdv');
+        }
+
+        $totalPriceSale = $pdv->total;
+
+        if(isset($pdv->total) || $pdv->total != 0){
+            $allProductsInSale = $this->vendaProdutoRepository->allProductsOnSale($pdv->id);
+
+            $totalPriceSale = priceWithDiscount($allProductsInSale);
+        }
+
+        $finish = $this->vendaRepository->finishSale($pdv->id);
+
+        if(is_null($finish)){
+            return $this->router->redirect('pdv/'.$pdv->uuid.'/finalizar');
+        }
+
+        return $this->router->redirect('pdv');
     }
 
     public function subtractPaidValue(Request $request, $uuid){
@@ -166,6 +204,48 @@ class PdvController extends Controller {
                 'venda' => $pdv,
                 'total' => $totalPriceSale,
                 'erro' => 'Erro ao atualizar'
+            ]);
+        }
+
+        return $this->router->redirect('pdv/'.$pdv->uuid.'/finalizar');
+    }
+
+    public function findPaymentMethod(Request $request, $uuid){
+        $pdv = $this->vendaRepository->findByUuid($uuid);
+
+        if(!$pdv){
+            return $this->router->redirect('pdv');
+        }
+
+        $totalPriceSale = $pdv->total;
+
+        if(isset($pdv->total) || $pdv->total != 0){
+            $allProductsInSale = $this->vendaProdutoRepository->allProductsOnSale($pdv->id);
+
+            $totalPriceSale = priceWithDiscount($allProductsInSale);
+        }
+
+        $data = $request->getBodyParams();
+
+        $pagamento = $this->pagamentoRepository->findById($data['pagamento']);
+
+        if(!$pagamento){
+            return $this->router->redirect('404');
+        }
+
+        $findBySaleId = $this->vendaPagamentoRepository->findBySaleId($pdv->id);
+
+        if($findBySaleId){
+            $delete = $this->vendaPagamentoRepository->delete($pdv->id, $pagamento->id);
+        }
+
+        $create = $this->vendaPagamentoRepository->create($pdv->id, $pagamento->id);
+
+        if(is_null($create)){
+            return $this->router->view('pdv/finalizar', [
+                'venda' => $pdv,
+                'total' => $totalPriceSale,
+                'erro' => 'Erro ao atualizar a forma de pagamento'
             ]);
         }
 

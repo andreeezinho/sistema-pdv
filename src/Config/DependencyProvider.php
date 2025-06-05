@@ -16,6 +16,10 @@ use App\Interfaces\Venda\IVendaProduto;
 use App\Repositories\Venda\VendaProdutoRepository;
 use App\Interfaces\Produto\IProduto;
 use App\Repositories\Produto\ProdutoRepository;
+use App\Interfaces\Pagamento\IPagamento;
+use App\Repositories\Pagamento\PagamentoRepository;
+use App\Interfaces\Venda\IVendaPagamento;
+use App\Repositories\Venda\VendaPagamentoRepository;
 
 class DependencyProvider {
 
@@ -67,6 +71,18 @@ class DependencyProvider {
             ->set(
                 IProduto::class,
                 new ProdutoRepository()
+            );
+
+        $this->container
+            ->set(
+                IPagamento::class,
+                new PagamentoRepository()
+            );
+
+        $this->container
+            ->set(
+                IVendaPagamento::class,
+                new VendaPagamentoRepository()
             );
 
     }

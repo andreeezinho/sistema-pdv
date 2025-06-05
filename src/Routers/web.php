@@ -85,8 +85,10 @@ $router->create("POST", "/perfil/deletar", [$userPerfilController, 'destroy'], $
 //pdv
 $router->create("GET", "/pdv", [$pdvController, 'index'], $auth);
 $router->create("GET", "/pdv/{uuid}", [$pdvController, 'pdv'], $auth);
-$router->create("GET", "/pdv/{uuid}/finalizar", [$pdvController, 'finalizar'], $auth);
+$router->create("GET", "/pdv/{uuid}/finalizar", [$pdvController, 'viewSaleInfos'], $auth);
+$router->create("POST", "/pdv/{uuid}/finalizar", [$pdvController, 'finish'], $auth);
 $router->create("POST", "/pdv/{uuid}/finalizar/troco", [$pdvController, 'subtractPaidValue'], $auth);
+$router->create("POST", "/pdv/{uuid}/finalizar/pagamento", [$pdvController, 'findPaymentMethod'], $auth);
 $router->create("POST", "/pdv/{uuid}/cancelar", [$pdvController, 'removeAllProducts'], $auth);
 
 //vendaProdutos
@@ -100,5 +102,8 @@ $router->create("POST", "/produtos/cadastro", [$produtoController, 'store'], $au
 $router->create("GET", "/produtos/{uuid}/editar", [$produtoController, 'edit'], $auth);
 $router->create("POST", "/produtos/{uuid}/editar", [$produtoController, 'update'], $auth);
 $router->create("POST", "/produtos/{uuid}/deletar", [$produtoController, 'destroy'], $auth);
+
+//formas-de-pagamentos
+
 
 return $router;

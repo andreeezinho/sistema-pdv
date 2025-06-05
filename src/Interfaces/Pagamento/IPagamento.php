@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Interfaces\Venda;
+namespace App\Interfaces\Pagamento;
 
-interface IVenda {
+interface IPagamento {
 
     public function all(array $params = []);
 
@@ -10,11 +10,7 @@ interface IVenda {
 
     public function update(array $data, int $id);
 
-    public function finishSale(int $id);
-
     public function delete(int $id);
-
-    public function findByLastUserSale(int $usuarios_id);
 
     public function findById(int $id);
 

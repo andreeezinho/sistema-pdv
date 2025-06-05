@@ -83,7 +83,7 @@ class VendaProdutoRepository implements IVendaProduto {
     public function updateQuantity(float $quantity, int $id){}
 
     public function delete(int $id, $vendas_id, $produtos_id){
-         $sql = "DELETE FROM " . self::TABLE . "
+        $sql = "DELETE FROM " . self::TABLE . "
             WHERE
                 id = :id
             AND

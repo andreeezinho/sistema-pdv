@@ -35,10 +35,10 @@
                 <h3 class="text-2xl font-bold tracking-tight text-gray-900">Pagamento</h3>
 
                 <div class="flex w-full mt-9">
-                    <form action="" method="POST" class="w-1/6">
-                        <input type="number" class="w-full border border-gray-300 rounded-s-lg bg-neutral-50 p-3 text-2xl text-gray-800 px-8 text-center">
+                    <form action="/pdv/<?= $venda->uuid ?>/finalizar/pagamento" method="POST" class="w-1/6">
+                        <input type="number" name="pagamento" id="pagamento" value="<?= $pagamento->id ?? null ?>" class="w-full border border-gray-300 rounded-s-lg bg-neutral-50 p-3 text-2xl text-gray-800 px-8 text-center">
                     </form>
-                    <p class="w-5/6 border-s border-y border-gray-300 bg-neutral-50 p-3 text-2xl text-gray-800" value="0"> Forma de Pagamento </p>
+                    <p class="w-5/6 border-s border-y border-gray-300 bg-neutral-50 p-3 text-2xl text-gray-800" value="0"> <?= $pagamento->forma ?? "Forma de pagamento" ?> </p>
                     <button type="button" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="w-1/6 border border-y border-gray-300 rounded-e-lg bg-neutral-50 hover:bg-neutral-200 p-3 text-2xl text-gray-800 text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mx-auto">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
@@ -69,12 +69,20 @@
                                             </thead>
                                             <tbody>
                                                 <tr class="bg-white border-b border-gray-200 hover:bg-gray-200 hover:cursor-pointer">
-                                                    <td class="px-6 py-4">
-                                                        1
-                                                    </td>
-                                                    <td class="px-6 py-4">
-                                                        Crédito
-                                                    </td>
+                                                    <?php
+                                                        if(count($allPayments) > 0){
+                                                            foreach($allPayments as $pagamento){
+                                                    ?>
+                                                        <td class="px-6 py-4">
+                                                            <?= $pagamento->id ?>
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            <?= $pagamento->forma ?>
+                                                        </td>
+                                                    <?php
+                                                            }
+                                                        }
+                                                    ?>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -111,7 +119,7 @@
         </div>
 
         <div class="w-full flex gap-2">
-            <form action="" method="POST" class="w-full">
+            <form action="/pdv/<?= $venda->uuid ?>/cancelar" method="POST" class="w-full">
                 <button type="submit" class="flex w-full bg-red-300 hover:bg-red-500 text-white font-bold py-2 px-4 rounded mt-1 justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -129,7 +137,7 @@
                 </button>
             </form>
 
-            <form action="" method="POST" class="w-full">
+            <form action="/pdv/<?= $venda->uuid ?>/finalizar" method="POST" class="w-full">
                 <button type="submit" class="flex w-full bg-violet-300 hover:bg-violet-500 text-white font-bold py-2 px-4 rounded mt-1 justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
