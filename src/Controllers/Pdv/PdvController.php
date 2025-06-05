@@ -117,7 +117,7 @@ class PdvController extends Controller {
         }
 
         $removeAllProducts = $this->vendaProdutoRepository->deleteAllProductsInSale($pdv->id);
-        
+
         if(!$removeAllProducts){
             return $this->router->redirect('404');
         }
@@ -125,8 +125,51 @@ class PdvController extends Controller {
         return $this->router->redirect('pdv');
     }
 
-    public function finalizar(Request $request){
-        return $this->router->view('pdv/finalizar', []);
+    public function finalizar(Request $request, $uuid){
+        $pdv = $this->vendaRepository->findByUuid($uuid);
+
+        if(!$pdv){
+            return $this->router->redirect('pdv');
+        }
+
+        $totalPriceSale = $pdv->total;
+
+        if(isset($pdv->total) || $pdv->total != 0){
+            $allProductsInSale = $this->vendaProdutoRepository->allProductsOnSale($pdv->id);
+
+            $totalPriceSale = priceWithDiscount($allProductsInSale);
+        }
+
+        return $this->router->view('pdv/finalizar', [
+            'venda' => $pdv,
+            'total' => $totalPriceSale
+        ]);
+    }
+
+    public function subtractPaidValue(Request $request, $uuid){
+        $pdv = $this->vendaRepository->findByUuid($uuid);
+
+        if(!$pdv){
+            return $this->router->redirect('pdv');
+        }
+
+        $data = $request->getBodyParams();
+
+        $allProductsInSale = $this->vendaProdutoRepository->allProductsOnSale($pdv->id);
+
+        $data = array_merge($data, ['total' => priceWithDiscount($allProductsInSale)]);
+
+        $update = $this->vendaRepository->update($data, $pdv->id);
+        
+        if(is_null($update)){
+            return $this->router->view('pdv/finalizar', [
+                'venda' => $pdv,
+                'total' => $totalPriceSale,
+                'erro' => 'Erro ao atualizar'
+            ]);
+        }
+
+        return $this->router->redirect('pdv/'.$pdv->uuid.'/finalizar');
     }
 
 }

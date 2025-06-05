@@ -12,19 +12,21 @@
                 <div class="w-1/3 pb-8 border-b border-gray-500">
                     <h3 class="text-3xl font-bold tracking-tight text-violet-300">Total</h3>
                     <div class="border border-gray-300 rounded-lg bg-neutral-100 p-3">
-                        <p class="text-2xl font-bold tracking-tight text-gray-800">R$ 0,00</p>
+                        <p class="text-2xl font-bold tracking-tight text-gray-800">R$ <?= number_format($total,2,",",".") ?></p>
                     </div>
                 </div>
 
                 <div class="w-1/3">
-                    <h3 class="text-3xl font-bold tracking-tight text-gray-500">Recebido</h3>
-                    <input type="number" autofocus class="w-full border border-gray-300 rounded-lg bg-neutral-50 p-3 text-2xl text-gray-800">
+                    <form action="/pdv/<?= $venda->uuid ?>/finalizar/troco" method="POST">
+                        <h3 class="text-3xl font-bold tracking-tight text-gray-500">Recebido</h3>
+                        <input type="float" name="troco" id="troco" autofocus class="w-full border border-gray-300 rounded-lg bg-neutral-50 p-3 text-2xl text-gray-800">
+                    </form>
                 </div>
 
                 <div class="w-1/3">
                     <h3 class="text-3xl font-bold tracking-tight text-red-300">Troco</h3>
                     <div class="border border-gray-300 rounded-lg bg-neutral-100 p-3">
-                        <p class="text-2xl font-bold tracking-tight text-gray-800">R$ 0,00</p>
+                        <p class="text-2xl font-bold tracking-tight text-gray-800">R$ <?= number_format($total - ($venda->troco ?? 0),2,",",".") ?></p>
                     </div>
                 </div>
             </div>

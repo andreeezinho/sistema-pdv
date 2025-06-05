@@ -70,6 +70,7 @@ class VendaRepository implements IVenda {
                     uuid = :uuid,
                     desconto = :desconto,
                     total = :total,
+                    troco = :troco,
                     situacao = :situacao,
                     usuarios_id = :usuarios_id
             ";
@@ -80,6 +81,7 @@ class VendaRepository implements IVenda {
                 ':uuid' => $venda->uuid,
                 ':desconto' => $venda->desconto,
                 ':total' => $venda->total,
+                ':troco' => $venda->troco,
                 ':situacao' => $venda->situacao,
                 ':usuarios_id' => $venda->usuarios_id
             ]);
@@ -98,7 +100,40 @@ class VendaRepository implements IVenda {
     }
 
     public function update(array $data, int $id){
-        
+        $venda = $this->model->create($data);
+
+        try{
+            $sql = "UPDATE " . self::TABLE . "
+                SET
+                    desconto = :desconto,
+                    total = :total,
+                    troco = :troco,
+                    situacao = :situacao
+                WHERE
+                    id = :id
+            ";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $update = $stmt->execute([
+                ':desconto' => $venda->desconto,
+                ':total' => $venda->total,
+                ':troco' => $venda->troco,
+                ':situacao' => $venda->situacao,
+                ':id' => $id
+            ]);
+
+            if(!$update){
+                return null;
+            }
+
+            return $this->findById($id);
+
+        }catch(\Throwable $th){
+            return $th;
+        }finally{
+            Database::getInstance()->closeConnection();
+        }
     }
 
     public function delete(int $id){
