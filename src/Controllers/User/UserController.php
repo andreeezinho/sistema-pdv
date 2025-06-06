@@ -24,7 +24,9 @@ class UserController extends Controller {
         $usuarios = $this->userRepository->all($params);
 
         return $this->router->view('user/index', [
-            'usuarios' => $usuarios
+            'usuarios' => $usuarios,
+            'nome_usuario' => $params['nome_usuario'] ?? null,
+            'ativo' => $params['ativo'] ?? null
         ]);
     }
 
