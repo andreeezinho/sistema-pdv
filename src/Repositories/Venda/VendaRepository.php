@@ -44,7 +44,7 @@ class VendaRepository implements IVenda {
         }
 
         if(isset($params['data']) && !empty($params['data'])){
-            $conditions[] = "date_format(v.created_at, '%d/%m/%Y') = date_format(:data, '%d/%m/%Y')";
+            $conditions[] = "date_format(v.created_at, '%d/%m/%Y') <= date_format(:data, '%d/%m/%Y')";
             $bindings[':data'] = $params['data'];
         }
     

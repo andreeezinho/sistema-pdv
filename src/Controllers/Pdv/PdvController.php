@@ -167,6 +167,12 @@ class PdvController extends Controller {
             return $this->router->redirect('pdv');
         }
 
+        $allPayments = $this->pagamentoRepository->all(['ativo' => 1]);
+
+        $pagamento = $this->vendaPagamentoRepository->findBySaleId($pdv->id);
+
+        $pagamento = $this->pagamentoRepository->findById($pagamento->pagamento_id);
+
         $totalPriceSale = $pdv->total;
 
         if(isset($pdv->total) || $pdv->total != 0){
@@ -179,6 +185,20 @@ class PdvController extends Controller {
 
         if(is_null($finish)){
             return $this->router->redirect('pdv/'.$pdv->uuid.'/finalizar');
+        }
+
+        $all_products = $this->produtoRepository->all();
+
+        $subtractProduct = $this->produtoRepository->verifyProductQuantity($all_products, $allProductsInSale);
+
+        if(!$subtractProduct){
+            return $this->router->view('pdv/index', [
+                'venda' => $pdv,
+                'total' => $totalPriceSale,
+                'allPayments' => $allPayments,
+                'pagamento' => $pagamento,
+                'erro' => 'Quantidade no estoque indisponível'
+            ]);
         }
 
         return $this->router->redirect('pdv');
@@ -196,6 +216,8 @@ class PdvController extends Controller {
         $allProductsInSale = $this->vendaProdutoRepository->allProductsOnSale($pdv->id);
 
         $data = array_merge($data, ['total' => priceWithDiscount($allProductsInSale)]);
+        
+        $data['troco'] = priceWithDiscount($allProductsInSale, (float)$data['troco']);
 
         $update = $this->vendaRepository->update($data, $pdv->id);
         

@@ -161,6 +161,53 @@ class ProdutoRepository implements IProduto {
         }
     }
 
+    public function subtractProduct(int $id, int $quantity){
+        try{
+            
+            $sql = "UPDATE " . self::TABLE . "
+                SET 
+                    estoque = :estoque
+                WHERE
+                    id = :id
+            ";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $update = $stmt->execute([
+                ':estoque' => $quantity,
+                ':id' => $id
+            ]);
+
+            return $update;
+
+        }catch(\Thorwable $th){
+            return null;
+        }finally{
+            Database::getInstance()->closeConnection();
+        }
+    }
+
+    public function verifyProductQuantity(array $all_products, array $vendaProdutos){
+        foreach($all_products as $produto_estoque){
+            foreach($vendaProdutos as $produto){
+                if($produto_estoque->id == $produto->produtos_id){
+                    $quantidade = $produto_estoque->estoque;
+                    if($produto_estoque->estoque > 0){
+                        if(($quantidade - $produto->quantidade) < 0){
+                            return false; break;
+                        }
+
+                        $quantidade = $quantidade - $produto->quantidade;
+                    }
+    
+                    $subtractProduct = $this->subtractProduct($produto->produtos_id, $quantidade);
+                }
+            }
+        }
+
+        return true;
+    }
+
     public function findByCode(int $codigo){
         $stmt = $this->conn->prepare(
             "SELECT * FROM " . self::TABLE . " WHERE codigo = :codigo AND ativo = 1"

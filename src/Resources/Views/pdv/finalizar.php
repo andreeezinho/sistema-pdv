@@ -26,7 +26,7 @@
                 <div class="w-1/3">
                     <h3 class="text-3xl font-bold tracking-tight text-red-300">Troco</h3>
                     <div class="border border-gray-300 rounded-lg bg-neutral-100 p-3">
-                        <p class="text-2xl font-bold tracking-tight text-gray-800">R$ <?= number_format($total - ($venda->troco ?? 0),2,",",".") ?></p>
+                        <p class="text-2xl font-bold tracking-tight text-gray-800">R$ <?= number_format($venda->troco ?? 0,2,",",".") ?></p>
                     </div>
                 </div>
             </div>
