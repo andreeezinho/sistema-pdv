@@ -74,15 +74,9 @@ class VendaPagamentoRepository implements IVendaPagamento {
 
     public function findBySaleId(int $vendas_id){
         try{
-            $sql = "SELECT vp.*,
-                           p.forma as forma
-                FROM " . self::TABLE . " vp
-                JOIN pagamento p
-                    ON pagamento_id = p.id
+            $sql = "SELECT * FROM " . self::TABLE . "
                 WHERE
-                    vp.vendas_id = :vendas_id
-                ORDER BY 
-                    vp.created_at ASC
+                    vendas_id = :vendas_id
             ";
 
             $stmt = $this->conn->prepare($sql);

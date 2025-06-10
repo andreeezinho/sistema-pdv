@@ -5,6 +5,7 @@ namespace App\Controllers\Pdv;
 use App\Request\Request;
 use App\Controllers\Controller;
 use App\Config\Auth;
+use App\Services\Pdf\PdfService;
 use App\Interfaces\User\IUser;
 use App\Interfaces\Venda\IVenda;
 use App\Interfaces\Venda\IVendaProduto;
@@ -15,6 +16,7 @@ use App\Interfaces\Pagamento\IPagamento;
 class PdvController extends Controller {
 
     protected $auth;
+    protected $pdfService;
     protected $userRepository;
     protected $vendaRepository;
     protected $vendaProdutoRepository;
@@ -22,9 +24,10 @@ class PdvController extends Controller {
     protected $pagamentoRepository;
     protected $vendaPagamentoRepository;
 
-    public function __construct(IUser $userRepository, IVenda $vendaRepository, IVendaProduto $vendaProdutoRepository, IProduto $produtoRepository, IPagamento $pagamentoRepository, IVendaPagamento $vendaPagamentoRepository, Auth $auth){
+    public function __construct(IUser $userRepository, IVenda $vendaRepository, IVendaProduto $vendaProdutoRepository, IProduto $produtoRepository, IPagamento $pagamentoRepository, IVendaPagamento $vendaPagamentoRepository, Auth $auth, PdfService $pdfService){
         parent::__construct();
         $this->auth = $auth;
+        $this->pdfService = $pdfService;
         $this->userRepository = $userRepository;
         $this->vendaRepository = $vendaRepository;
         $this->vendaProdutoRepository = $vendaProdutoRepository;
@@ -149,8 +152,10 @@ class PdvController extends Controller {
         $allPayments = $this->pagamentoRepository->all(['ativo' => 1]);
 
         $pagamento = $this->vendaPagamentoRepository->findBySaleId($pdv->id);
-
-        $pagamento = $this->pagamentoRepository->findById($pagamento->pagamento_id);
+        
+        if(!is_null($pagamento)){
+            $pagamento = $this->pagamentoRepository->findById($pagamento->pagamento_id);
+        }
         
         return $this->router->view('pdv/finalizar', [
             'venda' => $pdv,
@@ -200,6 +205,8 @@ class PdvController extends Controller {
                 'erro' => 'Quantidade no estoque indisponível'
             ]);
         }
+
+        $generateProof = $this->pdfService->generateProof($pdv, $allProductsInSale);
 
         return $this->router->redirect('pdv');
     }
