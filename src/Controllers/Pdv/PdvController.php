@@ -186,12 +186,6 @@ class PdvController extends Controller {
             $totalPriceSale = priceWithDiscount($allProductsInSale);
         }
 
-        $finish = $this->vendaRepository->finishSale($pdv->id);
-
-        if(is_null($finish)){
-            return $this->router->redirect('pdv/'.$pdv->uuid.'/finalizar');
-        }
-
         $all_products = $this->produtoRepository->all();
 
         $subtractProduct = $this->produtoRepository->verifyProductQuantity($all_products, $allProductsInSale);
@@ -207,6 +201,13 @@ class PdvController extends Controller {
         }
 
         $generateProof = $this->pdfService->generateProof($pdv, $allProductsInSale);
+        dd($generateProof);
+
+        $finish = $this->vendaRepository->finishSale($pdv->id);
+
+        if(is_null($finish)){
+            return $this->router->redirect('pdv/'.$pdv->uuid.'/finalizar');
+        }
 
         return $this->router->redirect('pdv');
     }

@@ -10,17 +10,22 @@
     <title>Venda</title>
 
     <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-size: 6px;
+        }
 
         .bg-services{
             background-color: #EBEBEB;
         }
 
         .colunas{
-            padding-left: 10px;
+            padding-left: 5px;
         }
 
         .borda{
-            border-right: 3px solid #313131;
+            border-right: 1px solid #313131;
         }
 
         .borda-linha{
@@ -28,11 +33,11 @@
         }
 
         .borda-linha-titulo{
-            border-bottom: 3px solid #313131;
+            border-bottom: 1px solid #313131;
         }
 
         .services-container{
-            min-height: 550px;
+            width: 100%;
         }
     </style>
 </head>
@@ -40,35 +45,26 @@
 
     <div class="container">
         <div class="col-12">
-            <p style="font-size: 30px;margin-bottom:20px"
-                <img src="data:image/png;base64,<?=base64_encode(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/public/img/site/logo.png'))?>" width="100" style="margin-right:120px;">
-                Venda
-            </p>
+            <p style="font-size: 15px;margin-bottom:20px">Comprovante de venda</p>
         </div>
 
-        
         <table>
             <tr>
                 <td width="300px" height="25px" class="colunas"><b>Data:</b> <?= date('d/m/Y - h:i', strtotime($venda->created_at)) ?></td>
             </tr>
-
-            <tr>
-                <td width="350px" height="50px" class="colunas"><b>Cliente:</b></td>
-                <td width="200px" height="50px" class="colunas"><b>Doc.:</b></td>
-            </tr>
-            
         </table>
 
         <div class="col-12 text-center">
-            <p style='font-size: 20px; margin: 30px 0 30px 0'>Produtos</p>
+            <p style='font-size: 10px; margin: 30px 0 30px 0'>Produtos</p>
         </div>
 
         <div class="services-container bg-services">
             <table class="" style="border-collapse:collapse;">
                 <thead>
                     <tr>
-                        <td width="400px" height="60px" class="colunas borda borda-linha-titulo"><b style="font-size: 18px">Produto</b></td>
-                        <td width="115px" height="60px" class="colunas borda-linha-titulo"><b style="font-size: 18px">Preço</b></td>
+                        <td width="60%" height="20px" class="colunas borda borda-linha-titulo"><b style="font-size: 8px">Produto</b></td>
+                        <td width="10%" height="20px" class="colunas borda borda-linha-titulo"><b style="font-size: 8px">Quant.</b></td>
+                        <td width="30%" height="20px" class="colunas borda-linha-titulo"><b style="font-size: 8px">Preço</b></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -77,16 +73,18 @@
                         foreach($produtos as $produto){
                 ?>
                     <tr>
-                        <td width="400px" height="50px" class="colunas borda borda-linha"><?= $produto->nome ?></td>
-                        <td width="115px" height="50px" class="colunas borda-linha">R$ <?= number_format($produto->preco,2,",",".") ?></td>
+                        <td width="60%" height="20px" class="colunas borda borda-linha"><?= $produto->nome ?></td>
+                        <td width="10%" height="20px" class="colunas borda borda-linha"><?= $produto->quantidade ?></td>
+                        <td width="30%" height="20px" class="colunas borda-linha">R$ <?= number_format($produto->preco,2,",",".") ?></td>
                     </tr>
                 <?php
                         }
                     }else{
                 ?>
                     <tr>
-                        <td width="400px" height="50px" class="colunas">Não há produtos na venda</td>
-                        <td width="117px" height="50px" class="colunas"></td>
+                        <td width="60%" height="20px" class="colunas">Não há produtos na venda</td>
+                        <td width="10%" height="20px" class="colunas"></td>
+                        <td width="30%" height="20px" class="colunas"></td>
                     </tr>
                 <?php
                     }
