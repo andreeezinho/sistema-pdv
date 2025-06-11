@@ -137,7 +137,7 @@ class PdvController extends Controller {
     public function viewSaleInfos(Request $request, $uuid){
         $pdv = $this->vendaRepository->findByUuid($uuid);
 
-        if(!$pdv){
+        if(!$pdv || $pdv->situacao == 'concluida'){
             return $this->router->redirect('pdv');
         }
 
@@ -152,11 +152,11 @@ class PdvController extends Controller {
         $allPayments = $this->pagamentoRepository->all(['ativo' => 1]);
 
         $pagamento = $this->vendaPagamentoRepository->findBySaleId($pdv->id);
-        
+
         if(!is_null($pagamento)){
             $pagamento = $this->pagamentoRepository->findById($pagamento->pagamento_id);
         }
-        
+
         return $this->router->view('pdv/finalizar', [
             'venda' => $pdv,
             'total' => $totalPriceSale,
@@ -200,16 +200,13 @@ class PdvController extends Controller {
             ]);
         }
 
-        $generateProof = $this->pdfService->generateProof($pdv, $allProductsInSale);
-        dd($generateProof);
-
         $finish = $this->vendaRepository->finishSale($pdv->id);
 
         if(is_null($finish)){
             return $this->router->redirect('pdv/'.$pdv->uuid.'/finalizar');
         }
 
-        return $this->router->redirect('pdv');
+        return $this->pdfService->generateProof($pdv, $allProductsInSale);
     }
 
     public function subtractPaidValue(Request $request, $uuid){
