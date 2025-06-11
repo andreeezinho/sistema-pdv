@@ -17,7 +17,7 @@
         }
 
         .bg-services{
-            background-color: #EBEBEB;
+            background-color:rgb(252, 252, 252);
         }
 
         .colunas{
@@ -42,20 +42,28 @@
     </style>
 </head>
 <body class="bg-theme">
-
     <div class="container">
         <div class="col-12">
-            <p style="font-size: 15px;margin-bottom:20px">Comprovante de venda</p>
+            <p style="font-size: 15px;margin-bottom:20px;text-align: center;">Cupom Fiscal</p>
         </div>
 
         <table>
             <tr>
-                <td width="300px" height="25px" class="colunas"><b>Data:</b> <?= date('d/m/Y - h:i', strtotime($venda->created_at)) ?></td>
+                <td width="100%" height="5px" class="colunas"><b>Razao Social:</b> <?= date('d/m/Y - h:i', strtotime($venda->created_at)) ?></td>
+            </tr>
+            <tr>
+                <td width="100%" height="5px" class="colunas"><b>CNPJ:</b> <?= date('d/m/Y - h:i', strtotime($venda->created_at)) ?></td>
+            </tr>
+            <tr>
+                <td width="100%" height="5px" class="colunas"><b>Endereço:</b> <?= date('d/m/Y - h:i', strtotime($venda->created_at)) ?></td>
+            </tr>
+            <tr>
+                <td width="100%" height="5px" class="colunas"><b>Data:</b> <?= date('d/m/Y - h:i', strtotime($venda->created_at)) ?></td>
             </tr>
         </table>
 
         <div class="col-12 text-center">
-            <p style='font-size: 10px; margin: 30px 0 30px 0'>Produtos</p>
+            <p style='font-size: 10px; margin: 15px 0 15px 0'>Produtos</p>
         </div>
 
         <div class="services-container bg-services">
@@ -94,14 +102,11 @@
         </div>
 
         <div class="col-12 pt-3">
-            <div class="float-start">
-                <p style="font-size: 18px" class="my-1"><b>PIX:</b> 103.171.015-95</p>
-                <p style="font-size: 18px" class="my-1"><b>Contato:</b> (75) 99116-4106</p>
-            </div>
-
-            <div class="float-end">
-                <p style="font-size: 18px" class="my-1"><b>Desconto:</b> <?= $venda->desconto ?>%</p>
-                <p style="font-size: 18px" class="my-1"><b>Total:</b> R$: <?= number_format($venda->total,2,",",".") ?></p>
+            <div class="mx-auto text-end px-5">
+                <p style="font-size: 10px" class="my-1"><b>Desconto:</b> <?= $venda->desconto ?>%</p>
+                <p style="font-size: 10px" class="my-1"><b>Total:</b> R$: <?= number_format($venda->total,2,",",".") ?></p>
+                <p style="font-size: 10px" class="my-1"><b>Valor Pago:</b> R$: <?= number_format($venda->total + $venda->troco,2,",",".") ?></p>
+                <p style="font-size: 10px" class="my-1"><b>Troco:</b> R$: <?= number_format($venda->troco,2,",",".") ?></p>
             </div>
         </div>
 
