@@ -11,6 +11,7 @@ use App\Controllers\Permissao\PermissaoController;
 use App\Controllers\Permissao\PermissaoUserController;
 use App\Controllers\User\UserPerfilController;
 use App\Controllers\User\RecoveryPasswordController;
+use App\Controllers\Venda\VendaController;
 use App\Controllers\Pdv\PdvController;
 use App\Controllers\Produto\ProdutoController;
 
@@ -29,6 +30,7 @@ $permissaoController = $container->get(PermissaoController::class);
 $permissaoUserController = $container->get(PermissaoUserController::class);
 $userPerfilController = $container->get(UserPerfilController::class);
 $recoveryPasswordController = $container->get(RecoveryPasswordController::class);
+$vendaController = $container->get(VendaController::class);
 $pdvController = $container->get(PdvController::class);
 $produtoController = $container->get(ProdutoController::class);
 
@@ -81,6 +83,9 @@ $router->create("POST", "/perfil/icone", [$userPerfilController, 'updateIcone'],
 $router->create("POST", "/perfil/editar", [$userPerfilController, 'updateDados'], $auth);
 $router->create("POST", "/perfil/senha", [$userPerfilController, 'updateSenha'], $auth);
 $router->create("POST", "/perfil/deletar", [$userPerfilController, 'destroy'], $auth);
+
+//vendas
+$router->create("GET", "/vendas", [$vendaController, 'index'], $auth);
 
 //pdv
 $router->create("GET", "/pdv", [$pdvController, 'index'], $auth);

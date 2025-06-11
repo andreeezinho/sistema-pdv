@@ -58,7 +58,7 @@
                 <td width="100%" height="5px" class="colunas"><b>Endereço:</b> <?= date('d/m/Y - h:i', strtotime($venda->created_at)) ?></td>
             </tr>
             <tr>
-                <td width="100%" height="5px" class="colunas"><b>Data:</b> <?= date('d/m/Y - h:i', strtotime($venda->created_at)) ?></td>
+                <td width="100%" height="5px" class="colunas"><b>Data:</b> <?= date('d/m/Y - H:i', strtotime($venda->created_at)) ?></td>
             </tr>
         </table>
 
