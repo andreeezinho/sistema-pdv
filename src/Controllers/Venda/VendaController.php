@@ -39,8 +39,11 @@ class VendaController extends Controller {
 
         $vendas = $this->vendaRepository->all($params);
 
+        $vendaPagamento = $this->vendaPagamentoRepository->all();
+
         return $this->router->view('venda/index', [
             'vendas' => $vendas,
+            'vendaPagamento' => $vendaPagamento,
             'usuario' => $params['usuario'] ?? null,
             'total' => $params['total'] ?? null,
             'data' => $params['data'] ?? null,

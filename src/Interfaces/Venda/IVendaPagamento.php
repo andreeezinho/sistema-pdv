@@ -4,6 +4,8 @@ namespace App\Interfaces\Venda;
 
 interface IVendaPagamento {
 
+    public function all(array $params = []);
+
     public function create(int $vendas_id, int $pagamento_id);
 
     public function delete($vendas_id, $pagamento_id);

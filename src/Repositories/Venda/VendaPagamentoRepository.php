@@ -22,6 +22,44 @@ class VendaPagamentoRepository implements IVendaPagamento {
         $this->model = new VendaPagamento();
     }
 
+    public function all(array $params = []){
+        $sql = "SELECT vp.*, 
+            p.forma as forma 
+            FROM " .self::TABLE. " vp
+            JOIN pagamento p
+                ON pagamento_id = p.id
+        ";
+
+        $conditions = [];
+        $bindings = [];
+    
+        if(isset($params['pagamento_id']) && $params['pagamento_id'] != ""){
+            $conditions[] = "vp.pagamento_id = :pagamento_id";
+            $bindings[':pagamento_id'] = $params['pagamento_id'];
+        }
+
+        if(isset($params['vendas_id']) && $params['vendas_id'] != ""){
+            $conditions[] = "vp.vendas_id = :vendas_id";
+            $bindings[':vendas_id'] = $params['vendas_id'];
+        }
+    
+        if(count($conditions) > 0) {
+            $sql .= " WHERE " . implode(" AND ", $conditions);
+        }
+
+        $sql .= " ORDER BY created_at ASC";
+
+        if(isset($params['dash']) && !empty($params['dash'])){
+            $sql .= " LIMIT 20";
+        };
+
+        $stmt = $this->conn->prepare($sql);
+
+        $stmt->execute($bindings);
+
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, self::CLASS_NAME);
+    }
+
     public function create(int $vendas_id, int $pagamento_id){
         $vendaPagamento = $this->model->create($vendas_id, $pagamento_id);
 
