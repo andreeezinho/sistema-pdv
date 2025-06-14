@@ -53,7 +53,26 @@ class VendaController extends Controller {
         ]);
     }
 
-    public function viewSaleInfos(Request $request, $uuid){}
+    public function viewSaleInfos(Request $request, $uuid){
+        $venda = $this->vendaRepository->findByUuid($uuid);
+
+        if(!$venda){
+            return $this->router->redirect('404');
+        }
+
+        $vendedor = $this->userRepository->findById($venda->usuarios_id);
+
+        $allProductsInSale = $this->vendaProdutoRepository->allProductsOnSale($venda->id);
+
+        $pagamento = $this->vendaPagamentoRepository->findBySaleId($venda->id);
+
+        return $this->router->view('venda/sale-info', [
+            'venda' => $venda,
+            'vendedor' => $vendedor,
+            'allProductsInSale' => $allProductsInSale,
+            'pagamento' => $pagamento
+        ]);
+    }
 
     public function viewProofSale(Request $request, $uuid){
         $venda = $this->vendaRepository->findByUuid($uuid);
