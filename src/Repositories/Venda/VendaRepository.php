@@ -140,7 +140,7 @@ class VendaRepository implements IVenda {
         }
     }
 
-    public function finishSale(int $id){
+    public function updateSituation(string $situation, int $id){
         try{
             $sql = "UPDATE " . self::TABLE . "
                 SET
@@ -152,7 +152,7 @@ class VendaRepository implements IVenda {
             $stmt = $this->conn->prepare($sql);
 
             $update = $stmt->execute([
-                ':situacao' => 'concluida',
+                ':situacao' => $situation,
                 ':id' => $id
             ]);
 

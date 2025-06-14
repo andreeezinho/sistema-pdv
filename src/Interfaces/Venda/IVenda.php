@@ -10,7 +10,7 @@ interface IVenda {
 
     public function update(array $data, int $id);
 
-    public function finishSale(int $id);
+    public function updateSituation(string $situation, int $id);
 
     public function delete(int $id);
 

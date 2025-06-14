@@ -200,7 +200,7 @@ class PdvController extends Controller {
             ]);
         }
 
-        $finish = $this->vendaRepository->finishSale($pdv->id);
+        $finish = $this->vendaRepository->updateSituation('concluida', $pdv->id);
 
         if(is_null($finish)){
             return $this->router->redirect('pdv/'.$pdv->uuid.'/finalizar');
