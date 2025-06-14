@@ -68,7 +68,7 @@
 
             <div class="flex flex-col gap-y-2 w-1/3 min-h-[80dvh] p-2">
                 <div class="flex h-3/4 p-3">
-                    <img src="<?= LOGO ?>" alt="Logo Site" class="m-auto">
+                    <img src="<?= COLORED_LOGO ?>" alt="Logo Site" class="m-auto w-[70%]">
                 </div>
 
                 <div class="h-2/4 p-3 pt-8">

@@ -12,7 +12,7 @@
 <body class="h-full bg-neutral-100">
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 items-center">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img class="mx-auto h-12 w-auto" src="<?= LOGO ?>" alt="Site logo">
+            <img class="mx-auto h-12 w-auto" src="<?= COLORED_LOGO ?>" alt="Site logo">
             <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900"><?= SITE_NAME ?></h2>
         </div>
 
@@ -52,12 +52,12 @@
                         </svg>
                     </div>
                     <div class="text-sm mt-3">
-                        <a href="/recuperar-senha" class="font-semibold text-indigo-600 hover:text-indigo-500">Esqueceu sua senha?</a>
+                        <a href="/recuperar-senha" class="font-semibold text-indigo-400 hover:text-indigo-500">Esqueceu sua senha?</a>
                     </div>
                 </div>
 
                 <div class="">
-                    <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Login</button>
+                    <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-400 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Login</button>
                 </div>
             </form>
         </div>
