@@ -50,7 +50,7 @@
                         </a>
                     <?php } ?>
 
-                    <div class="flex gap-x-2 w-1/2">
+                    <!-- <div class="flex gap-x-2 w-1/2">
                         <p class="flex gap-x-1">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 text-green-500">
                                 <path fill-rule="evenodd" d="M4.5 7.5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3v-9Z" clip-rule="evenodd" />
@@ -75,13 +75,13 @@
                             </svg>
                             Cancelada
                         </p>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div id="popup-modal-filter" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                     <div class="relative p-4 w-full max-w-md max-h-full">
                         <div class="relative bg-white rounded-lg shadow-sm">
-                            <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="popup-modal">
+                            <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="popup-modal-filter">
                                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                 </svg>
@@ -91,30 +91,35 @@
                                 <h3 class="text-center text-gray-700 my-4">Filtrar Vendas</h3>
                                 <form action="/vendas" method="GET" class="flex flex-col gap-y-4">
                                     <div>
-                                        <label for="nome_codigo" class="block text-sm/6 font-medium text-gray-900">Código ou Nome</label>
+                                        <label for="usuario" class="block text-sm/6 font-medium text-gray-900">Vendedor</label>
                                         <div class="mt-2">
-                                            <input type="text" name="nome_codigo" id="nome_codigo" value="<?= $nome_codigo ?? null ?>" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                                            <input type="text" name="usuario" id="usuario" value="<?= $usuario ?? null ?>" placeholder="Insira o vendedor" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
                                         </div>
                                     </div>
 
                                     <div>
-                                        <label for="tipo" class="block text-sm/6 font-medium text-gray-900">Tipo</label>
+                                        <label for="data" class="block text-sm/6 font-medium text-gray-900">Data</label>
                                         <div class="mt-2">
-                                            <select name="tipo" id="tipo" value="<?= $tipo ?? null ?>" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-                                                <option value="" <?= ($tipo == '') ? 'selected' : null ?>>Insira o tipo</option>
-                                                <option value="un" <?= ($tipo == 'un') ? 'selected' : null ?>>UN</option>
-                                                <option value="kg" <?= ($tipo == 'kg') ? 'selected' : null ?>>KG</option>
-                                            </select>
+                                            <input type="date" name="data" id="data" value="<?= $data ?? null ?>" placeholder="Insira a data" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label for="data" class="block text-sm/6 font-medium text-gray-900">Valor da Venda</label>
+                                        <div class="mt-2">
+                                            <input type="number" name="data" id="data" value="<?= $data ?? null ?>" placeholder="Insira o valor da venda" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
                                         </div>
                                     </div>
 
                                     <div>
                                         <label for="tipo" class="block text-sm/6 font-medium text-gray-900">Situação</label>
                                         <div class="mt-2">
-                                            <select name="ativo" id="ativo" value="<?= $ativo ?? null ?>" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-                                                <option value="" <?= ($ativo == '') ? 'selected' : null ?>>Insira a situação</option>
-                                                <option value='1' <?= ($ativo == '1') ? 'selected' : null ?>>Ativo</option>
-                                                <option value='0' <?= ($tipo == '0') ? 'selected' : null ?>>Inativo</option>
+                                            <select name="ativo" id="ativo" value="<?= $situacao ?? null ?>" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                                                <option value="" <?= ($situacao == '') ? 'selected' : null ?>>Insira a situação</option>
+                                                <option value='cancelada' <?= ($situacao == 'cancelada') ? 'selected' : null ?>>Cancelada</option>
+                                                <option value='concluida' <?= ($situacao == 'concluida') ? 'selected' : null ?>>Concluída</option>
+                                                <option value='em andamento' <?= ($situacao == 'em andamento') ? 'selected' : null ?>>Em Andamento</option>
+                                                <option value='em espera' <?= ($situacao == 'em espera') ? 'selected' : null ?>>Em Espera</option>
                                             </select>
                                         </div>
                                     </div>
@@ -156,7 +161,7 @@
                             if(count($vendas) > 0){
                                 foreach($vendas as $venda){
                         ?>
-                            <tr class="bg-violet-100 border-b border-gray-400 text-gray-800">
+                            <tr class="bg-stone-100 border-b border-gray-400 text-gray-800">
                                 <td class="px-6 py-4">
                                     <?= $venda->usuario ?>
                                 </td>
@@ -219,7 +224,7 @@
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                                                     </svg>
                                                     <h3 class="mb-5 text-lg font-normal text-gray-700">Deseja deletar esse venda?</h3>
-                                                    <h3 class="mb-5 text-sm font-normal text-gray-500"><?= $venda->nome ?></h3>
+                                                    <h3 class="mb-5 text-sm font-normal text-gray-500">Total: R$<?= number_format($venda->total ?? 0,2,",",".") ?></h3>
                                                     <form action="/vendas/<?= $venda->uuid ?>/cancelar" method="POST">
                                                         <button type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                                             Deletar

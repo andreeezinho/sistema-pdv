@@ -13,6 +13,7 @@ class VendaProduto {
     public $quantidade;
     public $nome;
     public $codigo;
+    public $tipo;
     public $preco;
     public $uuidProduto;
     public $produtos_id;

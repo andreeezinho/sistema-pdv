@@ -86,6 +86,9 @@ $router->create("POST", "/perfil/deletar", [$userPerfilController, 'destroy'], $
 
 //vendas
 $router->create("GET", "/vendas", [$vendaController, 'index'], $auth);
+$router->create("GET", "/vendas/{uuid}/visualizar", [$vendaController, 'viewSaleInfos'], $auth);
+$router->create("GET", "/vendas/{uuid}/comprovante", [$vendaController, 'viewProofSale'], $auth);
+$router->create("POST", "/vendas/{uuid}/cancelar", [$vendaController, 'cancelSale'], $auth);
 
 //pdv
 $router->create("GET", "/pdv", [$pdvController, 'index'], $auth);

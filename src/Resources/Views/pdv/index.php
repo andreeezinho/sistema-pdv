@@ -10,6 +10,7 @@
                 <div class="flex p-2 py-4 bg-gray-100 border-b border-gray-400 mb-4 pr-7">
                     <p class="w-2/4 text-gray-500 border-r border-gray-400 pl-2">Produto</p>
                     <p class="w-1/6 text-gray-500 border-r border-gray-400 pl-2">Código</p>
+                    <p class="w-1/6 text-gray-500 border-r border-gray-400 pl-2">Tipo</p>
                     <p class="w-1/6 text-gray-500 border-r border-gray-400 pl-2">Quantidade</p>
                     <p class="w-1/5 text-gray-500 pl-2">Total</p>
                 </div>
@@ -22,6 +23,7 @@
                         <div class="flex p-2 text-gray-800 border-b border-gray-200 mb-4">
                             <p class="w-2/4 border-r border-gray-200 pl-2"><?= $produto->nome ?></p>
                             <p class="w-1/6 border-r border-gray-200 pl-2"><?= $produto->codigo ?></p>
+                            <p class="w-1/6 border-r border-gray-200 pl-2"><?= strtoupper($produto->tipo) ?></p>
                             <p class="w-1/6 border-r border-gray-200 text-center"><?= $produto->quantidade ?></p>
                             <div class="w-1/5 pl-2 flex">
                                 <p class="w-1/2">R$ <?=  number_format(($produto->preco * $produto->quantidade) ?? 0,2,",",".") ?></p>
@@ -79,7 +81,7 @@
 
                             <div>
                                 <label for="quantidade" class="block mb-1 text-sm font-medium text-gray-900">Quant.</label>
-                                <input type="float" name="quantidade" id="quantidade" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required value="1" />
+                                <input type="number" name="quantidade" id="quantidade" min="0" max="1000" step="0.01" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required value="1" />
                             </div>
 
                             <!-- <div>

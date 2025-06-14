@@ -19,7 +19,7 @@
                 <div class="w-1/3">
                     <form action="/pdv/<?= $venda->uuid ?>/finalizar/troco" method="POST">
                         <h3 class="text-3xl font-bold tracking-tight text-gray-500">Recebido</h3>
-                        <input type="float" name="troco" id="troco" autofocus class="w-full border border-gray-300 rounded-lg bg-neutral-50 p-3 text-2xl text-gray-800">
+                        <input type="number" name="troco" id="troco" min="0" max="1000" step="0.01" autofocus class="w-full border border-gray-300 rounded-lg bg-neutral-50 p-3 text-2xl text-gray-800">
                     </form>
                 </div>
 

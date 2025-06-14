@@ -25,7 +25,7 @@ class VendaProdutoRepository implements IVendaProduto {
     public function allProductsOnSale(int $vendas_id){
         $sql = "SELECT vp.*,
 			           v.id as venda,
-            p.nome as nome, p.codigo as codigo, p.preco as preco, p.uuid as uuidProduto
+            p.nome as nome, p.codigo as codigo, p.tipo as tipo, p.preco as preco, p.uuid as uuidProduto
             FROM " . self::TABLE . " vp
             JOIN vendas v
                 ON vendas_id = v.id

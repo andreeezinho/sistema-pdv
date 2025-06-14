@@ -51,4 +51,20 @@ class VendaController extends Controller {
         ]);
     }
 
+    public function viewSaleInfos(Request $request, $uuid){}
+
+    public function viewProofSale(Request $request, $uuid){
+        $venda = $this->vendaRepository->findByUuid($uuid);
+
+        if(!$venda){
+            return $this->router->redirect('404');
+        }
+
+        $allProductsInSale = $this->vendaProdutoRepository->allProductsOnSale($venda->id);
+
+        return $this->pdfService->generateProof($venda, $allProductsInSale);
+    }
+
+    public function cancelSale(Request $request, $uuid){}
+
 }

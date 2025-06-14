@@ -10,12 +10,12 @@
 
 <div>
     <label for="preco" class="block mb-1 text-sm font-medium text-gray-900">Preço</label>
-    <input type="float" name="preco" id="preco" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $produto->preco ?? null?>" />
+    <input type="number" name="preco" id="preco" min="0" max="1000" step="0.01" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $produto->preco ?? null?>" />
 </div>
 
 <div>
     <label for="estoque" class="block mb-1 text-sm font-medium text-gray-900">Estoque</label>
-    <input type="number" name="estoque" id="estoque" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $produto->estoque ?? null?>" />
+    <input type="number" name="estoque" min="0" max="1000" step="0.01" id="estoque" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $produto->estoque ?? null?>" />
 </div>
 
 <div>
