@@ -66,6 +66,8 @@ class VendaController extends Controller {
 
         $pagamento = $this->vendaPagamentoRepository->findBySaleId($venda->id);
 
+        $pagamento = $this->pagamentoRepository->findById($pagamento->pagamento_id);
+
         return $this->router->view('venda/sale-info', [
             'venda' => $venda,
             'vendedor' => $vendedor,
