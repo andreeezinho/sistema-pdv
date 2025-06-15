@@ -33,7 +33,7 @@ class VendaRepository implements IVenda {
         $conditions = [];
         $bindings = [];
     
-        if(isset($params['situacao']) && $params['situacao'] != ""){
+        if(isset($params['situacao']) && !empty($params['situacao'])){
             $conditions[] = "v.situacao = :situacao";
             $bindings[':situacao'] = $params['situacao'];
         }
@@ -46,6 +46,11 @@ class VendaRepository implements IVenda {
         if(isset($params['data']) && !empty($params['data'])){
             $conditions[] = "date_format(v.created_at, '%d/%m/%Y') <= date_format(:data, '%d/%m/%Y')";
             $bindings[':data'] = $params['data'];
+        }
+
+        if(isset($params['exact_data']) && !empty($params['exact_data'])){
+            $conditions[] = "date_format(v.created_at, '%d/%m/%Y') = date_format(:exact_data, '%d/%m/%Y')";
+            $bindings[':exact_data'] = $params['exact_data'];
         }
     
         if(count($conditions) > 0) {

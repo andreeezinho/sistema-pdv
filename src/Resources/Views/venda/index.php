@@ -98,23 +98,23 @@
                                     </div>
 
                                     <div>
-                                        <label for="data" class="block text-sm/6 font-medium text-gray-900">Data</label>
+                                        <label for="exact_data" class="block text-sm/6 font-medium text-gray-900">Data</label>
                                         <div class="mt-2">
-                                            <input type="date" name="data" id="data" value="<?= $data ?? null ?>" placeholder="Insira a data" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                                            <input type="date" name="exact_data" id="exact_data" value="<?= $data ?? null ?>" placeholder="Insira a data" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
                                         </div>
                                     </div>
 
                                     <div>
-                                        <label for="data" class="block text-sm/6 font-medium text-gray-900">Valor da Venda</label>
+                                        <label for="total" class="block text-sm/6 font-medium text-gray-900">Valor da Venda</label>
                                         <div class="mt-2">
-                                            <input type="number" name="data" id="data" value="<?= $data ?? null ?>" placeholder="Insira o valor da venda" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                                            <input type="number" name="total" id="total" value="<?= $total ?? null ?>" placeholder="Insira o valor da venda" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
                                         </div>
                                     </div>
 
                                     <div>
                                         <label for="tipo" class="block text-sm/6 font-medium text-gray-900">Situação</label>
                                         <div class="mt-2">
-                                            <select name="ativo" id="ativo" value="<?= $situacao ?? null ?>" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                                            <select name="situacao" id="situacao" value="<?= $situacao ?? null ?>" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
                                                 <option value="" <?= ($situacao == '') ? 'selected' : null ?>>Insira a situação</option>
                                                 <option value='cancelada' <?= ($situacao == 'cancelada') ? 'selected' : null ?>>Cancelada</option>
                                                 <option value='concluida' <?= ($situacao == 'concluida') ? 'selected' : null ?>>Concluída</option>
@@ -246,7 +246,7 @@
             </div>
         </div>
     </div>
-    
+
 <?php
     require_once __DIR__ . '/../layout/bottom.php';
 ?>

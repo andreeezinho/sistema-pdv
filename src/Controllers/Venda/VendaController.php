@@ -48,7 +48,7 @@ class VendaController extends Controller {
             'vendaPagamento' => $vendaPagamento,
             'usuario' => $params['usuario'] ?? null,
             'total' => $params['total'] ?? null,
-            'data' => $params['data'] ?? null,
+            'data' => $params['exact_data'] ?? null,
             'situacao' => $params['situacao'] ?? null
         ]);
     }
