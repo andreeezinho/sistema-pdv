@@ -115,11 +115,11 @@
                                         <label for="tipo" class="block text-sm/6 font-medium text-gray-900">Situação</label>
                                         <div class="mt-2">
                                             <select name="situacao" id="situacao" value="<?= $situacao ?? null ?>" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-                                                <option value="" <?= ($situacao == '') ? 'selected' : null ?>>Insira a situação</option>
-                                                <option value='cancelada' <?= ($situacao == 'cancelada') ? 'selected' : null ?>>Cancelada</option>
-                                                <option value='concluida' <?= ($situacao == 'concluida') ? 'selected' : null ?>>Concluída</option>
-                                                <option value='em andamento' <?= ($situacao == 'em andamento') ? 'selected' : null ?>>Em Andamento</option>
-                                                <option value='em espera' <?= ($situacao == 'em espera') ? 'selected' : null ?>>Em Espera</option>
+                                                <option value="" <?= (isset($situacao) && $situacao == '') ? 'selected' : null ?>>Insira a situação</option>
+                                                <option value='cancelada' <?= (isset($situacao) && $situacao == 'cancelada') ? 'selected' : null ?>>Cancelada</option>
+                                                <option value='concluida' <?= (isset($situacao) && $situacao == 'concluida') ? 'selected' : null ?>>Concluída</option>
+                                                <option value='em andamento' <?= (isset($situacao) && $situacao == 'em andamento') ? 'selected' : null ?>>Em Andamento</option>
+                                                <option value='em espera' <?= (isset($situacao) && $situacao == 'em espera') ? 'selected' : null ?>>Em Espera</option>
                                             </select>
                                         </div>
                                     </div>

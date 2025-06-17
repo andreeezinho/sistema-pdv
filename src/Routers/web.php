@@ -14,6 +14,7 @@ use App\Controllers\User\RecoveryPasswordController;
 use App\Controllers\Venda\VendaController;
 use App\Controllers\Pdv\PdvController;
 use App\Controllers\Produto\ProdutoController;
+use App\Controllers\Pagamento\PagamentoController;
 
 
 $router = new Router();
@@ -33,6 +34,7 @@ $recoveryPasswordController = $container->get(RecoveryPasswordController::class)
 $vendaController = $container->get(VendaController::class);
 $pdvController = $container->get(PdvController::class);
 $produtoController = $container->get(ProdutoController::class);
+$pagamentoController = $container->get(PagamentoController::class);
 
 //rotas
 
@@ -112,6 +114,11 @@ $router->create("POST", "/produtos/{uuid}/editar", [$produtoController, 'update'
 $router->create("POST", "/produtos/{uuid}/deletar", [$produtoController, 'destroy'], $auth);
 
 //formas-de-pagamentos
-
+$router->create("GET", "/pagamentos", [$pagamentoController, 'index'], $auth);
+$router->create("GET", "/pagamentos/cadastro", [$pagamentoController, 'create'], $auth);
+$router->create("POST", "/pagamentos/cadastro", [$pagamentoController, 'store'], $auth);
+$router->create("GET", "/pagamentos/{uuid}/editar", [$pagamentoController, 'edit'], $auth);
+$router->create("POST", "/pagamentos/{uuid}/editar", [$pagamentoController, 'update'], $auth);
+$router->create("POST", "/pagamentos/{uuid}/deletar", [$pagamentoController, 'destroy'], $auth);
 
 return $router;

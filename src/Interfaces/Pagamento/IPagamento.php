@@ -6,7 +6,7 @@ interface IPagamento {
 
     public function all(array $params = []);
 
-    public function create(array $data, int $usuarios_id);
+    public function create(array $data);
 
     public function update(array $data, int $id);
 

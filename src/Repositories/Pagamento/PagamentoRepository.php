@@ -42,7 +42,7 @@ class PagamentoRepository implements IPagamento {
             $sql .= " WHERE " . implode(" AND ", $conditions);
         }
 
-        $sql .= " ORDER BY created_at DESC";
+        $sql .= " ORDER BY id ASC";
 
         $stmt = $this->conn->prepare($sql);
 
@@ -51,10 +51,93 @@ class PagamentoRepository implements IPagamento {
         return $stmt->fetchAll(\PDO::FETCH_CLASS, self::CLASS_NAME);
     }
 
-    public function create(array $data, int $usuarios_id){}
+    public function create(array $data){
+        $pagamento = $this->model->create($data);
+        
+        try{
+            $sql = "INSERT INTO " . self::TABLE . "
+                SET
+                    uuid = :uuid,
+                    forma = :forma,
+                    ativo = :ativo
+            ";
 
-    public function update(array $data, int $id){}
+            $stmt = $this->conn->prepare($sql);
 
-    public function delete(int $id){}
+            $create = $stmt->execute([
+                ':uuid' => $pagamento->uuid,
+                ':forma' => $pagamento->forma,
+                ':ativo' => $pagamento->ativo ?? 1
+            ]);
+
+            if(!$create){
+                return null;
+            }
+
+            return $this->findByUuid($pagamento->uuid);
+
+        }catch(\Throwable $th){
+            return null;
+        }finally{
+            Database::getInstance()->closeConnection();
+        }
+    }
+
+    public function update(array $data, int $id){
+        $pagamento = $this->model->create($data);
+
+        try{
+            $sql = "UPDATE " . self::TABLE . "
+                SET
+                    forma = :forma,
+                    ativo = :ativo
+                WHERE 
+                    id =:id
+            ";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $update = $stmt->execute([
+                ':forma' => $pagamento->forma,
+                ':ativo' => $pagamento->ativo,
+                ':id' => $id
+            ]);
+
+            if(!$update){
+                return null;
+            }
+
+            return $this->findById($id);
+
+        }catch(\Throwable $th){
+            return null;
+        }finally{
+            Database::getInstance()->closeConnection();
+        }
+    }
+
+    public function delete(int $id){
+        try{
+            $sql = "UPDATE " . self::TABLE . "
+                SET
+                    ativo = 0
+                WHERE 
+                    id =:id
+            ";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $delete = $stmt->execute([
+                ':id' => $id
+            ]);
+
+            return $delete;
+
+        }catch(\Throwable $th){
+            return null;
+        }finally{
+            Database::getInstance()->closeConnection();
+        }
+    }
 
 }
