@@ -6,7 +6,7 @@
         <nav class="" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
-                    <a href="/dashboard" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-violet-600">
+                    <a href="/dashboard" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-600">
                         <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
                         </svg>
@@ -18,7 +18,7 @@
                         <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                         </svg>
-                        <a href="/vendas" class="ms-1 text-sm font-medium text-gray-700 hover:text-violet-600 md:ms-2">Vendas</a>
+                        <a href="/vendas" class="ms-1 text-sm font-medium text-gray-700 hover:text-gray-600 md:ms-2">Vendas</a>
                     </div>
                 </li>
                 <li aria-current="page">
@@ -93,28 +93,28 @@
                                     <div>
                                         <label for="usuario" class="block text-sm/6 font-medium text-gray-900">Vendedor</label>
                                         <div class="mt-2">
-                                            <input type="text" name="usuario" id="usuario" value="<?= $usuario ?? null ?>" placeholder="Insira o vendedor" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                                            <input type="text" name="usuario" id="usuario" value="<?= $usuario ?? null ?>" placeholder="Insira o vendedor" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
                                         </div>
                                     </div>
 
                                     <div>
                                         <label for="exact_data" class="block text-sm/6 font-medium text-gray-900">Data</label>
                                         <div class="mt-2">
-                                            <input type="date" name="exact_data" id="exact_data" value="<?= $data ?? null ?>" placeholder="Insira a data" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                                            <input type="date" name="exact_data" id="exact_data" value="<?= $data ?? null ?>" placeholder="Insira a data" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
                                         </div>
                                     </div>
 
                                     <div>
                                         <label for="total" class="block text-sm/6 font-medium text-gray-900">Valor da Venda</label>
                                         <div class="mt-2">
-                                            <input type="number" name="total" id="total" value="<?= $total ?? null ?>" placeholder="Insira o valor da venda" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                                            <input type="number" name="total" id="total" value="<?= $total ?? null ?>" placeholder="Insira o valor da venda" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
                                         </div>
                                     </div>
 
                                     <div>
                                         <label for="tipo" class="block text-sm/6 font-medium text-gray-900">Situação</label>
                                         <div class="mt-2">
-                                            <select name="situacao" id="situacao" value="<?= $situacao ?? null ?>" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                                            <select name="situacao" id="situacao" value="<?= $situacao ?? null ?>" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
                                                 <option value="" <?= (isset($situacao) && $situacao == '') ? 'selected' : null ?>>Insira a situação</option>
                                                 <option value='cancelada' <?= (isset($situacao) && $situacao == 'cancelada') ? 'selected' : null ?>>Cancelada</option>
                                                 <option value='concluida' <?= (isset($situacao) && $situacao == 'concluida') ? 'selected' : null ?>>Concluída</option>
@@ -124,14 +124,14 @@
                                         </div>
                                     </div>
 
-                                    <button type="submit" class="py-2.5 px-5 text-sm font-medium text-white focus:outline-none bg-violet-500 rounded-lg border border-gray-200 hover:bg-violet-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Filtrar</button>
+                                    <button type="submit" class="py-2.5 px-5 text-sm font-medium text-white focus:outline-none bg-gray-500 rounded-lg border border-gray-200 hover:bg-gray-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Filtrar</button>
                                 </form>    
                             </div>
                         </div>
                     </div>
                 </div>
                 <table class="w-full text-sm text-left rtl:text-right text-white">
-                    <thead class="text-xs text-white uppercase bg-violet-300">
+                    <thead class="text-xs text-white uppercase bg-gray-800">
                         <tr>
                             <th scope="col" class="px-6 py-3">
                                 Usuário
@@ -198,7 +198,7 @@
                                         </svg>
                                     </a>
 
-                                    <a href="/vendas/<?= $venda->uuid ?>/comprovante" class="font-medium text-white p-2 rounded-lg text-center bg-violet-400 hover:bg-violet-700">
+                                    <a href="/vendas/<?= $venda->uuid ?>/comprovante" class="font-medium text-white p-2 rounded-lg text-center bg-gray-400 hover:bg-gray-700">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
                                             <path fill-rule="evenodd" d="M4.125 3C3.089 3 2.25 3.84 2.25 4.875V18a3 3 0 0 0 3 3h15a3 3 0 0 1-3-3V4.875C17.25 3.839 16.41 3 15.375 3H4.125ZM12 9.75a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H12Zm-.75-2.25a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75ZM6 12.75a.75.75 0 0 0 0 1.5h7.5a.75.75 0 0 0 0-1.5H6Zm-.75 3.75a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1-.75-.75ZM6 6.75a.75.75 0 0 0-.75.75v3c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75v-3A.75.75 0 0 0 9 6.75H6Z" clip-rule="evenodd" />
                                             <path d="M18.75 6.75h1.875c.621 0 1.125.504 1.125 1.125V18a1.5 1.5 0 0 1-3 0V6.75Z" />

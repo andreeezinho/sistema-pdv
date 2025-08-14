@@ -91,7 +91,7 @@
                         </div>
 
                         <div class="text-center mt-5">
-                            <button type="submit" class="w-full bg-violet-300 hover:bg-violet-500 text-white font-bold py-2 px-4 rounded">Adicionar</button>
+                            <button type="submit" class="w-full bg-gray-800 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">Adicionar</button>
                         </div>
                     </form>
                 </div>

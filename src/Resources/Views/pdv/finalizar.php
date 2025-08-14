@@ -10,7 +10,7 @@
                 <h3 class="text-2xl font-bold tracking-tight text-gray-900">Dados da venda</h3>
 
                 <div class="w-1/3 pb-8 border-b border-gray-500">
-                    <h3 class="text-3xl font-bold tracking-tight text-violet-300">Total</h3>
+                    <h3 class="text-3xl font-bold tracking-tight text-gray-800">Total</h3>
                     <div class="border border-gray-300 rounded-lg bg-neutral-100 p-3">
                         <p class="text-2xl font-bold tracking-tight text-gray-800">R$ <?= number_format($total,2,",",".") ?></p>
                     </div>
@@ -138,7 +138,7 @@
             </form>
 
             <form action="/pdv/<?= $venda->uuid ?>/finalizar" method="POST" class="w-full">
-                <button type="submit" class="flex w-full bg-violet-300 hover:bg-violet-500 text-white font-bold py-2 px-4 rounded mt-1 justify-center">
+                <button type="submit" class="flex w-full bg-gray-800 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded mt-1 justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                     </svg>

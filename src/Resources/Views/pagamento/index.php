@@ -6,7 +6,7 @@
         <nav class="" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
-                    <a href="/dashboard" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-violet-600">
+                    <a href="/dashboard" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-600">
                         <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
                         </svg>
@@ -18,7 +18,7 @@
                         <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                         </svg>
-                        <a href="/pagamentos" class="ms-1 text-sm font-medium text-gray-700 hover:text-violet-600 md:ms-2">Pagamentos</a>
+                        <a href="/pagamentos" class="ms-1 text-sm font-medium text-gray-700 hover:text-gray-600 md:ms-2">Pagamentos</a>
                     </div>
                 </li>
                 <li aria-current="page">
@@ -32,7 +32,7 @@
             </ol>
 
             <div class="float-end mx-4">
-                <a href="/pagamentos/cadastro" class="text-white bg-violet-300 hover:bg-violet-800 focus:ring-4 focus:ring-violet-500 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">+</a>
+                <a href="/pagamentos/cadastro" class="text-white bg-gray-800 hover:bg-gray-800 focus:ring-4 focus:ring-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">+</a>
             </div>
         </nav>
 
@@ -70,14 +70,14 @@
                                     <div>
                                         <label for="forma" class="block text-sm/6 font-medium text-gray-900">Código ou Nome</label>
                                         <div class="mt-2">
-                                            <input type="text" name="forma" id="forma" value="<?= $forma ?? null ?>" placeholder="Forma de pagamento" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                                            <input type="text" name="forma" id="forma" value="<?= $forma ?? null ?>" placeholder="Forma de pagamento" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
                                         </div>
                                     </div>
 
                                     <div>
                                         <label for="tipo" class="block text-sm/6 font-medium text-gray-900">Situação</label>
                                         <div class="mt-2">
-                                            <select name="ativo" id="ativo" value="<?= isset($ativo) && $ativo ?? null ?>" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                                            <select name="ativo" id="ativo" value="<?= isset($ativo) && $ativo ?? null ?>" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
                                                 <option value="" <?= (isset($ativo) && $ativo == '') ? 'selected' : null ?>>Insira a situação</option>
                                                 <option value='1' <?= (isset($ativo) && $ativo == '1') ? 'selected' : null ?>>Ativo</option>
                                                 <option value='0' <?= (isset($ativo) && $ativo == '0') ? 'selected' : null ?>>Inativo</option>
@@ -85,14 +85,14 @@
                                         </div>
                                     </div>
 
-                                    <button type="submit" class="py-2.5 px-5 text-sm font-medium text-white focus:outline-none bg-violet-500 rounded-lg border border-gray-200 hover:bg-violet-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Filtrar</button>
+                                    <button type="submit" class="py-2.5 px-5 text-sm font-medium text-white focus:outline-none bg-gray-500 rounded-lg border border-gray-200 hover:bg-gray-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Filtrar</button>
                                 </form>    
                             </div>
                         </div>
                     </div>
                 </div>
                 <table class="w-full text-sm text-left rtl:text-right text-white">
-                    <thead class="text-xs text-white uppercase bg-violet-300">
+                    <thead class="text-xs text-white uppercase bg-gray-800">
                         <tr>
                             <th scope="col" class="px-6 py-3">
                                 Código
@@ -113,7 +113,7 @@
                             if(count($pagamentos) > 0){
                                 foreach($pagamentos as $pagamento){
                         ?>
-                            <tr class="bg-violet-100 border-b border-gray-400 text-gray-800">
+                            <tr class="bg-gray-100 border-b border-gray-400 text-gray-800">
                                 <td class="px-6 py-4">
                                     <?= $pagamento->id ?>
                                 </td>
@@ -126,7 +126,7 @@
                                     </svg>
                                 </td>
                                 <td class="px-6 py-4 flex gap-x-2 justify-center">
-                                    <a href="/pagamentos/<?= $pagamento->uuid ?>/editar" class="font-medium text-white p-2 rounded-lg text-center bg-violet-400 hover:bg-violet-700">
+                                    <a href="/pagamentos/<?= $pagamento->uuid ?>/editar" class="font-medium text-white p-2 rounded-lg text-center bg-gray-400 hover:bg-gray-700">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
                                         </svg>
