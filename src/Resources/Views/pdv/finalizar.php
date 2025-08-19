@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="w-1/3">
-                    <form action="/pdv/<?= $venda->uuid ?>/finalizar/troco" method="POST">
+                    <form action="/pdv/<?= $venda->uuid ?>/finalizar/troco" method="POST" id="form-troco">
                         <h3 class="text-3xl font-bold tracking-tight text-gray-500">Recebido</h3>
                         <input type="number" name="troco" id="troco" min="0" max="1000" step="0.01" autofocus class="w-full border border-gray-300 rounded-lg bg-neutral-50 p-3 text-2xl text-gray-800">
                     </form>
@@ -26,7 +26,7 @@
                 <div class="w-1/3">
                     <h3 class="text-3xl font-bold tracking-tight text-red-300">Troco</h3>
                     <div class="border border-gray-300 rounded-lg bg-neutral-100 p-3">
-                        <p class="text-2xl font-bold tracking-tight text-gray-800">R$ <?= number_format($venda->troco ?? 0,2,",",".") ?></p>
+                        <p class="text-2xl font-bold tracking-tight text-gray-800" id="valor-troco">R$ </p>
                     </div>
                 </div>
             </div>
@@ -35,10 +35,11 @@
                 <h3 class="text-2xl font-bold tracking-tight text-gray-900">Pagamento</h3>
 
                 <div class="flex w-full mt-9">
-                    <form action="/pdv/<?= $venda->uuid ?>/finalizar/pagamento" method="POST" class="w-1/6">
-                        <input type="number" name="pagamento" id="pagamento" value="<?= $pagamento->id ?? null ?>" class="w-full border border-gray-300 rounded-s-lg bg-neutral-50 p-3 text-2xl text-gray-800 px-8 text-center">
+                    <div id="pagamento-erro"></div>
+                    <form action="/pdv/<?= $venda->uuid ?>/finalizar/pagamento" method="POST" class="w-1/6" id='forma-pagamento'>
+                        <input type="number" name="pagamento" id="pagamento" class="w-full border border-gray-300 rounded-s-lg bg-neutral-50 p-3 text-2xl text-gray-800 px-8 text-center">
                     </form>
-                    <p class="w-5/6 border-s border-y border-gray-300 bg-neutral-50 p-3 text-2xl text-gray-800" value="0"> <?= $pagamento->forma ?? "Forma de pagamento" ?> </p>
+                    <p class="w-5/6 border-s border-y border-gray-300 bg-neutral-50 p-3 text-2xl text-gray-800" id='forma'> Forma de Pagamento </p>
                     <button type="button" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="w-1/6 border border-y border-gray-300 rounded-e-lg bg-neutral-50 hover:bg-neutral-200 p-3 text-2xl text-gray-800 text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mx-auto">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
@@ -68,22 +69,22 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr class="bg-white border-b border-gray-200 hover:bg-gray-200 hover:cursor-pointer">
-                                                    <?php
-                                                        if(count($allPayments) > 0){
-                                                            foreach($allPayments as $pagamento){
-                                                    ?>
+                                                <?php
+                                                    if(count($allPayments) > 0){
+                                                        foreach($allPayments as $pagamento){
+                                                ?>
+                                                    <tr class="bg-white border-b border-gray-200 hover:bg-gray-200 hover:cursor-pointer">
                                                         <td class="px-6 py-4">
                                                             <?= $pagamento->id ?>
                                                         </td>
                                                         <td class="px-6 py-4">
                                                             <?= $pagamento->forma ?>
                                                         </td>
-                                                    <?php
-                                                            }
+                                                    </tr>
+                                                <?php
                                                         }
-                                                    ?>
-                                                </tr>
+                                                    }
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -151,3 +152,65 @@
 <?php
     require_once __DIR__ . '/../layout/bottom.php';
 ?>
+
+<script>
+    $(document).ready(function () {
+
+        $('#form-troco').submit(function (e) {
+            e.preventDefault();
+
+            const formData = $(this).serialize();
+
+             $.ajax({
+                type: "POST",
+                url: "/pdv/<?= $venda->uuid ?>/finalizar/troco",
+                data: formData,
+                dataType: "JSON",
+                success: function(response) {
+                    if(response.errors){
+                        console.log(response.errors);
+                    }else{
+                        console.log(response);
+
+                        $('#valor-troco').text(response.troco.toLocaleString('pt-BR', { 
+                            style: 'currency', 
+                            currency: 'BRL' 
+                        }));
+                    }
+                },
+                error: function(error){
+                    console.error('Erro na requisição:', error);
+                    $('#forma').text('Não encontrado');
+                }
+            });
+        });
+
+        $('#forma-pagamento').submit(function (e) {
+            e.preventDefault();
+
+            const formData = $(this).serialize();
+
+             $.ajax({
+                type: "POST",
+                url: "/pdv/<?= $venda->uuid ?>/finalizar/pagamento",
+                data: formData,
+                dataType: "JSON",
+                success: function(response) {
+                    if(response.errors){
+                        $('#forma').text('Não encontrado');
+
+                        $('#pagamento-erro').html(errors).show();
+                    }else{
+                        $('#pagamento').val(response.id); 
+                        $('#forma').text(response.forma);
+                    }
+                },
+                error: function(error){
+                    console.error('Erro na requisição:', error);
+                    $('#forma').text('Não encontrado');
+                }
+            });
+        });
+
+    });
+</script>

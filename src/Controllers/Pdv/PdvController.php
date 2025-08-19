@@ -227,14 +227,18 @@ class PdvController extends Controller {
         $update = $this->vendaRepository->update($data, $pdv->id);
         
         if(is_null($update)){
-            return $this->router->view('pdv/finalizar', [
-                'venda' => $pdv,
-                'total' => $totalPriceSale,
-                'erro' => 'Erro ao atualizar'
+            echo json_encode([
+                'errors' => 'Erro ao calcular troco, tente novamente'
             ]);
+
+            exit();
         }
 
-        return $this->router->redirect('pdv/'.$pdv->uuid.'/finalizar');
+        echo json_encode([
+            'troco' => $update->troco
+        ]);
+        
+        exit();
     }
 
     public function findPaymentMethod(Request $request, $uuid){
@@ -242,14 +246,6 @@ class PdvController extends Controller {
 
         if(!$pdv){
             return $this->router->redirect('pdv');
-        }
-
-        $totalPriceSale = $pdv->total;
-
-        if(isset($pdv->total) || $pdv->total != 0){
-            $allProductsInSale = $this->vendaProdutoRepository->allProductsOnSale($pdv->id);
-
-            $totalPriceSale = priceWithDiscount($allProductsInSale);
         }
 
         $data = $request->getBodyParams();
@@ -260,23 +256,28 @@ class PdvController extends Controller {
             return $this->router->redirect('404');
         }
 
-        $findBySaleId = $this->vendaPagamentoRepository->findBySaleId($pdv->id);
+        $findBySaleId = $this->vendaPagamentoRepository->findBySaleId((int)$pdv->id);
 
-        if($findBySaleId){
-            $delete = $this->vendaPagamentoRepository->delete($pdv->id, $pagamento->id);
+        if(!is_null($findBySaleId)){
+            $delete = $this->vendaPagamentoRepository->delete($pdv->id, $findBySaleId->pagamento_id);
         }
 
         $create = $this->vendaPagamentoRepository->create($pdv->id, $pagamento->id);
 
         if(is_null($create)){
-            return $this->router->view('pdv/finalizar', [
-                'venda' => $pdv,
-                'total' => $totalPriceSale,
-                'erro' => 'Erro ao atualizar a forma de pagamento'
+            echo json_encode([
+                'errors' => 'Forma de pagamento não encontrada'
             ]);
+
+            exit();
         }
 
-        return $this->router->redirect('pdv/'.$pdv->uuid.'/finalizar');
+        echo json_encode([
+            'id' => $pagamento->id,
+            'forma' => $pagamento->forma
+        ]);
+        
+        exit();
     }
 
 }
