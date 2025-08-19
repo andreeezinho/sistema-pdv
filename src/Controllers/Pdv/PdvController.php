@@ -65,8 +65,14 @@ class PdvController extends Controller {
 
         $totalPriceSale = priceWithDiscount($allProductsInSale);
 
+        $vendas = $this->vendaRepository->all([
+            'situacao' => 'em espera',
+            'usuario' => $this->auth->user()->usuario
+        ]);
+
         return $this->router->view('pdv/index', [
             'venda' => $pdv,
+            'vendas' => $vendas,
             'produtos' => $allProductsInSale,
             'total' => $totalPriceSale
         ]);
