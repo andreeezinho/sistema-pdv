@@ -118,6 +118,22 @@ class PdvController extends Controller {
         return $this->router->redirect('pdv');
     }
 
+    public function suspendSale(Request $request, $uuid){
+        $pdv = $this->vendaRepository->findByUuid($uuid);
+
+        if(!$pdv){
+            return $this->router->redirect('pdv');
+        }
+
+        $suspend = $this->vendaRepository->updateSituation('em espera', $pdv->id);
+
+        if(is_null($suspend)){
+            return $this->router->redirect('pdv/'.$pdv->uuid.'/finalizar');
+        }
+
+        return $this->router->redirect('pdv');
+    }
+
     public function removeAllProducts(Request $request, $uuid){
         $pdv = $this->vendaRepository->findByUuid($uuid);
 

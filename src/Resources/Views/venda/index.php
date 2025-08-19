@@ -161,7 +161,7 @@
                             if(count($vendas) > 0){
                                 foreach($vendas as $venda){
                         ?>
-                            <tr class="bg-stone-100 border-b border-gray-400 text-gray-800">
+                            <tr class="odd:bg-gray-100 even:bg-gray-300 border-b border-gray-400 text-gray-800">
                                 <td class="px-6 py-4">
                                     <?= $venda->usuario ?>
                                 </td>

@@ -13,7 +13,6 @@
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 items-center">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <img class="mx-auto h-[200px] w-auto" src="<?= COLORED_LOGO ?>" alt="Site logo">
-            <h2 class="mt-4 text-center text-2xl/9 font-bold tracking-tight text-gray-900"><?= SITE_NAME ?></h2>
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">

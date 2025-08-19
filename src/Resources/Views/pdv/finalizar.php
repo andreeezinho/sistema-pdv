@@ -129,7 +129,7 @@
                 </button>
             </form>
 
-            <form action="" method="POST" class="w-full">
+            <form action="/pdv/<?= $venda->uuid ?>/em-espera" method="POST" class="w-full">
                 <button type="submit" class="flex w-full bg-gray-300 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded mt-1 justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />

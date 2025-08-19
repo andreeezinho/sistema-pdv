@@ -113,7 +113,7 @@
                             if(count($pagamentos) > 0){
                                 foreach($pagamentos as $pagamento){
                         ?>
-                            <tr class="bg-gray-100 border-b border-gray-400 text-gray-800">
+                            <tr class="odd:bg-gray-100 even:bg-gray-300 border-b border-gray-400 text-gray-800">
                                 <td class="px-6 py-4">
                                     <?= $pagamento->id ?>
                                 </td>
