@@ -22,6 +22,8 @@ use App\Interfaces\Venda\IVendaPagamento;
 use App\Repositories\Venda\VendaPagamentoRepository;
 use App\Interfaces\Cliente\ICliente;
 use App\Repositories\Cliente\ClienteRepository;
+use App\Interfaces\Cliente\IVendaCliente;
+use App\Repositories\Cliente\VendaClienteRepository;
 
 class DependencyProvider {
 

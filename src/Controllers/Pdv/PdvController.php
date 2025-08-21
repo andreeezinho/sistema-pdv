@@ -302,4 +302,10 @@ class PdvController extends Controller {
         exit();
     }
 
+    public function allClients(Request $request){}
+
+    public function bindClientOnSale(Request $request, $uuid, $client_uuid){}
+
+    public function deleteClientLink(Request $request, $uuid, $client_uuid){}
+
 }

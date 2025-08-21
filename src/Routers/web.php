@@ -104,7 +104,12 @@ $router->create("POST", "/pdv/{uuid}/finalizar/pagamento", [$pdvController, 'fin
 $router->create("POST", "/pdv/{uuid}/em-espera", [$pdvController, 'suspendSale'], $auth);
 $router->create("POST", "/pdv/{uuid}/cancelar", [$pdvController, 'removeAllProducts'], $auth);
 
-//vendaProdutos
+//venda_clientes
+$router->create("GET", "/pdv/clientes", [$pdvController, 'allClients'], $auth);
+$router->create("POST", "/pdv/{uuid}/vincular-cliente/{cliente_uuid}", [$pdvController, 'bindClientOnSale'], $auth);
+$router->create("POST", "/pdv/{uuid}/desvincular-cliente/{cliente_uuid}", [$pdvController, 'deleteClientLink'], $auth);
+
+//venda_produtos
 $router->create("POST", "/pdv/{uuid}/adicionar", [$pdvController, 'addProductInSale'], $auth);
 $router->create("POST", "/pdv/{uuid}/remover/{uuid_produto}", [$pdvController, 'removeProductInSale'], $auth);
 
