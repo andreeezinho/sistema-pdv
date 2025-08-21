@@ -30,7 +30,7 @@
 </div>
 
 <div>
-    <label for="tipo" class="block text-sm/6 font-medium text-gray-900">Situação</label>
+    <label for="ativo" class="block text-sm/6 font-medium text-gray-900">Situação</label>
     <div class="">
         <select name="ativo" id="ativo" value="<?= $produto->ativo ?? null ?>" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-3 p-2.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
             <option value="" <?= (isset($produto) && $produto->ativo == '') ? 'selected' : null ?>>Insira a situação</option>

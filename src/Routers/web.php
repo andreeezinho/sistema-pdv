@@ -15,6 +15,7 @@ use App\Controllers\Venda\VendaController;
 use App\Controllers\Pdv\PdvController;
 use App\Controllers\Produto\ProdutoController;
 use App\Controllers\Pagamento\PagamentoController;
+use App\Controllers\Cliente\ClienteController;
 
 
 $router = new Router();
@@ -35,6 +36,7 @@ $vendaController = $container->get(VendaController::class);
 $pdvController = $container->get(PdvController::class);
 $produtoController = $container->get(ProdutoController::class);
 $pagamentoController = $container->get(PagamentoController::class);
+$clienteController = $container->get(ClienteController::class);
 
 //rotas
 
@@ -121,5 +123,13 @@ $router->create("POST", "/pagamentos/cadastro", [$pagamentoController, 'store'],
 $router->create("GET", "/pagamentos/{uuid}/editar", [$pagamentoController, 'edit'], $auth);
 $router->create("POST", "/pagamentos/{uuid}/editar", [$pagamentoController, 'update'], $auth);
 $router->create("POST", "/pagamentos/{uuid}/deletar", [$pagamentoController, 'destroy'], $auth);
+
+//clientes
+$router->create("GET", "/clientes", [$clienteController, 'index'], $auth);
+$router->create("GET", "/clientes/cadastro", [$clienteController, 'create'], $auth);
+$router->create("POST", "/clientes/cadastro", [$clienteController, 'store'], $auth);
+$router->create("GET", "/clientes/{uuid}/editar", [$clienteController, 'edit'], $auth);
+$router->create("POST", "/clientes/{uuid}/editar", [$clienteController, 'update'], $auth);
+$router->create("POST", "/clientes/{uuid}/deletar", [$clienteController, 'destroy'], $auth);
 
 return $router;

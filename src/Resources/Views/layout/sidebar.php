@@ -40,6 +40,9 @@
                   <li>
                      <a href="/pagamentos" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Pagamentos</a>
                   </li>
+                  <li>
+                     <a href="/clientes" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Clientes</a>
+                  </li>
             </ul>
          </li>
          <li>
