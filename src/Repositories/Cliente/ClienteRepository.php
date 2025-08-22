@@ -28,14 +28,9 @@ class ClienteRepository implements ICliente {
         $conditions = [];
         $bindings = [];
 
-        if(isset($params['nome']) && !empty($params['nome'])){
-            $conditions[] = "nome LIKE :nome";
-            $bindings[':nome'] = "%" . $params['nome'] . "%" ;
-        }
-    
-        if(isset($params['documento']) && !empty($params['documento'])){
-            $conditions[] = "documento LIKE :documento";
-            $bindings[':documento'] = "%" . $params['documento'] . "%" ;
+        if(isset($params['nome_doc']) && !empty($params['nome_doc'])){
+            $conditions[] = "nome LIKE :nome_doc OR documento LIKE :nome_doc";
+            $bindings[':nome_doc'] = "%" . $params['nome_doc'] . "%" ;
         }
     
         if(isset($params['ativo']) && $params['ativo'] != ""){

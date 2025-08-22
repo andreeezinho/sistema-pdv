@@ -22,8 +22,7 @@ class ClienteController extends Controller {
 
         return $this->router->view('cliente/index', [
             'clientes' => $clientes,
-            'nome' => $params['nome'] ?? null,
-            'documento' => $params['documento'] ?? null,
+            'nome_doc' => $params['nome_doc'] ?? null,
             'ativo' => $params['ativo'] ?? null
         ]);
     }

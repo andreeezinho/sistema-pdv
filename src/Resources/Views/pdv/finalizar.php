@@ -96,25 +96,26 @@
 
                 <div class="w-full">
                     <h3 class="text-3xl font-bold tracking-tight text-gray-500 mb-4">Cliente</h3>
-                    <form action="" method="POST">
-                        <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <div class="grid grid-cols-2 gap-2 relative">
                             <div class="border border-gray-300 rounded-lg bg-neutral-100 p-3">
-                                <p class="flex tracking-tight text-gray-500">
+                                <p class="flex tracking-tight text-gray-500" id="client_name">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 border-r mr-2 pr-1">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                                     </svg>
                                     Nome do cliente
                                 </p>
                             </div>
-                            <input type="number" name="cpf" class="border border-gray-300 rounded-lg bg-neutral-50 p-3 text-gray-500" placeholder="CPF do cliente">
+                            <input type="text" name="nome_doc" id="search_client" class="border border-gray-300 rounded-lg bg-neutral-50 p-3 text-gray-500" placeholder="CPF do cliente">
+                            <ul class="border-collapse hidden border-2 border-gray-200 absolute w-1/2 left-0 top-[-45px]" id="clientes"></ul>
                         </div>
                         <button type="submit" class="flex w-full bg-gray-300 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded mt-3 justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                             </svg>
-                            Encontrar
+                            Vincular Cliente
                         </button>
-                    </form>
+                    </div>  
                 </div>
             </div>
         </div>
@@ -202,12 +203,47 @@
 <script>
     $(document).ready(function () {
 
+        //search_client
+        //client_name
+        $('#search_client').on('input', function() {
+            var data = $(this).val();
+
+            if(data.length < 3){
+                $('#clientes').hide();
+                return;
+            }
+
+            $.ajax({
+                type: "GET",
+                url: "/pdv/clientes",
+                data: {nome_doc: data},
+                dataType: "JSON",
+                success: function(response) {
+                    console.log(Array.isArray(response)); 
+                    var suggestions = '';
+
+                    if (response && Array.isArray(response) && response.length > 0) {
+                        response.forEach(function(cliente) {
+                            suggestions += '<li class="odd:bg-gray-100 even:bg-gray-200 border-1 border-b border-gray-300 last:border-none hover:bg-gray-50 hover:cursor-pointer p-2" id="'+cliente.uuid+'">';
+                            suggestions += cliente.nome + ' ('+ cliente.documento +')';
+                            suggestions += '</li>';
+                        });
+
+                        $('#clientes').html(suggestions).show();
+                    }
+                },
+                error: function(error){
+                    console.error('Erro na requisição:', error);
+                }
+            });
+        });
+
         $('#form-troco').submit(function (e) {
             e.preventDefault();
 
             const formData = $(this).serialize();
 
-             $.ajax({
+            $.ajax({
                 type: "POST",
                 url: "/pdv/<?= $venda->uuid ?>/finalizar/troco",
                 data: formData,

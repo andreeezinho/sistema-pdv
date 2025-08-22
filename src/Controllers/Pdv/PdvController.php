@@ -12,6 +12,7 @@ use App\Interfaces\Venda\IVendaProduto;
 use App\Interfaces\Venda\IVendaPagamento;
 use App\Interfaces\Produto\IProduto;
 use App\Interfaces\Pagamento\IPagamento;
+use App\Interfaces\Cliente\ICliente;
 
 class PdvController extends Controller {
 
@@ -23,8 +24,9 @@ class PdvController extends Controller {
     protected $produtoRepository;
     protected $pagamentoRepository;
     protected $vendaPagamentoRepository;
+    protected $clienteRepository;
 
-    public function __construct(IUser $userRepository, IVenda $vendaRepository, IVendaProduto $vendaProdutoRepository, IProduto $produtoRepository, IPagamento $pagamentoRepository, IVendaPagamento $vendaPagamentoRepository, Auth $auth, PdfService $pdfService){
+    public function __construct(IUser $userRepository, IVenda $vendaRepository, IVendaProduto $vendaProdutoRepository, IProduto $produtoRepository, IPagamento $pagamentoRepository, IVendaPagamento $vendaPagamentoRepository, ICliente $clienteRepository, Auth $auth, PdfService $pdfService){
         parent::__construct();
         $this->auth = $auth;
         $this->pdfService = $pdfService;
@@ -34,6 +36,7 @@ class PdvController extends Controller {
         $this->produtoRepository = $produtoRepository;
         $this->pagamentoRepository = $pagamentoRepository;
         $this->vendaPagamentoRepository = $vendaPagamentoRepository;
+        $this->clienteRepository = $clienteRepository;
     }
 
     public function index(Request $request){
@@ -302,7 +305,14 @@ class PdvController extends Controller {
         exit();
     }
 
-    public function allClients(Request $request){}
+    public function allClients(Request $request){
+        $data = $request->getQueryParams();
+
+        $clientes = $this->clienteRepository->all($data);
+
+        echo json_encode($clientes);
+        exit();
+    }
 
     public function bindClientOnSale(Request $request, $uuid, $client_uuid){}
 

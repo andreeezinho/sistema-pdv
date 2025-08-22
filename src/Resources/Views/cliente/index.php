@@ -68,16 +68,9 @@
                                 <h3 class="text-center text-gray-700 my-4">Filtrar Clientes</h3>
                                 <form action="/clientes" method="GET" class="flex flex-col gap-y-4">
                                     <div>
-                                        <label for="nome" class="block text-sm/6 font-medium text-gray-900">Nome</label>
+                                        <label for="nome_doc" class="block text-sm/6 font-medium text-gray-900">Nome ou Doc. (CPF/CNPJ)</label>
                                         <div class="mt-2">
-                                            <input type="text" name="nome" id="nome" value="<?= $nome ?? null ?>" placeholder="Nome" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <label for="documento" class="block text-sm/6 font-medium text-gray-900">Doc. (CPF/CNPJ)</label>
-                                        <div class="mt-2">
-                                            <input type="text" name="documento" id="documento" value="<?= $documento ?? null ?>" placeholder="Documento" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
+                                            <input type="text" name="nome_doc" id="nome_doc" value="<?= $nome_doc ?? null ?>" placeholder="Nome" class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
                                         </div>
                                     </div>
 
