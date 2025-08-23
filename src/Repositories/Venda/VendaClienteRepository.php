@@ -78,25 +78,37 @@ class VendaClienteRepository implements IVendaCliente {
         }
     }
 
-    public function delete(int $id, $vendas_id, $cliente_id){
+    public function delete($vendas_id){
         $sql = "DELETE FROM " . self::TABLE . "
             WHERE
-                id = :id
-            AND
                 vendas_id = :vendas_id
-            AND
-                cliente_id = :cliente_id
         ";
 
         $stmt = $this->conn->prepare($sql);
 
         $delete = $stmt->execute([
-            ':id' => $id,
-            ':vendas_id' => $vendas_id,
-            ':cliente_id' => $cliente_id
+            ':vendas_id' => $vendas_id
         ]);
 
         return $delete;
+    }
+
+    public function findBySaleId($vendas_id){
+        $stmt = $this->conn->prepare(
+            "SELECT * FROM " . self::TABLE . " WHERE vendas_id = :vendas_id"
+        );
+
+        $stmt->bindParam(':vendas_id', $vendas_id, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, self::CLASS_NAME);
+        $result = $stmt->fetch();
+
+        if(is_null($result)){
+            return null;
+        }
+
+        return $result;
     }
 
 }

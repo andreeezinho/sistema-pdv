@@ -22,8 +22,8 @@ use App\Interfaces\Venda\IVendaPagamento;
 use App\Repositories\Venda\VendaPagamentoRepository;
 use App\Interfaces\Cliente\ICliente;
 use App\Repositories\Cliente\ClienteRepository;
-use App\Interfaces\Cliente\IVendaCliente;
-use App\Repositories\Cliente\VendaClienteRepository;
+use App\Interfaces\Venda\IVendaCliente;
+use App\Repositories\Venda\VendaClienteRepository;
 
 class DependencyProvider {
 
@@ -93,6 +93,12 @@ class DependencyProvider {
             ->set(
                 ICliente::class,
                 new ClienteRepository()
+            );
+
+        $this->container
+            ->set(
+                IVendaCliente::class,
+                new VendaClienteRepository()
             );
 
     }

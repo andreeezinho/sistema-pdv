@@ -8,8 +8,10 @@ interface IVendaCliente {
 
     public function create(array $data, int $vendas_id, int $clientes_id);
 
-    public function delete(int $id, $vendas_id, $clientes_id);
+    public function delete(int $vendas_id);
     
+    public function findBySaleId(int $vendas_id);
+
     public function findById(int $id);
 
     public function findByUuid(string $uuid);

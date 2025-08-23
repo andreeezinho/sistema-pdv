@@ -10,6 +10,7 @@ use App\Interfaces\User\IUser;
 use App\Interfaces\Venda\IVenda;
 use App\Interfaces\Venda\IVendaProduto;
 use App\Interfaces\Venda\IVendaPagamento;
+use App\Interfaces\Venda\IVendaCliente;
 use App\Interfaces\Produto\IProduto;
 use App\Interfaces\Pagamento\IPagamento;
 use App\Interfaces\Cliente\ICliente;
@@ -21,18 +22,20 @@ class PdvController extends Controller {
     protected $userRepository;
     protected $vendaRepository;
     protected $vendaProdutoRepository;
+    protected $vendaClienteRepository;
     protected $produtoRepository;
     protected $pagamentoRepository;
     protected $vendaPagamentoRepository;
     protected $clienteRepository;
 
-    public function __construct(IUser $userRepository, IVenda $vendaRepository, IVendaProduto $vendaProdutoRepository, IProduto $produtoRepository, IPagamento $pagamentoRepository, IVendaPagamento $vendaPagamentoRepository, ICliente $clienteRepository, Auth $auth, PdfService $pdfService){
+    public function __construct(IUser $userRepository, IVenda $vendaRepository, IVendaProduto $vendaProdutoRepository, IProduto $produtoRepository, IPagamento $pagamentoRepository, IVendaPagamento $vendaPagamentoRepository, IVendaCliente $vendaClienteRepository, ICliente $clienteRepository, Auth $auth, PdfService $pdfService){
         parent::__construct();
         $this->auth = $auth;
         $this->pdfService = $pdfService;
         $this->userRepository = $userRepository;
         $this->vendaRepository = $vendaRepository;
         $this->vendaProdutoRepository = $vendaProdutoRepository;
+        $this->vendaClienteRepository = $vendaClienteRepository;
         $this->produtoRepository = $produtoRepository;
         $this->pagamentoRepository = $pagamentoRepository;
         $this->vendaPagamentoRepository = $vendaPagamentoRepository;
@@ -314,7 +317,54 @@ class PdvController extends Controller {
         exit();
     }
 
-    public function bindClientOnSale(Request $request, $uuid, $client_uuid){}
+    public function bindClientOnSale(Request $request, $uuid, $client_uuid){
+        $pdv = $this->vendaRepository->findByUuid($uuid);
+
+        if(!$pdv){
+            echo json_encode([
+                'errors' => 'Venda não encontrada'
+            ]);
+
+            exit();
+        }
+
+        $cliente = $this->clienteRepository->findByUuid($client_uuid);
+
+        if(!$cliente){
+            echo json_encode([
+                'errors' => 'Cliente não encontrado'
+            ]);
+
+            exit();
+        }
+
+        if($this->vendaClienteRepository->findBySaleId($pdv->id)){
+            $venda_cliente = $this->vendaClienteRepository->delete($pdv->id);
+
+            if(!$venda_cliente){
+                echo json_encode([
+                    'errors' => 'Erro ao desvincular cliente antigo'
+                ]);
+
+                exit();
+            }
+        }
+
+        $venda_cliente = $this->vendaClienteRepository->create([], $pdv->id, $cliente->id);
+
+        if(is_null($venda_cliente)){
+            echo json_encode([
+                'errors' => 'Erro ao vincular cliente'
+            ]);
+
+            exit();
+        }
+
+        echo json_encode([
+            'nome' => $cliente->nome
+        ]);
+        exit();     
+    }
 
     public function deleteClientLink(Request $request, $uuid, $client_uuid){}
 

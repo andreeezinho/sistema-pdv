@@ -238,6 +238,30 @@
             });
         });
 
+        $('#clientes').on('click', 'li', function() {
+            var data = $(this).attr('id');
+
+            $.ajax({
+                type: "POST",
+                url: "/pdv/<?= $venda->uuid ?>/vincular-cliente/"+data,
+                data: data,
+                dataType: "JSON",
+                success: function(response) {
+                    if(response.errors){
+                        console.log(response.errors);
+                    }else{
+                        console.log(response);
+
+                        $('#clientes').hide();
+                        $('#client_name').text(response.nome);
+                    }
+                },
+                error: function(error){
+                    console.error('Erro na requisição:', error);
+                }
+            });
+        });
+
         $('#form-troco').submit(function (e) {
             e.preventDefault();
 
