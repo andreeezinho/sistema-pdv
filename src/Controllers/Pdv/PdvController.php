@@ -137,6 +137,25 @@ class PdvController extends Controller {
             return $this->router->redirect('pdv');
         }
 
+        $venda_cliente = $this->vendaClienteRepository->findBySaleId($pdv->id);
+
+        if(!$venda_cliente){
+            $allPayments = $this->pagamentoRepository->all(['ativo' => 1]);
+
+            if(isset($pdv->total) || $pdv->total != 0){
+                $allProductsInSale = $this->vendaProdutoRepository->allProductsOnSale($pdv->id);
+
+                $totalPriceSale = priceWithDiscount($allProductsInSale);
+            }
+
+            return $this->router->view('pdv/finalizar', [
+                'venda' => $pdv,
+                'total' => $totalPriceSale,
+                'allPayments' => $allPayments,
+                'erro' => 'Cliente precisa ser vinculado para suspender a venda'
+            ]);
+        }
+
         $suspend = $this->vendaRepository->updateSituation('em espera', $pdv->id);
 
         if(is_null($suspend)){
@@ -188,8 +207,7 @@ class PdvController extends Controller {
         return $this->router->view('pdv/finalizar', [
             'venda' => $pdv,
             'total' => $totalPriceSale,
-            'allPayments' => $allPayments,
-            'pagamento' => $pagamento
+            'allPayments' => $allPayments
         ]);
     }
 
@@ -200,13 +218,11 @@ class PdvController extends Controller {
             return $this->router->redirect('pdv');
         }
 
+        $all_products = $this->produtoRepository->all();
+
         $allPayments = $this->pagamentoRepository->all(['ativo' => 1]);
 
-        $pagamento = $this->vendaPagamentoRepository->findBySaleId($pdv->id);
-
-        $pagamento = $this->pagamentoRepository->findById($pagamento->pagamento_id);
-
-        $totalPriceSale = $pdv->total;
+        $totalPriceSale = $pdv->total;  
 
         if(isset($pdv->total) || $pdv->total != 0){
             $allProductsInSale = $this->vendaProdutoRepository->allProductsOnSale($pdv->id);
@@ -214,19 +230,29 @@ class PdvController extends Controller {
             $totalPriceSale = priceWithDiscount($allProductsInSale);
         }
 
-        $all_products = $this->produtoRepository->all();
-
         $subtractProduct = $this->produtoRepository->verifyProductQuantity($all_products, $allProductsInSale);
 
         if(!$subtractProduct){
-            return $this->router->view('pdv/index', [
+            return $this->router->view('pdv/finalizar', [
                 'venda' => $pdv,
                 'total' => $totalPriceSale,
                 'allPayments' => $allPayments,
-                'pagamento' => $pagamento,
                 'erro' => 'Quantidade no estoque indisponível'
             ]);
         }
+
+        $pagamento = $this->vendaPagamentoRepository->findBySaleId($pdv->id);
+
+        if(!$pagamento){
+            return $this->router->view('pdv/finalizar', [
+                'venda' => $pdv,
+                'total' => $totalPriceSale,
+                'allPayments' => $allPayments,
+                'erro' => 'Insira uma forma de pagamento'
+            ]);
+        }
+
+        $pagamento = $this->pagamentoRepository->findById($pagamento->pagamento_id);
 
         $finish = $this->vendaRepository->updateSituation('concluida', $pdv->id);
 
@@ -361,7 +387,8 @@ class PdvController extends Controller {
         }
 
         echo json_encode([
-            'nome' => $cliente->nome
+            'nome' => $cliente->nome,
+            'doc' => $cliente->documento
         ]);
         exit();     
     }

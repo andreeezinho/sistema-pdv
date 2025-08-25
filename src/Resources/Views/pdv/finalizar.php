@@ -3,7 +3,19 @@
 ?>
 
     <div class="p-4 rounded-lg mt-14">
-        <h3 class="text-2xl text-center font-bold tracking-tight text-gray-900">Finalizar Venda</h3>
+        <div class="float-start">
+            <a href="/pdv" class="flex gap-x-1 p-2 rounded-lg hover:bg-gray-200">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                </svg>
+
+                Voltar
+            </a>
+        </div>
+        
+        <div class="w-full text-center">
+            <h3 class="text-2xl font-bold tracking-tight text-gray-900">Finalizar Venda</h3>
+        </div>
         
         <div class="flex gap-x-2 w-full min-h-[70dvh] p-4 mt-5">
             <div class="flex flex-col gap-y-6 w-1/2 p-5">
@@ -49,7 +61,7 @@
                     <div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                         <div class="relative p-4 w-full max-w-md max-h-full">
                             <div class="relative bg-white rounded-lg shadow-sm">
-                                <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
+                                <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal" id="button-close-payment-modal">
                                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                     </svg>
@@ -73,7 +85,7 @@
                                                     if(count($allPayments) > 0){
                                                         foreach($allPayments as $pagamento){
                                                 ?>
-                                                    <tr class="bg-white border-b border-gray-200 hover:bg-gray-200 hover:cursor-pointer">
+                                                    <tr class="bg-white border-b border-gray-200 hover:bg-gray-200 hover:cursor-pointer formas-modal" data-id="<?= $pagamento->id ?>">
                                                         <td class="px-6 py-4">
                                                             <?= $pagamento->id ?>
                                                         </td>
@@ -108,7 +120,7 @@
                                     </span>
                                 </p>
                             </div>
-                            <input type="text" name="nome_doc" id="search_client" class="border border-gray-300 rounded-lg bg-neutral-50 p-3 text-gray-500" placeholder="CPF do cliente">
+                            <input type="text" name="nome_doc" id="search_client" class="border border-gray-300 rounded-lg bg-neutral-50 p-3 text-gray-500" placeholder="CPF ou DOC. do cliente">
                             <ul class="border-collapse hidden border-2 border-gray-200 absolute w-1/2 left-0 top-[-45px]" id="clientes"></ul>
                         </div>
                         <button type="submit" class="flex w-full bg-gray-300 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded mt-3 justify-center">
@@ -205,8 +217,6 @@
 <script>
     $(document).ready(function () {
 
-        //search_client
-        //client_name
         $('#search_client').on('input', function() {
             var data = $(this).val();
 
@@ -256,12 +266,20 @@
 
                         $('#clientes').hide();
                         $('#client_name').text(response.nome);
+                        $('#search_client').val(response.doc);
                     }
                 },
                 error: function(error){
                     console.error('Erro na requisição:', error);
                 }
             });
+        });
+
+        $('.formas-modal').on('click', function() {
+            var data = $(this).data('id');
+
+            $('#button-close-payment-modal').click();
+            $('#pagamento').val(data); 
         });
 
         $('#form-troco').submit(function (e) {
