@@ -107,6 +107,7 @@ $router->create("POST", "/pdv/{uuid}/finalizar", [$pdvController, 'finish'], $au
 $router->create("POST", "/pdv/{uuid}/finalizar/troco", [$pdvController, 'subtractPaidValue'], $auth);
 $router->create("POST", "/pdv/{uuid}/finalizar/pagamento", [$pdvController, 'findPaymentMethod'], $auth);
 $router->create("POST", "/pdv/{uuid}/em-espera", [$pdvController, 'suspendSale'], $auth);
+$router->create("POST", "/pdv/{uuid}/liberar", [$pdvController, 'releaseSale'], $auth);
 $router->create("POST", "/pdv/{uuid}/cancelar", [$pdvController, 'removeAllProducts'], $auth);
 
 //venda_produtos

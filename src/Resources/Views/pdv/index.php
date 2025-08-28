@@ -18,12 +18,78 @@
             </div>
             <ul class="py-1" role="none">
                 <li>
-                    <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Suas vendas</a>
+                    <button type="button" id="diarias" class="w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:hidden text-left" role="menuitem" data-modal-target="vendas-diarias" data-modal-toggle="vendas-diarias">Vendas do dia</button>
                 </li>
                 <li>
-                    <button type="button" id="em-espera" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:hidden" role="menuitem" data-modal-target="vendas-em-espera" data-modal-toggle="vendas-em-espera">Venda em espera</button>
+                    <button type="button" id="em-espera" class="w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:hidden text-left" role="menuitem" data-modal-target="vendas-em-espera" data-modal-toggle="vendas-em-espera">Venda em espera</button>
                 </li>
             </ul>
+        </div>
+
+        <div id="vendas-diarias" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-lg max-w-full max-h-full">
+                <div class="relative bg-white rounded-lg shadow-sm">
+                    <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="vendas-diarias">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                    </button>
+                    <div class="p-4 md:p-5 text-center">
+                        <h3 class="mb-5 text-lg font-normal text-gray-700">Vendas do dia</h3>
+                        
+                        <table class="w-full text-sm text-left rtl:text-right text-white">
+                            <thead class="text-xs text-white uppercase bg-gray-800">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">
+                                        N°
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Total
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Troco
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center">
+                                        Hora
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center">
+                                        -
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    if(count($vendas_diarias) > 0){
+                                        foreach($vendas_diarias as $vendas_diaria){
+                                ?>
+                                    <tr class="odd:bg-gray-100 even:bg-gray-300 border-b border-gray-400 text-gray-800">
+                                        <td class="px-6 py-4">
+                                            <?= $vendas_diaria->id ?>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            R$ <?= number_format($vendas_diaria->total ?? 0,2,",",".") ?>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            R$ <?= number_format($vendas_diaria->troco ?? 0,2,",",".") ?>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <?= date('d/m/Y H:i', strtotime($vendas_diaria->created_at)) ?>
+                                        </td>
+                                        <td class="px-6 py-4 flex gap-x-2 justify-center text-<?= $venda->situacao == 'concluida' ? 'green' : ($venda->situacao == 'em andamento' ? 'yellow' : ($venda->situacao == 'em espera' ? 'gray' : 'red')) ?>-500 ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 mx-auto">
+                                                <path fill-rule="evenodd" d="M4.5 7.5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3v-9Z" clip-rule="evenodd" />
+                                            </svg>
+                                        </td>
+                                    </tr>
+                                <?php
+                                        }
+                                    }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="vendas-em-espera" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -41,12 +107,15 @@
                             <thead class="text-xs text-white uppercase bg-gray-800">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
+                                        N°
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
                                         Total
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Troco
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-6 py-3 text-center">
                                         Data
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center">
@@ -61,6 +130,9 @@
                                 ?>
                                     <tr class="odd:bg-gray-100 even:bg-gray-300 border-b border-gray-400 text-gray-800">
                                         <td class="px-6 py-4">
+                                            <?= $venda_suspensa->id ?>
+                                        </td>
+                                        <td class="px-6 py-4">
                                             R$ <?= number_format($venda_suspensa->total ?? 0,2,",",".") ?>
                                         </td>
                                         <td class="px-6 py-4">
@@ -70,7 +142,7 @@
                                             <?= date('d/m/Y - H:i', strtotime($venda_suspensa->created_at)) ?>
                                         </td>
                                         <td class="px-6 py-4 flex gap-x-2 justify-center">
-                                            <a href="/vendas/<?= $venda_suspensa->uuid ?>/visualizar" class="font-medium text-white p-2 rounded-lg text-center bg-blue-500 hover:bg-blue-800">
+                                            <a href="/vendas/<?= $venda_suspensa->uuid ?>/liberar" class="font-medium text-white p-2 rounded-lg text-center bg-blue-500 hover:bg-blue-800">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" />
                                                 </svg>
@@ -265,6 +337,12 @@
 
 <script>
     $(document).ready(function () {
+
+        $('#diarias').click(function (e) {
+            $('#dropdown-sale').removeClass("block");
+
+            $('#dropdown-sale').addClass("hidden");
+        });
 
         $('#em-espera').click(function (e) {
             $('#dropdown-sale').removeClass("block");

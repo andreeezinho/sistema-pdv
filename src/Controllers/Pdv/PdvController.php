@@ -63,7 +63,7 @@ class PdvController extends Controller {
     public function pdv(Request $request, $uuid){
         $pdv = $this->vendaRepository->findByUuid($uuid);
 
-        if(!$pdv){
+        if(!$pdv || $pdv->situacao != 'em andamento'){
             return $this->router->redirect('pdv');
         }
 
@@ -76,9 +76,15 @@ class PdvController extends Controller {
             'usuario' => $this->auth->user()->usuario
         ]);
 
+        $vendas_diarias = $this->vendaRepository->all([
+            'usuario' => $this->auth->user()->usuario,
+            'exact_data' => date('Y-m-d')
+        ]);
+
         return $this->router->view('pdv/index', [
             'venda' => $pdv,
             'vendas_suspensas' => $vendas_suspensas,
+            'vendas_diarias' => $vendas_diarias,
             'produtos' => $allProductsInSale,
             'total' => $totalPriceSale
         ]);
@@ -163,6 +169,16 @@ class PdvController extends Controller {
         }
 
         return $this->router->redirect('pdv');
+    }
+
+    public function releaseSale(Request $request, $uuid){
+        $pdv = $this->vendaRepository->findByUuid($uuid);
+
+        if(!$pdv){
+            return $this->router->redirect('pdv');
+        }
+
+        
     }
 
     public function removeAllProducts(Request $request, $uuid){

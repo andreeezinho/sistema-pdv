@@ -39,17 +39,17 @@ class VendaRepository implements IVenda {
         }
 
         if(isset($params['usuario']) && !empty($params['usuario'])){
-            $conditions[] = "u.usuario LIKE :usuario OR u.cpf LIKE :usuario";
+            $conditions[] = "(u.usuario LIKE :usuario OR u.cpf LIKE :usuario)";
             $bindings[':usuario'] = "%" . $params['usuario'] . "%";
         }
 
         if(isset($params['data']) && !empty($params['data'])){
-            $conditions[] = "date_format(v.created_at, '%d/%m/%Y') <= date_format(:data, '%d/%m/%Y')";
+            $conditions[] = "DATE(v.created_at) <= DATE(:data)";
             $bindings[':data'] = $params['data'];
         }
 
         if(isset($params['exact_data']) && !empty($params['exact_data'])){
-            $conditions[] = "date_format(v.created_at, '%d/%m/%Y') = date_format(:exact_data, '%d/%m/%Y')";
+            $conditions[] = "DATE(v.created_at) = DATE(:exact_data)";
             $bindings[':exact_data'] = $params['exact_data'];
         }
     
