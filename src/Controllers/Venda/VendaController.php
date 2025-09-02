@@ -62,6 +62,12 @@ class VendaController extends Controller {
 
         $vendedor = $this->userRepository->findById($venda->usuarios_id);
 
+        if(!$this->auth->user()->is_admin){
+            if($vendedor->id != $this->auth->user()->id){
+                return $this->router->redirect('404');
+            }
+        }
+
         $allProductsInSale = $this->vendaProdutoRepository->allProductsOnSale($venda->id);
 
         $pagamento = $this->vendaPagamentoRepository->findBySaleId($venda->id);

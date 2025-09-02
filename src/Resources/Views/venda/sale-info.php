@@ -38,56 +38,63 @@
             <div class="md:w-2/3 mt-5 mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-2 gap-y-4">
                     <div class="col-span-2">
-                        <label for="nome" class="block mb-1 text-sm font-medium text-gray-900">Vendedor</label>
+                        <label class="block mb-1 text-sm font-medium text-gray-900">N° da Venda</label>
+                        <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                            <p><?= $vendedor->id ?? null ?></p>
+                        </div>
+                    </div>
+
+                    <div class="col-span-2">
+                        <label class="block mb-1 text-sm font-medium text-gray-900">Vendedor</label>
                         <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                             <p><?= $vendedor->nome ?? null ?></p>
                         </div>
                     </div>
 
                     <div class="col-span-2">
-                        <label for="nome" class="block mb-1 text-sm font-medium text-gray-900">Desconto</label>
-                        <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                            <p><?= $venda->desconto ?? null ?></p>
-                        </div>
-                    </div>
-
-                    <div class="col-span-2">
-                        <label for="nome" class="block mb-1 text-sm font-medium text-gray-900">Total</label>
+                        <label class="block mb-1 text-sm font-medium text-gray-900">Total</label>
                         <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                             <p>R$ <?= number_format($venda->total,2,",",".") ?? null ?></p>
                         </div>
                     </div>
 
                     <div class="col-span-2">
-                        <label for="nome" class="block mb-1 text-sm font-medium text-gray-900">Troco</label>
+                        <label class="block mb-1 text-sm font-medium text-gray-900">Desconto</label>
+                        <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                            <p><?= $venda->desconto ?? null ?></p>
+                        </div>
+                    </div>
+
+                    <div class="col-span-2">
+                        <label class="block mb-1 text-sm font-medium text-gray-900">Troco</label>
                         <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                             <p>R$ <?= number_format($venda->troco,2,",",".") ?? null ?></p>
                         </div>
                     </div>
 
                     <div class="col-span-2">
-                        <label for="nome" class="block mb-1 text-sm font-medium text-gray-900">Situação da Venda</label>
+                        <label class="block mb-1 text-sm font-medium text-gray-900">Situação da Venda</label>
                         <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                             <p><?= $venda->situacao ?? null ?></p>
                         </div>
                     </div>
 
                     <div class="col-span-2">
-                        <label for="nome" class="block mb-1 text-sm font-medium text-gray-900">Forma de Pagamento</label>
+                        <label class="block mb-1 text-sm font-medium text-gray-900">Forma de Pagamento</label>
                         <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                            <p><?= $pagamento->forma ?? null ?></p>
+                            <p><?= $pagamento->forma ?? 'Não inserido' ?></p>
                         </div>
                     </div>
                     
                     <div class="col-span-2">
-                        <label for="nome" class="block mb-1 text-sm font-medium text-gray-900">Criada em</label>
+                        <label class="block mb-1 text-sm font-medium text-gray-900">Criada em</label>
                         <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                             <p><?= date('d/m/Y - H:i', strtotime($venda->created_at)) ?? null ?></p>
                         </div>
                     </div>
 
                     <div class="col-span-2">
-                        <label for="nome" class="block mb-1 text-sm font-medium text-gray-900">Atualizada em</label>
+                        <label class="block mb-1 text-sm font-medium text-gray-900">Atualizada em</label>
                         <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                             <p><?= date('d/m/Y - H:i', strtotime($venda->updated_at)) ?? null ?></p>
                         </div>
