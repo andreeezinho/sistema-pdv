@@ -64,5 +64,26 @@ function createImage($arquivo, $dir){
     }
 
     return null;
+}
 
+function priceWithDiscount(array $products, float $discount = 0){
+    $total = 0;
+
+    foreach($products as $product){
+        if(isset($product->quantidade)){
+            $total += $product->preco * $product->quantidade;
+        }
+
+
+        if(!isset($product->quantidade)){
+            $total = $total + $product->preco;
+        }
+    }
+
+    if($discount > 0){
+        $total -= $discount;
+        $total *= -1;
+    }
+
+    return $total;
 }

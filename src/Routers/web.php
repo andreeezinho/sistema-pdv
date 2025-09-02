@@ -11,7 +11,11 @@ use App\Controllers\Permissao\PermissaoController;
 use App\Controllers\Permissao\PermissaoUserController;
 use App\Controllers\User\UserPerfilController;
 use App\Controllers\User\RecoveryPasswordController;
+use App\Controllers\Venda\VendaController;
 use App\Controllers\Pdv\PdvController;
+use App\Controllers\Produto\ProdutoController;
+use App\Controllers\Pagamento\PagamentoController;
+use App\Controllers\Cliente\ClienteController;
 
 
 $router = new Router();
@@ -28,7 +32,11 @@ $permissaoController = $container->get(PermissaoController::class);
 $permissaoUserController = $container->get(PermissaoUserController::class);
 $userPerfilController = $container->get(UserPerfilController::class);
 $recoveryPasswordController = $container->get(RecoveryPasswordController::class);
+$vendaController = $container->get(VendaController::class);
 $pdvController = $container->get(PdvController::class);
+$produtoController = $container->get(ProdutoController::class);
+$pagamentoController = $container->get(PagamentoController::class);
+$clienteController = $container->get(ClienteController::class);
 
 //rotas
 
@@ -80,8 +88,54 @@ $router->create("POST", "/perfil/editar", [$userPerfilController, 'updateDados']
 $router->create("POST", "/perfil/senha", [$userPerfilController, 'updateSenha'], $auth);
 $router->create("POST", "/perfil/deletar", [$userPerfilController, 'destroy'], $auth);
 
+//vendas
+$router->create("GET", "/vendas", [$vendaController, 'index'], $auth);
+$router->create("GET", "/vendas/{uuid}/visualizar", [$vendaController, 'viewSaleInfos'], $auth);
+$router->create("GET", "/vendas/{uuid}/comprovante", [$vendaController, 'viewProofSale'], $auth);
+$router->create("POST", "/vendas/{uuid}/cancelar", [$vendaController, 'cancelSale'], $auth);
+
+//venda_clientes
+$router->create("GET", "/pdv/clientes", [$pdvController, 'allClients'], $auth);
+$router->create("POST", "/pdv/{uuid}/vincular-cliente/{cliente_uuid}", [$pdvController, 'bindClientOnSale'], $auth);
+$router->create("POST", "/pdv/{uuid}/desvincular-cliente/{cliente_uuid}", [$pdvController, 'deleteClientLink'], $auth);
+
 //pdv
 $router->create("GET", "/pdv", [$pdvController, 'index'], $auth);
-$router->create("GET", "/pdv/tal/finalizar", [$pdvController, 'finalizar'], $auth);
+$router->create("GET", "/pdv/{uuid}", [$pdvController, 'pdv'], $auth);
+$router->create("GET", "/pdv/{uuid}/finalizar", [$pdvController, 'viewSaleInfos'], $auth);
+$router->create("POST", "/pdv/{uuid}/finalizar", [$pdvController, 'finish'], $auth);
+$router->create("POST", "/pdv/{uuid}/finalizar/troco", [$pdvController, 'subtractPaidValue'], $auth);
+$router->create("POST", "/pdv/{uuid}/finalizar/pagamento", [$pdvController, 'findPaymentMethod'], $auth);
+$router->create("POST", "/pdv/{uuid}/em-espera", [$pdvController, 'suspendSale'], $auth);
+$router->create("POST", "/pdv/{uuid}/liberar", [$pdvController, 'releaseSale'], $auth);
+$router->create("POST", "/pdv/{uuid}/cancelar", [$pdvController, 'removeAllProducts'], $auth);
+
+//venda_produtos
+$router->create("POST", "/pdv/{uuid}/adicionar", [$pdvController, 'addProductInSale'], $auth);
+$router->create("POST", "/pdv/{uuid}/remover/{uuid_produto}", [$pdvController, 'removeProductInSale'], $auth);
+
+//produtos
+$router->create("GET", "/produtos", [$produtoController, 'index'], $auth);
+$router->create("GET", "/produtos/cadastro", [$produtoController, 'create'], $auth);
+$router->create("POST", "/produtos/cadastro", [$produtoController, 'store'], $auth);
+$router->create("GET", "/produtos/{uuid}/editar", [$produtoController, 'edit'], $auth);
+$router->create("POST", "/produtos/{uuid}/editar", [$produtoController, 'update'], $auth);
+$router->create("POST", "/produtos/{uuid}/deletar", [$produtoController, 'destroy'], $auth);
+
+//formas-de-pagamentos
+$router->create("GET", "/pagamentos", [$pagamentoController, 'index'], $auth);
+$router->create("GET", "/pagamentos/cadastro", [$pagamentoController, 'create'], $auth);
+$router->create("POST", "/pagamentos/cadastro", [$pagamentoController, 'store'], $auth);
+$router->create("GET", "/pagamentos/{uuid}/editar", [$pagamentoController, 'edit'], $auth);
+$router->create("POST", "/pagamentos/{uuid}/editar", [$pagamentoController, 'update'], $auth);
+$router->create("POST", "/pagamentos/{uuid}/deletar", [$pagamentoController, 'destroy'], $auth);
+
+//clientes
+$router->create("GET", "/clientes", [$clienteController, 'index'], $auth);
+$router->create("GET", "/clientes/cadastro", [$clienteController, 'create'], $auth);
+$router->create("POST", "/clientes/cadastro", [$clienteController, 'store'], $auth);
+$router->create("GET", "/clientes/{uuid}/editar", [$clienteController, 'edit'], $auth);
+$router->create("POST", "/clientes/{uuid}/editar", [$clienteController, 'update'], $auth);
+$router->create("POST", "/clientes/{uuid}/deletar", [$clienteController, 'destroy'], $auth);
 
 return $router;
