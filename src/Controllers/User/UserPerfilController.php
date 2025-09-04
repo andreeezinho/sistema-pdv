@@ -17,13 +17,12 @@ class UserPerfilController extends Controller {
         parent::__construct();
         $this->userRepository = $userRepository;
         $this->auth = $auth;
-        $this->usuario = $_SESSION['user'] ?? null;
     }
 
     public function index(Request $request){
         return $this->router->view('user/perfil/index', [
             'perfil' => true,
-            'usuario' => $this->usuario
+            'usuario' => $this->auth->user()
         ]);
     }
 
@@ -40,21 +39,21 @@ class UserPerfilController extends Controller {
             return $this->router->view('user/perfil/index', [
                 'erro' => 'Insira uma imagem para continuar',
                 'perfil' => true,
-                'usuario' => $this->usuario
+                'usuario' => $this->auth->user()
             ]);
         }
 
-        $update = $this->userRepository->updateIcone($this->usuario->id, $icone, $dir);
+        $update = $this->userRepository->updateIcone($this->auth->user()->id, $icone, $dir);
 
         if(is_null($update)){
             return $this->router->view('user/perfil/index', [
                 'erro' => 'Não foi possível atualizar imagem de perfil',
                 'perfil' => true,
-                'usuario' => $this->usuario
+                'usuario' => $this->auth->user()
             ]);
         }
 
-        $_SESSION['user'] = $this->userRepository->findById($this->usuario->id);
+        $_SESSION['user'] = $this->userRepository->findById($this->auth->user()->id);
 
         return $this->router->redirect('perfil');
     }
@@ -66,17 +65,17 @@ class UserPerfilController extends Controller {
             return $this->router->view('user/perfil/index', [
                 'erro' => 'Campo obrigatório em branco',
                 'perfil' => true,
-                'usuario' => $this->usuario
+                'usuario' => $this->auth->user()
             ]);
         }
 
-        $update = $this->userRepository->update($data, $this->usuario->id);
+        $update = $this->userRepository->updatePerfil($data, $this->auth->user()->id);
 
         if(is_null($update)){
             return $this->router->view('user/perfil/index', [
                 'erro' => 'Não foi possível editar seus dados',
                 'perfil' => true,
-                'usuario' => $this->usuario
+                'usuario' => $this->auth->user()
             ]);
         }
 
@@ -94,17 +93,17 @@ class UserPerfilController extends Controller {
             return $this->router->view('user/perfil/index', [
                 'erro' => 'Senha não pode estar em branco',
                 'perfil' => true,
-                'usuario' => $this->usuario
+                'usuario' => $this->auth->user()
             ]);
         }
 
-        $update = $this->userRepository->updateSenha($data, $this->usuario->id);
+        $update = $this->userRepository->updateSenha($data, $this->auth->user()->id);
 
         if(is_null($update)){
             return $this->router->view('user/perfil/index', [
                 'erro' => 'Não foi possível editar sua senha',
                 'perfil' => true,
-                'usuario' => $this->usuario
+                'usuario' => $this->auth->user()
             ]);
         }
 
@@ -112,7 +111,7 @@ class UserPerfilController extends Controller {
     }
 
     public function destroy(Request $request){
-        $delete = $this->userRepository->delete($this->usuario->id);
+        $delete = $this->userRepository->delete($this->auth->user()->id);
 
         if(!$delete){
             return $this->router->view('user/perfil/index', [

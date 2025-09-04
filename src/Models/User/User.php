@@ -44,6 +44,16 @@ class User {
         return $user;
     }
 
+    public function updatePerfil(array $data) : User {
+        $user = new User();
+        $user->usuario = $data['usuario'] ?? null;
+        $user->nome = $data['nome'] ?? null;
+        $user->email = $data['email'] ?? null;
+        $user->cpf = $data['cpf'] ?? null;
+        $user->telefone = $data['telefone'] ?? null;
+        return $user;
+    }
+
     public function updateSenha(array $data) : User {
         $user = new User();
         $user->senha = password_hash($data['senha'], PASSWORD_BCRYPT);

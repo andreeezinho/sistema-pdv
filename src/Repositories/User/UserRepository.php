@@ -259,6 +259,46 @@ class UserRepository implements IUser {
         }
     }
 
+    public function updatePerfil(array $data, int $id){
+        $usuario = $this->model->updatePerfil($data);
+
+        try{
+
+            $sql = "UPDATE " .self::TABLE . "
+                SET
+                    usuario = :usuario,
+                    nome = :nome,
+                    email = :email,
+                    cpf = :cpf,
+                    telefone = :telefone
+                WHERE
+                    id = :id
+            ";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $update = $stmt->execute([
+                ':usuario' => $usuario->usuario,
+                ':nome' => $usuario->nome,
+                ':email' => $usuario->email,
+                ':cpf' => $usuario->cpf,
+                ':telefone' => $usuario->telefone,
+                ':id' => $id
+            ]);
+
+            if(!$update){
+                return null;
+            }
+
+            return $this->findById($id);
+
+        }catch(\Throwable $th){
+            return $th;
+        }finally{
+            Database::getInstance()->closeConnection();
+        }
+    }
+
     public function updateSenha(array $data, int $id){
         $usuario = $this->model->updateSenha($data);
 
