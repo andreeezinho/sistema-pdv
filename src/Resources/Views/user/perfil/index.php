@@ -43,7 +43,7 @@
         }
     ?>
 
-    <h3 class="text-2xl text-center font-bold tracking-tight text-gray-900">Seu perfil</h3>
+    <h3 class="text-2xl text-center font-bold tracking-tight text-gray-900 mt-10">Seu perfil</h3>
 
     <div class="my-3 pt-3">
         <form action="/perfil/icone" method="POST" enctype="multipart/form-data">
@@ -70,33 +70,39 @@
         </form>
     </div>
 
-    <div class="row my-3 border-bottom py-5">
-        <h3 class="my-3"><i class="bi-person-vcard-fill"></i> Seus dados</h3>
+    <div class="my-3 py-5">
+        <h3 class="text-2xl font-bold tracking-tight text-gray-900 mt-10">Seus dados</h3>
 
         <form action="/perfil/editar" method="POST" enctype="multipart/form-data">
-            <?php
-                require_once __DIR__ . '/../form.php';
-            ?>
-            <div class="form-group text-center mt-3">
-                <button type="submit" class="btn btn-primary mx-1">Atualizar</button>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-2 pt-2">
+                <?php
+                    require_once __DIR__ . '/../form.php';
+                ?>
+            </div>
+
+            <div class="text-center my-3">
+                <button type="submit" class="bg-gray-800 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">Atualizar</button>
             </div>
         </form>
     </div>
 
-    <div class="row my-3 border-bottom py-5">
-        <h3 class="my-3"><i class="bi-person-fill-lock"></i> Nova senha</h3>
+    <div class="my-3 py-5">
+        <h3 class="text-2xl font-bold tracking-tight text-gray-900 mt-10">Nova senha</h3>
 
         <form action="/perfil/senha" method="POST" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="senha">Insira uma nova senha</label>
-                <div class="col-12 position-relative">
-                    <input type="password" id="senha" name="senha" class="form-control py-2" placeholder="Digite sua nova senha">
-                    <i class="bi-eye position-absolute password-eye" id="password-eye"></i>
+            <div class="grid gap-2 pt-2 mx-auto">
+                <div class="relative col-span-1">
+                    <label for="senha" class="block mb-1 text-sm font-medium text-gray-900">Insira uma nova senha</label>
+                    <input type="password" name="senha" id="senha" autocomplete="current-password" required class="border-2 border-solid block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 absolute top-9 right-5 hover:size-5 cursor-pointer" id="password-eye"">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    </svg>
                 </div>
             </div>
 
-            <div class="form-group text-center mt-3">
-                <button type="submit" class="btn btn-primary mx-1">Atualizar</button>
+            <div class="text-center my-3">
+                <button type="submit" class="bg-gray-800 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">Atualizar</button>
             </div>
         </form>
     </div>
