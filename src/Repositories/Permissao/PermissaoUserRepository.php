@@ -42,51 +42,58 @@ class PermissaoUserRepository implements IPermissaoUser {
         return $stmt->fetchAll(\PDO::FETCH_CLASS, self::CLASS_NAME);
     }
 
-    public function linkUserPermission(int $usuario_id, int $permissao_id){
-        $permissao_user = $this->model->create($usuario_id, $permissao_id);
-        
+    public function linkUserPermission($data, int $usuario_id){
         try{
 
-            $sql = "INSERT INTO " . self::TABLE . "
-                SET
-                    uuid = :uuid,
-                    permissoes_id = :permissoes_id,
-                    usuarios_id = :usuarios_id
-            ";
-
-            $stmt = $this->conn->prepare($sql);
-
-            $create = $stmt->execute([
-                ':uuid' => $permissao_user->uuid,
-                ':permissoes_id' => $permissao_user->permissoes_id,
-                ':usuarios_id' => $permissao_user->usuarios_id,
-            ]);
-
-            if(!$create){
-                return null;
+            if (empty($data['permissions'])) {
+                return false;
             }
 
-            return $this->findByUuid($permissao_user->uuid);
+            if (!$this->unlinkUserPermission($usuario_id)) {
+                return false;
+            }
+
+            foreach($data['permissions'] as $permissao){
+                $permissao_user = $this->model->create((int)$permissao, (int)$usuario_id);
+
+                $sql = "INSERT INTO " . self::TABLE . "
+                    SET
+                        uuid = :uuid,
+                        permissoes_id = :permissoes_id,
+                        usuarios_id = :usuarios_id
+                ";
+
+                $stmt = $this->conn->prepare($sql);
+
+                $create = $stmt->execute([
+                    ':uuid' => $permissao_user->uuid,
+                    ':permissoes_id' => (int)$permissao,
+                    ':usuarios_id' => (int)$usuario_id,
+                ]);
+
+                if(!$create){
+                    return false;
+                }
+            }
+            
+            return true;
 
         }catch(\Throwable $th){
-            return null;
+            return $th;
         }finally{
             Database::getInstance()->closeConnection();
         }
     }
 
-    public function unlinkUserPermission(int $usuario_id, int $permissao_id){
+    public function unlinkUserPermission(int $usuario_id){
         $sql = "DELETE FROM " . self::TABLE . "
             WHERE
-                permissoes_id = :permissoes_id
-                AND
                 usuarios_id = :usuarios_id
         ";
 
         $stmt = $this->conn->prepare($sql);
 
         $delete = $stmt->execute([
-            ':permissoes_id' => $permissao_id,
             ':usuarios_id' => $usuario_id
         ]);
 
