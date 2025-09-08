@@ -2,125 +2,79 @@
     require_once __DIR__ . '/../../layout/top.php';
 ?>
 
-<div class="container">
-    <div class="row gx-3 mb-2 border-bottom pb-1">
-        <div class="col-12 col-md-6">
-            <ol class="breadcrumb mb-3">
-                <li class="breadcrumb-item">
-                    <i class="icon-house_siding lh-1"></i>
-                    <a href="/dashboard" class="text-decoration-none text-muted"><i class="bi-house"></i> Home</a>
+    <div class="p-8 rounded-lg mt-14">
+        <nav class="" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                <li class="inline-flex items-center">
+                    <a href="/dashboard" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-600">
+                        <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
+                        </svg>
+                        Home
+                    </a>
                 </li>
-
-                <li class="breadcrumb-item">
-                    <i class="icon-house_siding lh-1"></i>
-                    <a href="/usuarios" class="text-decoration-none text-muted">Usuários</a>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                        </svg>
+                        <a href="/usuarios" class="ms-1 text-sm font-medium text-gray-700 hover:text-gray-600 md:ms-2"><?= $usuario->usuario ?></a>
+                    </div>
                 </li>
-
-                <li class="breadcrumb-item">
-                    <i class="icon-house_siding lh-1"></i>
-                    <span class="text-decoration-none text-muted">Permissões</span>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                        </svg>
+                        <span class="ms-1 text-sm font-medium text-gray-700 hover:text-gray-600 md:ms-2">Permissões</span>
+                    </div>
+                </li>
+                
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                        </svg>
+                        <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2">-</span>
+                    </div>
                 </li>
             </ol>
-        </div>
+        </nav>
 
-        <div class="col-12 col-md-6">
-            <div class="float-md-end">
-                <button type="submit" class="btn btn-outline-dark" data-toggle="modal" data-target="#vincular"><i class="bi-link-45deg"></i> Vincular Permissão + </button>
-            </div>
-
-            <div class="modal fade" id="vincular" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <form action='/usuarios/<?= $usuario->uuid ?>/vincular' method="POST" class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Vincular permissão</h5>
-                        </div>
-
-                        <div class="modal-body">
-                            <p class="my-2">Permissões</p>
-                            <select name="permissao" id="permissao" class="form-select">
-                                <option value="" selected>Escolha uma permissão</option>
-                                <?php
-                                    if(count($permissoes) > 0){
-                                        foreach($permissoes as $permissao){
-                                ?>
-                                    <option value="<?= $permissao->uuid ?>"><?= $permissao->nome ?></option>
-                                <?php
-                                        }
-                                    }else{
-                                ?>
-                                    <option value="" selected>Não há permissões</option>
-                                <?php
-                                    }
-                                ?>
-                            </select>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary"><i class="bi-link-45deg"></i> Vincular</button>
-                        </div>
-                    </form>
+        <div class="w-full bg-neutral-50 mt-6 p-4 rounded-lg">
+            <form action="/usuarios/<?= $usuario->uuid ?>/vincular" method="POST">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-2">
+                    <?php
+                        if(count($permissoes) > 0){
+                            foreach($permissoes as $permissao){
+                    ?>
+                        <label for="permissao-<?= $permissao->uuid ?>" class="flex p-2 rounded-md bg-gray-100 hover:cursor-pointer hover:bg-gray-200">
+                            <span><?= $permissao->nome ?></span>
+                            <input 
+                                type="checkbox" 
+                                <?= userPermissionChecked($permissao->id, $permissao_user) ? 'checked' : '' ?>
+                                name="permissions[]" 
+                                id="permissao-<?= $permissao->uuid ?>" 
+                                value="<?= $permissao->id ?>" 
+                                class="float-right ml-auto accent-gray-800"
+                            />
+                        </label>
+                    <?php
+                            }
+                        }else{
+                    ?>
+                        <p>Usuário não tem permissões vinculadas</p>
+                    <?php
+                        }
+                    ?>
                 </div>
-            </div>
+                <div class="text-right mt-10">
+                    <a href="/usuarios" class="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2.5 px-4 rounded">Cancelar</a>
+                    <button type="submit" class="bg-gray-800 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">Confirmar</button>
+                </div>
+            </form>
         </div>
     </div>
-
-    <div class="row mt-3 g-3 pb-4">
-        <h3 class="my-3">Permissões do usuário</h3>
-        <?php
-            if(count($permissao_user) > 0){
-                foreach($permissao_user as $permissao){
-        ?>
-
-            <div class="col-12 col-md-4 col-lg-3">
-                <div class="card">
-                    <div class="card-body py-3">                        
-                        <p class="mt-3 text-muted"><i class="bi-sliders"></i> <?= $permissao->nome ?></p>
-
-                        <div class="d-flex mt-3 pt-2 border-top justify-content-center">
-                            <button type="button" class="btn btn-danger mx-2" data-toggle="modal" data-target="#permissao-<?= $permissao->uuid ?>">
-                                <i class="bi-trash-fill"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal fade" id="permissao-<?= $permissao->uuid ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Deletar permissão?</h5>
-                        </div>
-
-                        <div class="modal-body">
-                            <p class="my-auto">Deseja desvincular <b><?= $permissao->nome ?></b> do usuário?</p>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <form action="/usuarios/<?= $usuario->uuid ?>/desvincular/<?= $permissao->uuid ?>" method="POST">
-                                <button type="submit" class="btn btn-danger">Desvincular</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-        <?php
-                }
-            }else{
-        ?>
-
-        <p class="mt-3 text-muted">Usuário não tem permissões vinculadas...</p>
-
-        <?php
-            }
-        ?>
-    </div>
-
-</div>
-
 <?php
     require_once __DIR__ . '/../../layout/bottom.php';
 ?>

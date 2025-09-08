@@ -26,7 +26,7 @@ class PermissaoUserRepository implements IPermissaoUser {
     }
 
     public function allUserPermissions(int $usuario_id){
-        $sql = "SELECT pu.id, pu.uuid, p.nome FROM " . self::TABLE . " pu
+        $sql = "SELECT pu.id, pu.uuid, pu.permissoes_id, p.nome FROM " . self::TABLE . " pu
             JOIN permissoes p 
             ON pu.permissoes_id = p.id
             WHERE pu.usuarios_id = :usuario_id
