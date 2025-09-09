@@ -58,34 +58,4 @@ class PermissaoUserController extends Controller {
         return $this->router->redirect('usuarios/'.$usuario_uuid.'/permissoes');
     }
 
-    public function destroy(Request $request, $usuario_uuid, $permissao_uuid){
-        $usuario = $this->userRepository->findByUuid($usuario_uuid);
-
-        if(!$usuario){
-            return $this->router->redirect('');
-        }
-
-        $permissao = $this->permissaoUserRepository->findByUuid($permissao_uuid);
-
-        if(!$permissao){
-            return $this->router->redirect('');
-        }
-
-        $unlinkPermissaoUser = $this
-            ->permissaoUserRepository
-            ->unlinkUserPermission($usuario->id, $permissao->permissoes_id);
-
-        if(is_null($unlinkPermissaoUser)){
-            return $this->router->redirect('usuarios');
-        }
-
-        $_SESSION['permissoes'] = $this
-                ->permissaoUserRepository
-                ->allUserPermissions($usuario->id);
-
-        return $this
-            ->router
-            ->redirect('usuarios/'.$usuario->uuid.'/permissoes');
-    }
-
 }

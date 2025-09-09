@@ -46,6 +46,8 @@ class PermissaoUserRepository implements IPermissaoUser {
         try{
 
             if (empty($data['permissions'])) {
+                $this->unlinkUserPermission($usuario_id);
+
                 return false;
             }
 

@@ -42,8 +42,31 @@
         </nav>
 
         <div class="w-full bg-neutral-50 mt-6 p-4 rounded-lg">
+            <h3 class="text-2xl mb-2 ml-1">Atalhos</h3>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-2 mb-10 pb-3 border-b border-gray-300"> 
+                <label for="all-checkbox" class="flex p-2 rounded-md bg-gray-100 hover:cursor-pointer hover:bg-gray-200">
+                    <span>Selecionar Todos</span>
+                    <input 
+                        type="checkbox"
+                        name="permissions[]" 
+                        id="all-checkbox"
+                        class="float-right ml-auto accent-gray-800"
+                    />
+                </label>
+
+                <label for="remove-all-checkbox" class="flex p-2 rounded-md bg-gray-100 hover:cursor-pointer hover:bg-gray-200">
+                    <span>Remover Todos</span>
+                    <input 
+                        type="checkbox"
+                        name="permissions[]" 
+                        id="remove-all-checkbox"
+                        class="float-right ml-auto accent-gray-800"
+                    />
+                </label>
+            </div>
+
             <form action="/usuarios/<?= $usuario->uuid ?>/vincular" method="POST">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-2">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-2" id="checkbox-container">
                     <?php
                         if(count($permissoes) > 0){
                             foreach($permissoes as $permissao){
@@ -78,3 +101,21 @@
 <?php
     require_once __DIR__ . '/../../layout/bottom.php';
 ?>
+
+<script>
+    $(document).ready(function () {
+
+        $("#all-checkbox").on("change", function(){
+            if($(this).is(":checked")){
+                $("#checkbox-container input[type=checkbox]").prop("checked", true);
+            }else{
+                $("#checkbox-container input[type=checkbox]").prop("checked", false);
+            }
+        });
+
+        $("#remove-all-checkbox").on("click", function(){
+            $("#checkbox-container input[type=checkbox]").prop("checked", false);
+        });
+        
+    });
+</script>
