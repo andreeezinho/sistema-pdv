@@ -32,6 +32,28 @@ class DashboardController extends Controller {
 
         $last_sales = $this->vendaRepository->all(['data' => date("Y-m-d"), 'situacao' => 'concluida', 'dash' => true]);
 
+        $total_last_sales = $this->vendaRepository->getTotalLastSales(date("Y-m-d", strtotime('-2 day')));
+
+        $daily_sales = [
+            'hoje' => [
+                'concluida' => $this->vendaRepository->getDailySales(['data' => date("Y-m-d"), 'situacao' => 'concluida']), 
+                'cancelada' => $this->vendaRepository->getDailySales(['data' => date("Y-m-d"), 'situacao' => 'cancelada']), 
+                'em espera' => $this->vendaRepository->getDailySales(['data' => date("Y-m-d"), 'situacao' => 'em espera']) 
+            ],
+
+            'ontem' => [
+                'concluida' => $this->vendaRepository->getDailySales(['data' => date("Y-m-d", strtotime('-1 day')), 'situacao' => 'concluida']), 
+                'cancelada' => $this->vendaRepository->getDailySales(['data' => date("Y-m-d", strtotime('-1 day')), 'situacao' => 'cancelada']), 
+                'em espera' => $this->vendaRepository->getDailySales(['data' => date("Y-m-d", strtotime('-1 day')), 'situacao' => 'em espera']) 
+            ],
+
+            'anteontem' => [
+                'concluida' => $this->vendaRepository->getDailySales(['data' => date("Y-m-d", strtotime('-2 day')), 'situacao' => 'concluida']), 
+                'cancelada' => $this->vendaRepository->getDailySales(['data' => date("Y-m-d", strtotime('-2 day')), 'situacao' => 'cancelada']), 
+                'em espera' => $this->vendaRepository->getDailySales(['data' => date("Y-m-d", strtotime('-2 day')), 'situacao' => 'em espera']) 
+            ],
+        ];
+
         $produtos = $this->produtoRepository->all();
 
         return $this->router->view('dashboard/index', [
@@ -39,7 +61,9 @@ class DashboardController extends Controller {
             'usuarios' => $usuarios,
             'vendas' => $vendas,
             'produtos' => $produtos,
-            'last_sales' => $last_sales
+            'last_sales' => $last_sales,
+            'total_last_sales' => $total_last_sales,
+            'daily_sales' => $daily_sales
         ]);
     }
 

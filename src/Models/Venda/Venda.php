@@ -17,6 +17,8 @@ class Venda {
     public $usuarios_id;
     public $usuario;
     public $cpf;
+    public $vendas_diarias;
+    public $total_vendas;
     public $created_at;
     public $updated_at;
 

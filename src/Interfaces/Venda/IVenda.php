@@ -16,6 +16,10 @@ interface IVenda {
 
     public function findByLastUserSale(int $usuarios_id);
 
+    public function getTotalLastSales(string $date);
+
+    public function getDailySales(array $params);
+
     public function findById(int $id);
 
     public function findByUuid(string $uuid);
