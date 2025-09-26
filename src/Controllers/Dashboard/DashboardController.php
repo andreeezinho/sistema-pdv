@@ -30,6 +30,8 @@ class DashboardController extends Controller {
 
         $vendas = $this->vendaRepository->all();
 
+        $faturamento = $this->vendaRepository->getInvoicing(['data' => date("Y-m-d"), 'situacao' => 'concluida']);
+
         $last_sales = $this->vendaRepository->all(['data' => date("Y-m-d"), 'situacao' => 'concluida', 'dash' => true]);
 
         $total_last_sales = $this->vendaRepository->getTotalLastSales(date("Y-m-d", strtotime('-2 day')));
@@ -54,16 +56,40 @@ class DashboardController extends Controller {
             ],
         ];
 
+        $daily_invoice = [
+            'hoje' => [
+                'concluida' => $this->vendaRepository->getInvoicing(['data' => date("Y-m-d"), 'situacao' => 'concluida'])
+            ],
+
+            'ontem' => [
+                'concluida' => $this->vendaRepository->getInvoicing(['data' => date("Y-m-d", strtotime('-1 day')), 'situacao' => 'concluida'])
+            ],
+
+            'anteontem' => [
+                'concluida' => $this->vendaRepository->getInvoicing(['data' => date("Y-m-d", strtotime('-2 day')), 'situacao' => 'concluida'])
+            ],
+
+            '4' => [
+                'concluida' => $this->vendaRepository->getInvoicing(['data' => date("Y-m-d", strtotime('-3 day')), 'situacao' => 'concluida'])
+            ],
+
+            '5' => [
+                'concluida' => $this->vendaRepository->getInvoicing(['data' => date("Y-m-d", strtotime('-4 day')), 'situacao' => 'concluida'])
+            ],
+        ];
+
         $produtos = $this->produtoRepository->all();
 
         return $this->router->view('dashboard/index', [
             'user' => $user,
             'usuarios' => $usuarios,
             'vendas' => $vendas,
+            'faturamento' => $faturamento,
             'produtos' => $produtos,
             'last_sales' => $last_sales,
             'total_last_sales' => $total_last_sales,
-            'daily_sales' => $daily_sales
+            'daily_sales' => $daily_sales,
+            'daily_invoice' => $daily_invoice
         ]);
     }
 

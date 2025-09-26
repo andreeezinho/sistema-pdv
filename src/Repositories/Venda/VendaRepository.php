@@ -271,4 +271,35 @@ class VendaRepository implements IVenda {
         }
     }
 
+    public function getInvoicing(array $params){
+        try{
+            $sql = "SELECT SUM(total) AS faturamento FROM " . self::TABLE . "
+                WHERE 
+                    DATE(created_at) = DATE(:data)
+                AND 
+                    situacao = :situacao
+                ";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':data' => $params['data'],
+                ':situacao' => $params['situacao']
+            ]);
+
+            $result = $stmt->fetch();
+
+            if(empty($result)){
+                return null;
+            }
+
+            return $result;
+
+        }catch(\Throwable $th){
+            return $th;
+        }finally{
+            Database::getInstance()->closeConnection();
+        }
+    }
+
 }

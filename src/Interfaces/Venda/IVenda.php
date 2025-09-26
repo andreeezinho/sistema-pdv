@@ -20,6 +20,8 @@ interface IVenda {
 
     public function getDailySales(array $params);
 
+    public function getInvoicing(array $params);
+
     public function findById(int $id);
 
     public function findByUuid(string $uuid);
