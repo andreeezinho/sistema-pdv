@@ -78,7 +78,7 @@
                     </svg>
 
 
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Faturamento</h5>
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Faturamento do dia</h5>
                 </div>
                 <?php
                     if(!is_null($faturamento)){
@@ -374,7 +374,7 @@
             enabled: false,
         },
         stroke: {
-            width: 6,
+            width: 3,
         },
         grid: {
             show: false,
@@ -460,7 +460,7 @@
             enabled: false,
         },
         stroke: {
-            width: 6,
+            width: 3,
         },
         grid: {
             show: false,
@@ -487,7 +487,7 @@
             show: false,
             labels: {
                 formatter: function (value) {
-                    return value;
+                    return value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
                 }
             }
         },
