@@ -281,8 +281,8 @@
 
             <div class="bg-white p-2 rounded-lg w-[100%] h-1/3 flex items-center">
                 <div class="bg-neutral-50 border border-gray-300 w-full rounded-lg shadow-sm p-4 md:p-6 shadow shadow-lg mx-auto">
-                    <div class="flex justify-between ">
-                        <div class="flex items-center text-base font-semibold text-center">
+                    <div class="flex justify-between">
+                        <div class="w-full flex justify-between items-center text-base font-semibold">
                             <h3 class="text-2xl font-bold tracking-tight text-gray-900 mb-3">Faturamento</h3>
                             <?php
                                 if($daily_invoice['hoje']['concluida']['faturamento'] > $daily_invoice['ontem']['concluida']['faturamento']){
