@@ -1,26 +1,26 @@
 <div class="col-span-2">
     <label for="nome" class="block mb-1 text-sm font-medium text-gray-900">Nome</label>
-    <input type="text" name="nome" id="nome" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $cliente->nome ?? null?>" />
+    <input type="text" name="nome" id="nome" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $cliente->nome ?? null?>" />
 </div>
 
 <div class="col-span-2">
     <label for="email" class="block mb-1 text-sm font-medium text-gray-900">Email</label>
-    <input type="text" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $cliente->email ?? null?>" />
+    <input type="text" name="email" id="email" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $cliente->email ?? null?>" />
 </div>
 
 <div class="col-span-2">
     <label for="documento" class="block mb-1 text-sm font-medium text-gray-900">Doc. (CPF/CNPJ)</label>
-    <input type="text" name="documento" id="documento" step="0.01" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $cliente->documento ?? null?>" />
+    <input type="text" name="documento" id="documento" step="0.01" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $cliente->documento ?? null?>" />
 </div>
 
 <div class="col-span-2">
     <label for="telefone" class="block mb-1 text-sm font-medium text-gray-900">Telefone</label>
-    <input type="text" name="telefone" step="0.01" id="telefone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $cliente->telefone ?? null?>" />
+    <input type="text" name="telefone" step="0.01" id="telefone" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $cliente->telefone ?? null?>" />
 </div>
 
 <div class="col-span-full">
     <label for="endereco" class="block mb-1 text-sm font-medium text-gray-900">Endereço</label>
-    <input type="text" name="endereco" step="0.01" id="endereco" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $cliente->endereco ?? null?>" />
+    <input type="text" name="endereco" step="0.01" id="endereco" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $cliente->endereco ?? null?>" />
 </div>
 
 <div class="col-span-full">

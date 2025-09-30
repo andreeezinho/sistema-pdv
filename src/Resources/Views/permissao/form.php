@@ -1,6 +1,6 @@
 <div class="col-span-2">
     <label for="nome" class="block mb-1 text-sm font-medium text-gray-900">Nome</label>
-    <input type="text" name="nome" id="nome" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $permissao->nome ?? null?>" />
+    <input type="text" name="nome" id="nome" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $permissao->nome ?? null?>" />
 </div>
 
 <div class="">

@@ -1,26 +1,26 @@
 <div class="col-span-2">
     <label for="usuario" class="block mb-1 text-sm font-medium text-gray-900">Usuário</label>
-    <input type="text" name="usuario" id="usuario" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $usuario->usuario ?? null?>" />
+    <input type="text" name="usuario" id="usuario" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $usuario->usuario ?? null?>" />
 </div>
 
 <div class="col-span-2">
     <label for="nome" class="block mb-1 text-sm font-medium text-gray-900">Nome</label>
-    <input type="text" name="nome" id="nome" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $usuario->nome ?? null?>" />
+    <input type="text" name="nome" id="nome" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $usuario->nome ?? null?>" />
 </div>
 
 <div class="col-span-2">
     <label for="email" class="block mb-1 text-sm font-medium text-gray-900">E-mail</label>
-    <input type="text" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $usuario->email ?? null?>" />
+    <input type="text" name="email" id="email" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $usuario->email ?? null?>" />
 </div>
 
 <div class="col-span-2">
     <label for="cpf" class="block mb-1 text-sm font-medium text-gray-900">CPF</label>
-    <input type="text" name="cpf" id="cpf" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $usuario->cpf ?? null?>" />
+    <input type="text" name="cpf" id="cpf" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $usuario->cpf ?? null?>" />
 </div>
 
 <div class="col-span-2">
     <label for="telefone" class="block mb-1 text-sm font-medium text-gray-900">Telefone</label>
-    <input type="text" name="telefone" id="telefone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $usuario->telefone ?? null?>" />
+    <input type="text" name="telefone" id="telefone" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $usuario->telefone ?? null?>" />
 </div>
 
 <?php
