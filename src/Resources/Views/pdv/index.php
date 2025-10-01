@@ -23,6 +23,9 @@
                 <li>
                     <button type="button" id="em-espera" class="w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:hidden text-left" role="menuitem" data-modal-target="vendas-em-espera" data-modal-toggle="vendas-em-espera">Venda em espera</button>
                 </li>
+                <li>
+                    <button type="button" id="selecao-intervalo" class="w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:hidden text-left" role="menuitem" data-modal-target="intervalo" data-modal-toggle="intervalo">Intervalo</button>
+                </li>
             </ul>
         </div>
 
@@ -200,6 +203,63 @@
                 </div>
             </div>
         </div>
+
+        <div id="intervalo" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-lg max-w-full max-h-full">
+                <div class="relative bg-white rounded-lg shadow-sm">
+                    <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="intervalo">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                    </button>
+                    <div class="p-10 md:p-5">
+                        <div class="p-8">
+                            <h3 class="mb-10 text-lg font-normal text-gray-700 text-center">Selecione um Intervalo</h3>
+                        
+                            <div class="w-full flex flex-col md:flex-row gap-2 mb-10">
+                                <button type="button" id="" value="5" class="intervalo-button border-hidden bg-gray-800 px-3 py-2 rounded-lg text-white font-semibold flex gap-x-1 hover:bg-gray-500">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H8m12 0-4 4m4-4-4-4M9 4H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h2"/>
+                                    </svg>
+                                    Banheiro
+                                </button>
+
+                                <button type="button" id="" value="60" class="intervalo-button border-hidden bg-gray-800 px-3 py-2 rounded-lg text-white font-semibold flex gap-x-1 hover:bg-gray-500">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M5.00001 4.00003c-.55229 0-1 .44772-1 1 0 .55229.44771 1 1 1h1c.55228 0 1-.44771 1-1 0-.55228-.44772-1-1-1h-1Zm5.66889 1.39531c-.2216-.27879-.645-.61839-.94433-.83763-.16499-.12086-.34155-.24116-.49677-.33129-.072-.04181-.17435-.09779-.28569-.14043-.05091-.0195-.15457-.05642-.2853-.07202-.07757-.00926-.47279-.05405-.81565.25599-.28283.25575-.32408.57239-.33352.663-.01301.12501-.0017.22937.00606.28539.0164.11839.04792.22824.0723.30499.05229.16466.12863.35151.20939.5288.15481.33984.39005.78485.63096 1.08802.16417.20658.53268.55501.87921.85987-.34653.30486-.71505.65329-.87921.85988-.24091.30316-.47615.74817-.63096 1.08801-.08076.17728-.1571.36418-.20939.52878-.02438.0768-.0559.1866-.0723.305-.00776.056-.01907.1604-.00606.2854.00944.0906.05069.4072.33352.663.34286.31.73807.2653.81565.256.13073-.0156.23439-.0525.2853-.072.11134-.0427.21369-.0986.28569-.1405.15522-.0901.33178-.2104.49677-.3313.29933-.2192.72273-.5588.94433-.8376.1753-.2206.5103-.74026.773-1.18533.082-.13908.1641-.28267.2378-.41934h1.1367c-.2032.28993-.3943.65733-.5267.94787-.0807.1773-.1571.3642-.2094.5288-.0243.0768-.0559.1866-.0723.305-.0077.056-.019.1604-.006.2854.0094.0906.0507.4072.3335.663.3429.31.7381.2652.8156.256.1308-.0156.2344-.0525.2853-.072.1114-.0427.2137-.0987.2857-.1405.1552-.0901.3318-.2104.4968-.3313.2993-.2192.7228-.5588.9443-.8376.1754-.2207.5103-.74026.773-1.18532.0821-.13908.1641-.28267.2378-.41935h.6424c-.2032.28993-.3943.65733-.5267.94787-.0807.1773-.1571.3642-.2094.5288-.0243.0768-.0559.1866-.0723.305-.0077.056-.019.1604-.006.2854.0094.0906.0507.4072.3335.663.3429.31.7381.2652.8156.256.1308-.0156.2344-.0525.2853-.072.1114-.0427.2137-.0987.2857-.1405.1552-.0901.3318-.2104.4968-.3313.2993-.2192.7228-.5588.9443-.8376.1754-.2207.5103-.74026.773-1.18532.0821-.13908.1641-.28267.2378-.41935h.8261c.5522 0 1-.44772 1-1s-.4478-1-1-1h-.8261c-.0737-.13668-.1557-.28027-.2378-.41935-.2627-.44506-.5976-.96467-.773-1.18532-.2215-.27879-.645-.61839-.9443-.83763-.165-.12086-.3416-.24117-.4968-.33129-.072-.04182-.1743-.09779-.2857-.14044-.0509-.0195-.1545-.05642-.2853-.07202-.0775-.00926-.4727-.05404-.8156.25599-.2828.25575-.3241.57239-.3335.66301-.013.125-.0017.22936.006.28538.0164.1184.048.22824.0723.30499.0523.16466.1287.35151.2094.52881.1324.29054.3235.65794.5267.94787h-.6424c-.0737-.13667-.1557-.28026-.2378-.41935-.2627-.44506-.5976-.96467-.773-1.18532-.2215-.27879-.645-.61839-.9443-.83763-.165-.12086-.3416-.24117-.4968-.33129-.072-.04182-.1743-.09779-.2857-.14044-.0509-.0195-.1545-.05642-.2853-.07202-.0775-.00926-.4727-.05404-.8156.25599-.2828.25576-.3241.57239-.3335.66301-.013.125-.0017.22936.006.28538.0164.1184.048.22824.0723.305.0523.16465.1287.3515.2094.5288.1324.29054.3235.65795.5267.94787h-1.1367c-.0737-.13668-.1558-.28027-.2378-.41936-.2627-.44506-.5977-.96467-.773-1.18533Z"/>
+                                        <path fill="currentColor" d="M3.00001 7.00003c-.55229 0-1 .44772-1 1 0 .55229.44771 1 1 1h4c.55228 0 1-.44771 1-1 0-.55228-.44772-1-1-1h-4Zm2 2.99997c-.55229 0-1 .4477-1 1s.44771 1 1 1h1c.55228 0 1-.4477 1-1s-.44772-1-1-1h-1Zm-2 3c-.30399 0-.59147.1383-.78123.3758-.18976.2375-.2612.5484-.19413.8449.27848 1.231 1.1312 2.2553 2.23009 3.035.92161.6539 2.06605 1.1737 3.34395 1.5346V19c0 .5523.44772 1 1 1h6.80261c.5523 0 1-.4477 1-1v-.2097c1.2779-.3609 2.4224-.8807 3.344-1.5346 1.0989-.7797 1.9516-1.804 2.2301-3.035.067-.2965-.0044-.6074-.1942-.8449C21.5915 13.1383 21.304 13 21 13H3.00001Z"/>
+                                    </svg>
+                                    Almoço
+                                </button>
+
+                                <button type="button" id="" value="10" class="intervalo-button border-hidden bg-gray-800 px-3 py-2 rounded-lg text-white font-semibold flex gap-x-1 hover:bg-gray-500">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M15.0524 2.01283c-.2634-.00221-.7706-.00646-1.3064.08808-.6053.10681-1.377.35866-1.975.99279-.557.59067-.8308 1.31504-.9706 1.92248-.1413.61388-.1628 1.1828-.1628 1.5327v1h1c.0429 0 .0873.00018.1333.00036.8172.00329 2.1026.00847 3.2375-.9589.7023-.59862.9572-1.43277 1.059-2.06861.0871-.54385.0798-1.08153.0758-1.37798-.0007-.051-.0013-.09486-.0013-.13038v-1h-1c-.0255 0-.0554-.00025-.0895-.00054Zm-3.0525 7.02912c-.2934 0-.3974-.0566-.7263-.23555-.1027-.05589-.2273-.12372-.3865-.20548-.6797-.34907-1.55211-.64467-3.12486-.59552-1.30968.04093-2.37715.88151-3.01521 2.0359-.64078 1.1594-.90215 2.7005-.65499 4.4145.1543 1.07.66239 2.84 1.39644 4.358.36735.7596.81762 1.5119 1.34963 2.0895C7.35502 21.4646 8.08053 22 8.99163 22c1.17857 0 1.86287-.2589 2.38977-.5504.1663-.092.2761-.1558.3523-.2001.1161-.0674.1542-.0895.1949-.0968.0198-.0035.0403-.0035.0708-.0035.0105 0 .0195-.0003.0268-.0005.0132-.0003.0222-.0006.031.0009.0193.0032.0373.0146.095.0514.0638.0408.1761.1125.3925.2382.5319.3091 1.2263.5608 2.4635.5608.9293 0 1.6712-.5145 2.2105-1.0909.5456-.5832.9936-1.3421 1.3526-2.1048.7186-1.5268 1.1845-3.2947 1.3365-4.3485.2471-1.714-.0142-3.2551-.655-4.4145-.6381-1.15439-1.7055-1.99497-3.0152-2.0359-1.5728-.04915-2.4451.24645-3.1248.59552-.1592.08176-.2839.14959-.3866.20548-.3289.17895-.4329.23555-.7263.23555Z"/>
+                                    </svg>
+                                    Lanche
+                                </button>
+
+                                <button type="button" id="" value="5" class="intervalo-button border-hidden bg-gray-800 px-3 py-2 rounded-lg text-white font-semibold flex gap-x-1 hover:bg-gray-500">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd" d="M7 2a2 2 0 0 0-2 2v1a1 1 0 0 0 0 2v1a1 1 0 0 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H7Zm3 8a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm-1 7a3 3 0 0 1 3-3h2a3 3 0 0 1 3 3 1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1Z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Feedback
+                                </button>
+
+                                <button type="button" id="" value="10" class="intervalo-button border-hidden bg-gray-800 px-3 py-2 rounded-lg text-white font-semibold flex gap-x-1 hover:bg-gray-500">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd" d="M12 6a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm-1.5 8a4 4 0 0 0-4 4 2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-3Zm6.82-3.096a5.51 5.51 0 0 0-2.797-6.293 3.5 3.5 0 1 1 2.796 6.292ZM19.5 18h.5a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-1.1a5.503 5.503 0 0 1-.471.762A5.998 5.998 0 0 1 19.5 18ZM4 7.5a3.5 3.5 0 0 1 5.477-2.889 5.5 5.5 0 0 0-2.796 6.293A3.501 3.501 0 0 1 4 7.5ZM7.1 12H6a4 4 0 0 0-4 4 2 2 0 0 0 2 2h.5a5.998 5.998 0 0 1 3.071-5.238A5.505 5.505 0 0 1 7.1 12Z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Reunião
+                                </button>
+                            </div>
+
+                            <div class="text-center mt-5 text-3xl text-neutral-600 font-semibold py-5" id="demo"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <h3 class="text-2xl text-center font-bold tracking-tight text-gray-900">Venda em aberto</h3>
 
@@ -360,5 +420,47 @@
             $('#dropdown-sale').addClass("hidden");
         });
 
+        $('#selecao-intervalo').click(function (e) {
+            $('#dropdown-sale').removeClass("block");
+
+            $('#dropdown-sale').addClass("hidden");
+        });
+
+        $(".intervalo-button").on("click", function(){
+            //$(".intervalo-button").hide();
+            var countDownDate = new Date().getTime() + (parseInt($(this).val(), 10) * 60 * 1000)
+
+            var x = setInterval(function() {
+                var now = new Date().getTime();
+
+                var distance = countDownDate - now;
+
+                var days    = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours   = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                if (distance < 1) { 
+                    $('#demo').text('');
+                } else if (days > 0) {
+                    $('#demo').text(
+                        hours + "h " + minutes + "m " + seconds + "s"
+                    );
+                } else if (hours == 0 && minutes == 0) {
+                    $('#demo').text(
+                        seconds + "s"
+                    );
+                } else if (hours == 0) {
+                    $('#demo').text(
+                        minutes + "m " + seconds + "s"
+                    );
+                } else {
+                    $('#demo').text(
+                        hours + "h " + minutes + "m " + seconds + "s"
+                    );
+                }
+            }, 1000);
+        });
+        
     });
 </script>

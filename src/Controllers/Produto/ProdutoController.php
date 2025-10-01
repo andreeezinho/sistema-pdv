@@ -54,7 +54,8 @@ class ProdutoController extends Controller {
         }
 
         return $this->router->view('produto/edit', [
-            'produto' => $produto
+            'produto' => $produto,
+            'edit' => true
         ]);
     }
 
@@ -70,9 +71,10 @@ class ProdutoController extends Controller {
         $update = $this->produtoRepository->update($data, $produto->id);
 
         if(is_null($update)){
-            return $this->router->view('produto/create', [
+            return $this->router->view('produto/edit', [
                 'erro' => 'Erro ao cadastrar produto',
-                'produto' => $produto
+                'produto' => $produto,
+                'edit' => true
             ]);
         }
 

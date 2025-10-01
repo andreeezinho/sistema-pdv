@@ -79,7 +79,6 @@ $router->create("POST", "/permissoes/{uuid}/deletar", [$permissaoController, 'de
 //permissao_user
 $router->create("GET", "/usuarios/{uuid}/permissoes", [$permissaoUserController, 'index'], $auth);
 $router->create("POST", "/usuarios/{uuid}/vincular", [$permissaoUserController, 'create'], $auth);
-$router->create("POST", "/usuarios/{usuario_uuid}/desvincular/{permissao_uuid}", [$permissaoUserController, 'destroy'], $auth);
 
 //perfil usuario
 $router->create("GET", "/perfil", [$userPerfilController, 'index'], $auth);

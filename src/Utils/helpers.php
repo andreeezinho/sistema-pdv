@@ -23,6 +23,16 @@ function userPermission($permissao_nome){
     return false;
 }
 
+function userPermissionChecked($permissao_id, $user_permissoes){
+    foreach($user_permissoes as $permissao){
+        if($permissao->permissoes_id === $permissao_id){
+            return true;
+        }
+    }
+
+    return false;
+}
+
 //enviar imagem para o servidor
 function createImage($arquivo, $dir){
     if(empty($arquivo['name']) || empty($arquivo['tmp_name'])){

@@ -16,6 +16,7 @@ class User {
     public $cpf;
     public $telefone;
     public $senha;
+    public $cargo;
     public $is_admin;
     public $ativo;
     public $icone;
@@ -34,11 +35,22 @@ class User {
         $user->cpf = $data['cpf'] ?? null;
         $user->telefone = $data['telefone'] ?? null;
         $user->senha = password_hash($data['senha'], PASSWORD_BCRYPT);
-        $user->is_admin = ($data['is_admin'] == "") ? 0 : $data['is_admin'];
+        $user->cargo = $data['cargo'] ?? null;
+        $user->is_admin = $data['is_admin'] ?? 0;
         $user->ativo = ($data['ativo'] == "") ? 1 : $data['ativo'];
-        $user->icone = ($data['icone'] == "") ? "default.png" : $data['icone'];
+        $user->icone = $data['icone'] ?? 'default.png';
         $user->created_at = $data['created_at'] ?? null;
         $user->updated_at = $data['updated_at'] ?? null;
+        return $user;
+    }
+
+    public function updatePerfil(array $data) : User {
+        $user = new User();
+        $user->usuario = $data['usuario'] ?? null;
+        $user->nome = $data['nome'] ?? null;
+        $user->email = $data['email'] ?? null;
+        $user->cpf = $data['cpf'] ?? null;
+        $user->telefone = $data['telefone'] ?? null;
         return $user;
     }
 

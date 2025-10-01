@@ -26,6 +26,8 @@ class UserController extends Controller {
         return $this->router->view('user/index', [
             'usuarios' => $usuarios,
             'nome_usuario' => $params['nome_usuario'] ?? null,
+            'cpf' => $params['cpf'] ?? null,
+            'cargo' => $params['cargo'] ?? null,
             'ativo' => $params['ativo'] ?? null
         ]);
     }
@@ -82,15 +84,17 @@ class UserController extends Controller {
 
         if($data['nome'] == "" || $data['email'] == "" || $data['cpf'] == ""){
             return $this->router->view('user/edit', [
-                'erro' => 'Campo obrigatório em branco'
+                'erro' => 'Campo obrigatório em branco',
+                'usuario' => $usuario
             ]);
         }
 
         $update = $this->userRepository->update($data, $usuario->id);
 
         if(is_null($update)){
-            return $this->router->view('user/index', [
-                'erro' => 'Não foi possível editar usuário'
+            return $this->router->view('user/edit', [
+                'erro' => 'Não foi possível editar usuário',
+                'usuario' => $usuario
             ]);
         }
 

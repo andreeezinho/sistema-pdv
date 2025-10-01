@@ -1,6 +1,6 @@
 <div class="mt-4">
     <label for="forma" class="block mb-1 text-sm font-medium text-gray-900">Forma de Pagamento</label>
-    <input type="text" name="forma" id="forma" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $pagamento->forma ?? null ?>" />
+    <input type="text" name="forma" id="forma" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $pagamento->forma ?? null ?>" />
 </div>
 
 <div class="mt-4">

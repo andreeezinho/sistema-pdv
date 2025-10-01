@@ -211,5 +211,95 @@ class VendaRepository implements IVenda {
             Database::getInstance()->closeConnection();
         }
     }
+    
+    public function getTotalLastSales(string $date){
+        try{
+            $sql = "SELECT COUNT(*) AS total_vendas FROM " . self::TABLE . "
+                WHERE 
+                    DATE(created_at) >= DATE(:data)
+                ";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':data' => $date
+            ]);
+
+            $result = $stmt->fetch();
+            
+            if(empty($result)){
+                return null;
+            }
+
+            return $result;
+
+        }catch(\Throwable $th){
+            return null;
+        }finally{
+            Database::getInstance()->closeConnection();
+        }
+    }
+
+    public function getDailySales(array $params){
+        try{
+            $sql = "SELECT COUNT(*) AS vendas_diarias FROM " . self::TABLE . "
+                WHERE 
+                    DATE(created_at) = DATE(:data)
+                AND 
+                    situacao = :situacao
+                ";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':data' => $params['data'],
+                ':situacao' => $params['situacao']
+            ]);
+
+            $result = $stmt->fetch();
+
+            if(empty($result)){
+                return null;
+            }
+
+            return $result;
+
+        }catch(\Throwable $th){
+            return null;
+        }finally{
+            Database::getInstance()->closeConnection();
+        }
+    }
+
+    public function getInvoicing(array $params){
+        try{
+            $sql = "SELECT SUM(total) AS faturamento FROM " . self::TABLE . "
+                WHERE 
+                    DATE(created_at) = DATE(:data)
+                AND 
+                    situacao = :situacao
+                ";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':data' => $params['data'],
+                ':situacao' => $params['situacao']
+            ]);
+
+            $result = $stmt->fetch();
+
+            if(empty($result)){
+                return null;
+            }
+
+            return $result;
+
+        }catch(\Throwable $th){
+            return $th;
+        }finally{
+            Database::getInstance()->closeConnection();
+        }
+    }
 
 }
