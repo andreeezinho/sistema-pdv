@@ -22,6 +22,8 @@ interface IVenda {
 
     public function getInvoicing(array $params);
 
+    public function updateDate(string $date, int $id);
+
     public function findById(int $id);
 
     public function findByUuid(string $uuid);
