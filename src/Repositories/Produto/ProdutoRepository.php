@@ -23,7 +23,10 @@ class ProdutoRepository implements IProduto {
     }
 
     public function all(array $params = []){
-        $sql = "SELECT * FROM " . self::TABLE;
+        $sql = "SELECT p.*, g.nome AS nome_grupo FROM " . self::TABLE . " p
+            JOIN
+                grupo_produto g ON grupo_produto_id = g.id
+        ";
     
         $conditions = [];
         $bindings = [];
@@ -36,6 +39,11 @@ class ProdutoRepository implements IProduto {
         if(isset($params['tipo']) && $params['tipo'] != ""){
             $conditions[] = "tipo = :tipo";
             $bindings[':tipo'] = $params['tipo'];
+        }
+
+        if(isset($params['grupo']) && $params['grupo'] != ""){
+            $conditions[] = "nome_grupo = :grupo";
+            $bindings[':grupo'] = $params['grupo'];
         }
     
         if(isset($params['ativo']) && $params['ativo'] != ""){
@@ -68,6 +76,7 @@ class ProdutoRepository implements IProduto {
                     preco = :preco,
                     estoque = :estoque,
                     tipo = :tipo,
+                    grupo_produto_id = :grupo_produto_id,
                     ativo = :ativo
             ";
 
@@ -80,6 +89,7 @@ class ProdutoRepository implements IProduto {
                 ':preco' => $produto->preco,
                 ':estoque' => $produto->estoque,
                 ':tipo' => $produto->tipo,
+                ':grupo_produto_id' => $produto->grupo_produto_id,
                 ':ativo' => $produto->ativo ?? 1
             ]);
 
@@ -107,6 +117,7 @@ class ProdutoRepository implements IProduto {
                     preco = :preco,
                     estoque = :estoque,
                     tipo = :tipo,
+                    grupo_produto_id = :grupo_produto_id,
                     ativo = :ativo
                 WHERE 
                     id =:id
@@ -120,6 +131,7 @@ class ProdutoRepository implements IProduto {
                 ':preco' => $produto->preco,
                 ':estoque' => $produto->estoque,
                 ':tipo' => $produto->tipo,
+                ':grupo_produto_id' => $produto->grupo_produto_id,
                 ':ativo' => $produto->ativo,
                 ':id' => $id
             ]);

@@ -15,6 +15,8 @@ class Produto {
     public $preco;
     public $estoque;
     public $tipo;
+    public $grupo_produto_id;
+    public $nome_grupo;
     public $ativo;
     public $created_at;
     public $updated_at;
@@ -28,6 +30,7 @@ class Produto {
         $produto->preco = $data['preco'] ?? null;
         $produto->estoque = $data['estoque'] ?? null;
         $produto->tipo = $data['tipo'] ?? null;
+        $produto->grupo_produto_id = $data['grupo_produto_id'] ?? null;
         $produto->ativo = (!isset($data['ativo']) || $data['ativo'] == "") ? 1 : $data['ativo'];
         $produto->created_at = $data['created_at'] ?? null;
         $produto->updated_at = $data['updated_at'] ?? null;

@@ -5,14 +5,17 @@ namespace App\Controllers\Produto;
 use App\Request\Request;
 use App\Controllers\Controller;
 use App\Interfaces\Produto\IProduto;
+use App\Interfaces\Grupo\IGrupo;
 
 class ProdutoController extends Controller {
 
     protected $produtoRepository;
+    protected $grupoRepository;
 
-    public function __construct(IProduto $produtoRepository){
+    public function __construct(IProduto $produtoRepository, IGrupo $grupoRepository){
         parent::__construct();
         $this->produtoRepository = $produtoRepository;
+        $this->grupoRepository = $grupoRepository;
     }
 
     public function index(Request $request){
@@ -29,17 +32,24 @@ class ProdutoController extends Controller {
     }
 
     public function create(Request $request){
-        return $this->router->view('produto/create', []);
+        $grupos = $this->grupoRepository->all(['ativo' => 1]);
+
+        return $this->router->view('produto/create', [
+            'grupos' => $grupos
+        ]);
     }
 
     public function store(Request $request){
         $data = $request->getBodyParams();
+        
+        $grupos = $this->grupoRepository->all(['ativo' => 1]);
 
         $create = $this->produtoRepository->create($data);
 
         if(is_null($create)){
             return $this->router->view('produto/create', [
-                'erro' => 'Erro ao cadastrar produto'
+                'erro' => 'Erro ao cadastrar produto',
+                'grupos' => $grupos
             ]);
         }
 
@@ -49,12 +59,15 @@ class ProdutoController extends Controller {
     public function edit(Request $request, $uuid){
         $produto = $this->produtoRepository->findByUuid($uuid);
 
+        $grupos = $this->grupoRepository->all(['ativo' => 1]);
+
         if(!$produto){
             return $this->router->redirect('404');
         }
 
         return $this->router->view('produto/edit', [
             'produto' => $produto,
+            'grupos' => $grupos,
             'edit' => true
         ]);
     }
@@ -66,14 +79,17 @@ class ProdutoController extends Controller {
             return $this->router->redirect('produtos');
         }
 
+        $grupos = $this->grupoRepository->all(['ativo' => 1]);
+
         $data = $request->getBodyParams();
 
         $update = $this->produtoRepository->update($data, $produto->id);
-
+        
         if(is_null($update)){
             return $this->router->view('produto/edit', [
                 'erro' => 'Erro ao cadastrar produto',
                 'produto' => $produto,
+                'grupos' => $grupos,
                 'edit' => true
             ]);
         }
