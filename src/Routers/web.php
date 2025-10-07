@@ -16,6 +16,7 @@ use App\Controllers\Pdv\PdvController;
 use App\Controllers\Produto\ProdutoController;
 use App\Controllers\Pagamento\PagamentoController;
 use App\Controllers\Cliente\ClienteController;
+use App\Controllers\Grupo\GrupoController;
 
 
 $router = new Router();
@@ -37,6 +38,7 @@ $pdvController = $container->get(PdvController::class);
 $produtoController = $container->get(ProdutoController::class);
 $pagamentoController = $container->get(PagamentoController::class);
 $clienteController = $container->get(ClienteController::class);
+$grupoController = $container->get(GrupoController::class);
 
 //rotas
 
@@ -136,5 +138,13 @@ $router->create("POST", "/clientes/cadastro", [$clienteController, 'store'], $au
 $router->create("GET", "/clientes/{uuid}/editar", [$clienteController, 'edit'], $auth);
 $router->create("POST", "/clientes/{uuid}/editar", [$clienteController, 'update'], $auth);
 $router->create("POST", "/clientes/{uuid}/deletar", [$clienteController, 'destroy'], $auth);
+
+//grupo-produtos
+$router->create("GET", "/grupos", [$grupoController, 'index'], $auth);
+$router->create("GET", "/grupos/cadastro", [$grupoController, 'create'], $auth);
+$router->create("POST", "/grupos/cadastro", [$grupoController, 'store'], $auth);
+$router->create("GET", "/grupos/{uuid}/editar", [$grupoController, 'edit'], $auth);
+$router->create("POST", "/grupos/{uuid}/editar", [$grupoController, 'update'], $auth);
+$router->create("POST", "/grupos/{uuid}/deletar", [$grupoController, 'destroy'], $auth);
 
 return $router;
