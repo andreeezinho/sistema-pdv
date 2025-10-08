@@ -93,7 +93,7 @@
     </div>
 </div>
 
-<!-- <div class="col-span-full border-1 border-t border-gray-800 mt-10 mb-4">
+<div class="col-span-full border-1 border-t border-gray-800 mt-10 mb-4">
     <h3 class="text-gray-800 text-2xl mt-3">Tributação</h3>
 </div>
 
@@ -158,4 +158,4 @@
 <div class="col-span-1">
     <label for="nat-receita" class="block mb-1 text-sm font-medium text-gray-900">Nat. Receita</label>
     <input type="number" name="nat-receita" id="nat-receita" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" value="" />
-</div> -->
+</div>
