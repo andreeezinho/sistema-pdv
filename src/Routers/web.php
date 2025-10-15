@@ -17,7 +17,7 @@ use App\Controllers\Produto\ProdutoController;
 use App\Controllers\Pagamento\PagamentoController;
 use App\Controllers\Cliente\ClienteController;
 use App\Controllers\Grupo\GrupoController;
-
+use App\Controllers\NotaFiscal\NotaFiscalController;
 
 $router = new Router();
 $auth = new Auth();
@@ -39,6 +39,7 @@ $produtoController = $container->get(ProdutoController::class);
 $pagamentoController = $container->get(PagamentoController::class);
 $clienteController = $container->get(ClienteController::class);
 $grupoController = $container->get(GrupoController::class);
+$notaFiscalController = $container->get(NotaFiscalController::class);
 
 //rotas
 
@@ -146,5 +147,9 @@ $router->create("POST", "/grupos/cadastro", [$grupoController, 'store'], $auth);
 $router->create("GET", "/grupos/{uuid}/editar", [$grupoController, 'edit'], $auth);
 $router->create("POST", "/grupos/{uuid}/editar", [$grupoController, 'update'], $auth);
 $router->create("POST", "/grupos/{uuid}/deletar", [$grupoController, 'destroy'], $auth);
+
+//nota-fiscal
+$router->create("GET", "/gerar-xml", [$notaFiscalController, 'generateXml'], $auth);
+$router->create("GET", "/transmitir-nfe", [$notaFiscalController, 'transmitNFe'], $auth);
 
 return $router;

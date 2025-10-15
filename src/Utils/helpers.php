@@ -39,14 +39,14 @@ function createImage($arquivo, $dir){
         return null;
     }
 
-    if(
-        $arquivo['type'] != 'image/jpeg' &&
-        $arquivo['type'] != 'image/png' &&
-        $arquivo['type'] != 'image/svg*xml' &&
-        $arquivo['type'] != 'image/webp' 
-    ){
-        return null;
-    }
+    // if(
+    //     $arquivo['type'] != 'image/jpeg' &&
+    //     $arquivo['type'] != 'image/png' &&
+    //     $arquivo['type'] != 'image/svg*xml' &&
+    //     $arquivo['type'] != 'image/webp' 
+    // ){
+    //     return null;
+    // }
 
     $root_dir = rtrim($_SERVER['DOCUMENT_ROOT'] . '/public/img' . $dir, "/") . '/';
 

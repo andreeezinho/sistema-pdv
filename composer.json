@@ -20,6 +20,7 @@
     "require": {
         "phpmailer/phpmailer": "^6.10",
         "dompdf/dompdf": "^3.1",
-        "nfephp-org/sped-da" : "dev-master"
+        "nfephp-org/sped-da": "dev-master",
+        "nfephp-org/sped-nfe": "^5.0"
     }
 }
