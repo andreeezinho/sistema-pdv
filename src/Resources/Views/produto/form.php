@@ -132,12 +132,12 @@
 </div>
 
 <div class="col-span-2">
-    <label for="pis" class="block text-sm/6 font-medium text-gray-900">PIS/CONFINS</label>
+    <label for="pis" class="block text-sm/6 font-medium text-gray-900">PIS/COFINS</label>
     <div class="">
         <select name="pis" id="pis" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-2 p-2.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
-            <option value="" <?= (isset($produto) && $produto->tipo == '') ? 'selected' : null ?>>Insira o PIS/CONFINS</option>
+            <option value="" <?= (isset($produto) && $produto->tipo == '') ? 'selected' : null ?>>Insira o PIS/COFINS</option>
             <option value="un" <?= (isset($produto) && $produto->tipo == 'un') ? 'selected' : null ?>>Tributado 01/50</option>
-            <option value="kg" <?= (isset($produto) && $produto->tipo == 'kg') ? 'selected' : null ?>>PIS/CONFINS 05/75</option>
+            <option value="kg" <?= (isset($produto) && $produto->tipo == 'kg') ? 'selected' : null ?>>PIS/COFINS 05/75</option>
             <option value="kg" <?= (isset($produto) && $produto->tipo == 'kg') ? 'selected' : null ?>>Monofásico 04/70</option>
         </select>
     </div>
