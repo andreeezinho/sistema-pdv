@@ -342,8 +342,8 @@ class NFeService {
 
 	public function transmit($signXml, $key){
 		try{
-			$idLote = str_pad(100, 15, '0', STR_PAD_LEFT);
-			$resp = $this->tools->sefazEnviaLote([$signXml], $idLote);
+			$idLote = str_pad(rand(1, 999999999999999), 15, '0', STR_PAD_LEFT);
+			$resp = $this->tools->sefazEnviaLote([$signXml], $idLote, 1);
 
 			$st = new Standardize();
 			$std = $st->toStd($resp);
@@ -357,10 +357,11 @@ class NFeService {
 			
 			$recibo = $std->infRec->nRec; 
 			$protocolo = $this->tools->sefazConsultaRecibo($recibo);
+			
 			sleep(3);
 			try {
 				$xml = Complements::toAuthorize($signXml, $protocolo);
-				createImage($key, 'nfe_xml');
+				//createImage($key, 'nfe_xml');
 				return [
 					'sucesso' => $recibo
 				];
