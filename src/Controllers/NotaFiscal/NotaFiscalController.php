@@ -76,7 +76,7 @@ class NotaFiscalController extends Controller {
                     print_r($resultado['erro']);
                 }
             }else{
-                print_r($resultado['erros_xml']);
+                print_r($result['erros_xml']);
             }
         }
     }
