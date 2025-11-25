@@ -32,7 +32,7 @@ class ProdutoRepository implements IProduto {
         $bindings = [];
 
         if(isset($params['nome_codigo']) && !empty($params['nome_codigo'])){
-            $conditions[] = "nome LIKE :nome_codigo OR codigo LIKE :nome_codigo";
+            $conditions[] = "p.nome LIKE :nome_codigo OR p.codigo LIKE :nome_codigo";
             $bindings[':nome_codigo'] = "%" . $params['nome_codigo'] . "%";
         }
 

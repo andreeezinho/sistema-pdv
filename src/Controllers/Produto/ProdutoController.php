@@ -31,6 +31,15 @@ class ProdutoController extends Controller {
         ]);
     }
 
+    public function indexApi(Request $request){
+        $params = $request->getQueryParams();
+
+        $produtos = $this->produtoRepository->all($params);
+
+        echo json_encode($produtos);
+        exit();
+    }
+
     public function create(Request $request){
         $grupos = $this->grupoRepository->all(['ativo' => 1]);
 

@@ -334,7 +334,64 @@
                         <div class="grid gap-2 grid-cols-2">
                             <div>
                                 <label for="codigo" class="block mb-1 text-sm font-medium text-gray-900">Código</label>
-                                <input type="number" name="codigo" id="codigo" autofocus class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+                                <div class="flex border border-gray-300 rounded-lg">
+                                    <input type="number" name="codigo" id="codigo" autofocus class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5" required />
+                                    <button type="button" class="bg-gray-800 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded" data-modal-target="pesquisar" data-modal-toggle="pesquisar">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                        </svg>
+                                    </button>
+
+                                    <div id="pesquisar" tabindex="-1" class="hidden w-1/2 mx-auto overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                        <div class="relative p-4 w-full max-h-full">
+                                            <div class="relative bg-white rounded-lg shadow-sm">
+                                                <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="pesquisar">
+                                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                    </svg>
+                                                </button>
+                                                <div class="p-4 md:p-5 text-center">
+                                                    <h3 class="mb-5 text-lg font-normal text-gray-700">Pesquisar produto</h3>
+
+                                                    <div class="flex flex-col p-4 w-full">
+                                                        <div class="flex border border-gray-300 rounded-lg mb-5">
+                                                            <input type="text" name="search" id="search" placeholder="Insira o nome ou código do produto" class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5" required />
+                                                            <button type="button" id="search-button" class="bg-gray-800 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                        <div>
+                                                            <table class="w-full text-sm text-left rtl:text-right text-white">
+                                                                <thead class="text-xs text-white uppercase bg-gray-800">
+                                                                    <tr>
+                                                                        <th scope="col" class="px-6 py-3">
+                                                                            Nome
+                                                                        </th>
+                                                                        <th scope="col" class="px-6 py-3">
+                                                                            Código
+                                                                        </th>
+                                                                        <th scope="col" class="px-6 py-3 text-center">
+                                                                            Estoque
+                                                                        </th>
+                                                                        <th scope="col" class="px-6 py-3 text-center">
+                                                                            Tipo
+                                                                        </th>
+                                                                        <th scope="col" class="px-6 py-3 text-center">
+                                                                            -
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="products_table"></tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div>
@@ -440,7 +497,7 @@
                 var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                if (distance < 1) { 
+                if (distance < 1) {
                     $('#demo').text('');
                 } else if (days > 0) {
                     $('#demo').text(
@@ -460,6 +517,58 @@
                     );
                 }
             }, 1000);
+        });
+
+        $('#products_table').hide();
+
+        // TODO: (depois que concluir os novos atributos do PRODUTO) botao para adicionar produto na venda
+        $('#search-button').on('click', function() {
+            var data = $(this).val();
+
+            $.ajax({
+                type: "GET",
+                url: "/produtos-api",
+                data: {nome_codigo: data},
+                dataType: "JSON",
+                success: function(response) {
+                    var suggestions = '';
+
+                    if (response && Array.isArray(response) && response.length > 0) {
+                        response.forEach(function(produto) {
+                            suggestions += '<tr class="odd:bg-gray-100 even:bg-gray-300 border-b border-gray-400 text-gray-800">'
+                            suggestions += '    <td class="px-6 py-4">'
+                            suggestions +=          produto.nome
+                            suggestions += '    </td>'
+                            suggestions += '    <td class="px-6 py-4">'
+                            suggestions +=          produto.codigo
+                            suggestions += '    </td>'
+                            suggestions += '    <td class="px-6 py-4 text-center">'
+                            suggestions +=          produto.estoque
+                            suggestions += '    </td>'
+                            suggestions += '    <td class="px-6 py-4 text-center">'
+                            suggestions +=          produto.tipo
+                            suggestions += '    </td>'
+                            suggestions += '    <td class="px-6 py-4 text-center">'
+                            suggestions += '        <button type="button" class="bg-gray-800 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">'
+                            suggestions += '            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4">'
+                            suggestions += '                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />'
+                            suggestions += '            </svg>'
+                            suggestions += '        </button>'
+                            suggestions += '    </td>'
+                            suggestions += '</tr>'
+                        });
+
+                        $('#products_table').html(suggestions).show();
+                    }else{
+                        suggestions += '<p class="w-full text-gray-500 text-md mt-5">Nenhum produto encontrado</p>'
+
+                        $('#products_table').html(suggestions).show();
+                    }
+                },
+                error: function(error){
+                    console.error('Erro na requisição:', error);
+                }
+            });
         });
         
     });

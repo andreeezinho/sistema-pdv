@@ -231,7 +231,7 @@
                 data: {nome_doc: data},
                 dataType: "JSON",
                 success: function(response) {
-                    console.log(Array.isArray(response)); 
+                    // console.log(Array.isArray(response));
                     var suggestions = '';
 
                     if (response && Array.isArray(response) && response.length > 0) {

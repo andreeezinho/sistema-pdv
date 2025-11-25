@@ -118,6 +118,7 @@ $router->create("POST", "/pdv/{uuid}/remover/{uuid_produto}", [$pdvController, '
 
 //produtos
 $router->create("GET", "/produtos", [$produtoController, 'index'], $auth);
+$router->create("GET", "/produtos-api", [$produtoController, 'indexApi'], $auth);
 $router->create("GET", "/produtos/cadastro", [$produtoController, 'create'], $auth);
 $router->create("POST", "/produtos/cadastro", [$produtoController, 'store'], $auth);
 $router->create("GET", "/produtos/{uuid}/editar", [$produtoController, 'edit'], $auth);

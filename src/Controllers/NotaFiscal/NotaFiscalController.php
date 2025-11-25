@@ -59,7 +59,7 @@ class NotaFiscalController extends Controller {
         //if($venda->estado == 'Rejeitado' || $venda->estado == 'Novo'){
         if(true){
             $result = $nfe->generateXml($venda, $emitente);
-
+            print_r($result);
             if(!isset($result['erros_xml'])){
                 $signed = $nfe->sign($result['xml']);
                 $resultado = $nfe->transmit($signed, $result['chave']);
