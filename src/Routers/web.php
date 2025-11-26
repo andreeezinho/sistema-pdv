@@ -18,6 +18,7 @@ use App\Controllers\Pagamento\PagamentoController;
 use App\Controllers\Cliente\ClienteController;
 use App\Controllers\Grupo\GrupoController;
 use App\Controllers\NotaFiscal\NotaFiscalController;
+use App\Controllers\Tributacao\TributacaoController;
 
 $router = new Router();
 $auth = new Auth();
@@ -40,6 +41,7 @@ $pagamentoController = $container->get(PagamentoController::class);
 $clienteController = $container->get(ClienteController::class);
 $grupoController = $container->get(GrupoController::class);
 $notaFiscalController = $container->get(NotaFiscalController::class);
+$tributacaoController = $container->get(TributacaoController::class);
 
 //rotas
 
@@ -124,6 +126,10 @@ $router->create("POST", "/produtos/cadastro", [$produtoController, 'store'], $au
 $router->create("GET", "/produtos/{uuid}/editar", [$produtoController, 'edit'], $auth);
 $router->create("POST", "/produtos/{uuid}/editar", [$produtoController, 'update'], $auth);
 $router->create("POST", "/produtos/{uuid}/deletar", [$produtoController, 'destroy'], $auth);
+
+//tributacao
+$router->create("GET", "/tributacoes", [$tributacaoController, 'index'], $auth);
+$router->create("POST", "/tributacoes/cadastro", [$tributacaoController, 'store'], $auth);
 
 //formas-de-pagamentos
 $router->create("GET", "/pagamentos", [$pagamentoController, 'index'], $auth);

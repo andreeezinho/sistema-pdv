@@ -26,7 +26,8 @@ use App\Interfaces\Venda\IVendaCliente;
 use App\Repositories\Venda\VendaClienteRepository;
 use App\Interfaces\Grupo\IGrupo;
 use App\Repositories\Grupo\GrupoRepository;
-
+use App\Interfaces\Tributacao\ITributacao;
+use App\Repositories\Tributacao\TributacaoRepository;
 
 class DependencyProvider {
 
@@ -108,6 +109,12 @@ class DependencyProvider {
             ->set(
                 IGrupo::class,
                 new GrupoRepository()
+            );
+
+        $this->container
+            ->set(
+                ITributacao::class,
+                new TributacaoRepository()
             );
 
     }

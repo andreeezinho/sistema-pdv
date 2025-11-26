@@ -93,7 +93,7 @@
                      <a href="/grupos" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Grupo de Produtos</a>
                   </li>
                   <li>
-                     <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Tributação</a>
+                     <a href="/tributacoes" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Tributação</a>
                   </li>
             </ul>
          </li>
