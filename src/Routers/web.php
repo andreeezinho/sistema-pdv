@@ -130,6 +130,7 @@ $router->create("POST", "/produtos/{uuid}/deletar", [$produtoController, 'destro
 //tributacao
 $router->create("GET", "/tributacoes", [$tributacaoController, 'index'], $auth);
 $router->create("POST", "/tributacoes/cadastro", [$tributacaoController, 'store'], $auth);
+$router->create("POST", "/tributacoes/{uuid}/deletar", [$tributacaoController, 'destroy'], $auth);
 
 //formas-de-pagamentos
 $router->create("GET", "/pagamentos", [$pagamentoController, 'index'], $auth);
