@@ -6,16 +6,22 @@ use App\Request\Request;
 use App\Controllers\Controller;
 use App\Interfaces\Produto\IProduto;
 use App\Interfaces\Grupo\IGrupo;
+use App\Interfaces\Tributacao\ITributacao;
+use App\Interfaces\Embalagem\IEmbalagem;
 
 class ProdutoController extends Controller {
 
     protected $produtoRepository;
     protected $grupoRepository;
+    protected $tributacaoRepository;
+    protected $embalagemRepository;
 
-    public function __construct(IProduto $produtoRepository, IGrupo $grupoRepository){
+    public function __construct(IProduto $produtoRepository, IGrupo $grupoRepository, ITributacao $tributacaoRepository, IEmbalagem $embalagemRepository) {
         parent::__construct();
         $this->produtoRepository = $produtoRepository;
         $this->grupoRepository = $grupoRepository;
+        $this->tributacaoRepository = $tributacaoRepository;
+        $this->embalagemRepository = $embalagemRepository;
     }
 
     public function index(Request $request){
@@ -43,22 +49,50 @@ class ProdutoController extends Controller {
     public function create(Request $request){
         $grupos = $this->grupoRepository->all(['ativo' => 1]);
 
+        $entrada = $this->embalagemRepository->all('entrada_produto', ['ativo' => 1]);
+        $saida = $this->embalagemRepository->all('saida_produto', ['ativo' => 1]);
+
+        $icms = $this->tributacaoRepository->all('icms', ['ativo' => 1]);
+        $ipi = $this->tributacaoRepository->all('ipi', ['ativo' => 1]);
+        $pis = $this->tributacaoRepository->all('pis', ['ativo' => 1]);
+        $cofins = $this->tributacaoRepository->all('cofins', ['ativo' => 1]);
+
         return $this->router->view('produto/create', [
-            'grupos' => $grupos
+            'grupos' => $grupos,
+            'entrada' => $entrada,
+            'saida' => $saida,
+            'icms' => $icms,
+            'ipi' => $ipi,
+            'pis' => $pis,
+            'cofins' => $cofins
         ]);
     }
 
     public function store(Request $request){
         $data = $request->getBodyParams();
-        
-        $grupos = $this->grupoRepository->all(['ativo' => 1]);
 
         $create = $this->produtoRepository->create($data);
-
+        dd($create);
         if(is_null($create)){
+            $grupos = $this->grupoRepository->all(['ativo' => 1]);
+
+            $entrada = $this->embalagemRepository->all('entrada_produto', ['ativo' => 1]);
+            $saida = $this->embalagemRepository->all('saida_produto', ['ativo' => 1]);
+
+            $icms = $this->tributacaoRepository->all('icms', ['ativo' => 1]);
+            $ipi = $this->tributacaoRepository->all('ipi', ['ativo' => 1]);
+            $pis = $this->tributacaoRepository->all('pis', ['ativo' => 1]);
+            $cofins = $this->tributacaoRepository->all('cofins', ['ativo' => 1]);
+
             return $this->router->view('produto/create', [
                 'erro' => 'Erro ao cadastrar produto',
-                'grupos' => $grupos
+                'grupos' => $grupos,
+                'entrada' => $entrada,
+                'saida' => $saida,
+                'icms' => $icms,
+                'ipi' => $ipi,
+                'pis' => $pis,
+                'cofins' => $cofins
             ]);
         }
 

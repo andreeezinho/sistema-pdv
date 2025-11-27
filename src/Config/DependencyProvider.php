@@ -28,6 +28,8 @@ use App\Interfaces\Grupo\IGrupo;
 use App\Repositories\Grupo\GrupoRepository;
 use App\Interfaces\Tributacao\ITributacao;
 use App\Repositories\Tributacao\TributacaoRepository;
+use App\Interfaces\Embalagem\IEmbalagem;
+use App\Repositories\Embalagem\EmbalagemRepository;
 
 class DependencyProvider {
 
@@ -115,6 +117,12 @@ class DependencyProvider {
             ->set(
                 ITributacao::class,
                 new TributacaoRepository()
+            );
+
+        $this->container
+            ->set(
+                IEmbalagem::class,
+                new EmbalagemRepository()
             );
 
     }

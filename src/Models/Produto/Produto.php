@@ -16,6 +16,17 @@ class Produto {
     public $estoque;
     public $tipo;
     public $grupo_produto_id;
+    public $entrada_produto_id;
+    public $saida_produto_id;
+    public $icms_id;
+    public $ipi_id;
+    public $pis_id;
+    public $cofins_id;
+    public $origem_id;
+    public $cfop;
+    public $ncm;
+    public $cest;
+    public $nat_receita;
     public $nome_grupo;
     public $ativo;
     public $created_at;

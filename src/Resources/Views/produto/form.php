@@ -21,7 +21,7 @@
 
 <div>
     <label for="preco" class="block mb-1 text-sm font-medium text-gray-900">Preço</label>
-    <input type="number" name="preco" id="preco" min="0" max="1000" step="0.01" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $produto->preco ?? null?>" />
+    <input type="number" step="any" name="preco" id="preco" min="0" max="1000" step="0.01" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $produto->preco ?? null?>" />
 </div>
 
 <div>
@@ -44,7 +44,7 @@
     <label for="grupo_produto_id" class="block text-sm/6 font-medium text-gray-900">Grupo</label>
     <div class="">
         <select name="grupo_produto_id" id="grupo_produto_id" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-2 p-2.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
-            <option value="" <?= (isset($produto) && $produto->tipo == '') ? 'selected' : null ?>>Insira o grupo</option>
+            <option value="" <?= (isset($produto) && $produto->grupo_produto_id == '') ? 'selected' : null ?>>Insira o grupo</option>
             <?php
                 if(count($grupos) > 0){
                     foreach($grupos as $grupo){
@@ -59,25 +59,37 @@
 </div>
 
 <div>
-    <label for="tipo" class="block text-sm/6 font-medium text-gray-900">Embalagem (Entrada)</label>
+    <label for="entrada_produto_id" class="block text-sm/6 font-medium text-gray-900">Embalagem (Entrada)</label>
     <div class="">
-        <select name="tipo" id="tipo" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-2 p-2.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
-            <option value="" <?= (isset($produto) && $produto->tipo == '') ? 'selected' : null ?>>Insira o tipo da entrada</option>
-            <option value="un" <?= (isset($produto) && $produto->tipo == 'un') ? 'selected' : null ?>>Unidade</option>
-            <option value="kg" <?= (isset($produto) && $produto->tipo == 'kg') ? 'selected' : null ?>>Fardo 12</option>
-            <option value="kg" <?= (isset($produto) && $produto->tipo == 'kg') ? 'selected' : null ?>>Fardo 24</option>
+        <select name="entrada_produto_id" id="entrada_produto_id" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-2 p-2.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
+            <option value="" <?= (isset($produto) && $produto->entrada_produto_id == '') ? 'selected' : null ?>>Insira o tipo de entrada</option>
+            <?php
+                if(count($entrada) > 0){
+                    foreach($entrada as $item){
+            ?>
+                    <option value="<?= $item->id ?>" <?= (isset($produto) && isset($item) && $item->id == $produto->entrada_produto_id) ? 'selected' : null ?>><?= $item->quantidade ?> - <?= $item->tipo ?></option>
+            <?php
+                    }
+                }
+            ?>
         </select>
     </div>
 </div>
 
 <div>
-    <label for="tipo" class="block text-sm/6 font-medium text-gray-900">Embalagem (Saída)</label>
+    <label for="saida_produto_id" class="block text-sm/6 font-medium text-gray-900">Embalagem (Saída)</label>
     <div class="">
-        <select name="tipo" id="tipo" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-2 p-2.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
-            <option value="" <?= (isset($produto) && $produto->tipo == '') ? 'selected' : null ?>>Insira o tipo da saída</option>
-            <option value="un" <?= (isset($produto) && $produto->tipo == 'un') ? 'selected' : null ?>>Unidade</option>
-            <option value="kg" <?= (isset($produto) && $produto->tipo == 'kg') ? 'selected' : null ?>>Fardo 12</option>
-            <option value="kg" <?= (isset($produto) && $produto->tipo == 'kg') ? 'selected' : null ?>>Fardo 24</option>
+        <select name="saida_produto_id" id="saida_produto_id" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-2 p-2.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
+            <option value="" <?= (isset($produto) && $produto->saida_produto_id == '') ? 'selected' : null ?>>Insira o tipo de entrada</option>
+            <?php
+                if(count($entrada) > 0){
+                    foreach($entrada as $item){
+            ?>
+                    <option value="<?= $item->id ?>" <?= (isset($produto) && isset($item) && $item->id == $produto->saida_produto_id) ? 'selected' : null ?>><?= $item->quantidade ?> - <?= $item->tipo ?></option>
+            <?php
+                    }
+                }
+            ?>
         </select>
     </div>
 </div>
@@ -99,22 +111,28 @@
 
 <div class="col-span-1">
     <label for="ncm" class="block mb-1 text-sm font-medium text-gray-900">NCM</label>
-    <input type="number" name="ncm" id="ncm" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="" />
+    <input type="number" step="any" name="ncm" id="ncm" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="" />
 </div>
 
 <div class="col-span-1">
     <label for="cest" class="block mb-1 text-sm font-medium text-gray-900">CEST</label>
-    <input type="number" name="cest" id="cest" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" value="" />
+    <input type="number" step="any" name="cest" id="cest" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" value="" />
 </div>
 
 <div>
     <label for="icms" class="block text-sm/6 font-medium text-gray-900">ICMS</label>
     <div class="">
         <select name="icms" id="icms" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-2 p-2.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
-            <option value="" <?= (isset($produto) && $produto->tipo == '') ? 'selected' : null ?>>Insira o ICMS</option>
-            <option value="un" <?= (isset($produto) && $produto->tipo == 'un') ? 'selected' : null ?>>Tributado 20,5%</option>
-            <option value="kg" <?= (isset($produto) && $produto->tipo == 'kg') ? 'selected' : null ?>>Tributado 7%</option>
-            <option value="kg" <?= (isset($produto) && $produto->tipo == 'kg') ? 'selected' : null ?>>Tributado 12%</option>
+            <option value="" <?= (isset($produto) && $produto->icms_id == '') ? 'selected' : null ?>>Insira o grupo</option>
+            <?php
+                if(count($icms) > 0){
+                    foreach($icms as $item){
+            ?>
+                    <option value="<?= $item->id ?>" <?= (isset($produto) && isset($item) && $item->id == $produto->icms_id) ? 'selected' : null ?>><?= $item->nome ?></option>
+            <?php
+                    }
+                }
+            ?>
         </select>
     </div>
 </div>
@@ -123,39 +141,57 @@
     <label for="ipi" class="block text-sm/6 font-medium text-gray-900">IPI</label>
     <div class="">
         <select name="ipi" id="ipi" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-2 p-2.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
-            <option value="" <?= (isset($produto) && $produto->tipo == '') ? 'selected' : null ?>>Insira o IPI</option>
-            <option value="un" <?= (isset($produto) && $produto->tipo == 'un') ? 'selected' : null ?>>Tributado 20,5%</option>
-            <option value="kg" <?= (isset($produto) && $produto->tipo == 'kg') ? 'selected' : null ?>>Tributado 7%</option>
-            <option value="kg" <?= (isset($produto) && $produto->tipo == 'kg') ? 'selected' : null ?>>Tributado 12%</option>
+            <option value="" <?= (isset($produto) && $produto->ipi_id == '') ? 'selected' : null ?>>Insira o grupo</option>
+            <?php
+            if(count($ipi) > 0){
+                foreach($ipi as $item){
+                    ?>
+                    <option value="<?= $item->id ?>" <?= (isset($produto) && isset($item) && $item->id == $produto->ipi_id) ? 'selected' : null ?>><?= $item->nome ?></option>
+                    <?php
+                }
+            }
+            ?>
         </select>
     </div>
 </div>
 
-<div class="col-span-2">
-    <label for="pis" class="block text-sm/6 font-medium text-gray-900">PIS/COFINS</label>
+<div class="col-span-1">
+    <label for="pis" class="block text-sm/6 font-medium text-gray-900">PIS</label>
     <div class="">
         <select name="pis" id="pis" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-2 p-2.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
-            <option value="" <?= (isset($produto) && $produto->tipo == '') ? 'selected' : null ?>>Insira o PIS/COFINS</option>
-            <option value="un" <?= (isset($produto) && $produto->tipo == 'un') ? 'selected' : null ?>>Tributado 01/50</option>
-            <option value="kg" <?= (isset($produto) && $produto->tipo == 'kg') ? 'selected' : null ?>>PIS/COFINS 05/75</option>
-            <option value="kg" <?= (isset($produto) && $produto->tipo == 'kg') ? 'selected' : null ?>>Monofásico 04/70</option>
+            <option value="" <?= (isset($produto) && $produto->pis_id == '') ? 'selected' : null ?>>Insira o PIS</option>
+            <?php
+            if(count($pis) > 0){
+                foreach($pis as $item){
+                    ?>
+                    <option value="<?= $item->id ?>" <?= (isset($produto) && isset($item) && $item->id == $produto->pis_id) ? 'selected' : null ?>><?= $item->nome ?></option>
+                    <?php
+                }
+            }
+            ?>
         </select>
     </div>
 </div>
 
-<div class="col-span-2">
-    <label for="pis" class="block text-sm/6 font-medium text-gray-900">Origem da Mercadoria</label>
+<div class="col-span-1">
+    <label for="pis" class="block text-sm/6 font-medium text-gray-900">COFINS</label>
     <div class="">
         <select name="pis" id="pis" placeholder="Código ou nome" class="border-2 border-solid block w-full rounded-md bg-white px-2 p-2.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
-            <option value="" <?= (isset($produto) && $produto->tipo == '') ? 'selected' : null ?>>Insira a origem</option>
-            <option value="un" <?= (isset($produto) && $produto->tipo == 'un') ? 'selected' : null ?>>0 – Nacional, exceto as indicadas nos códigos 3, 4, 5 e 8</option>
-            <option value="kg" <?= (isset($produto) && $produto->tipo == 'kg') ? 'selected' : null ?>>1 – Estrangeira – Importação direta</option>
-            <option value="kg" <?= (isset($produto) && $produto->tipo == 'kg') ? 'selected' : null ?>>2 – Estrangeira – Adquirida no mercado interno</option>
+            <option value="" <?= (isset($produto) && $produto->cofins_id == '') ? 'selected' : null ?>>Insira o COFINS</option>
+            <?php
+            if(count($cofins) > 0){
+                foreach($cofins as $item){
+                    ?>
+                    <option value="<?= $item->id ?>" <?= (isset($produto) && isset($item) && $item->id == $produto->cofins_id) ? 'selected' : null ?>><?= $item->nome ?></option>
+                    <?php
+                }
+            }
+            ?>
         </select>
     </div>
 </div>
 
 <div class="col-span-1">
     <label for="nat-receita" class="block mb-1 text-sm font-medium text-gray-900">Nat. Receita</label>
-    <input type="number" name="nat-receita" id="nat-receita" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" value="" />
+    <input type="number" step="any" name="nat-receita" id="nat-receita" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" value="" />
 </div>

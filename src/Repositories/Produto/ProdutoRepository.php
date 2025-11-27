@@ -100,7 +100,7 @@ class ProdutoRepository implements IProduto {
             return $this->findByUuid($produto->uuid);
 
         }catch(\Throwable $th){
-            return null;
+            return $th;
         }finally{
             Database::getInstance()->closeConnection();
         }
