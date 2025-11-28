@@ -30,6 +30,8 @@ use App\Interfaces\Tributacao\ITributacao;
 use App\Repositories\Tributacao\TributacaoRepository;
 use App\Interfaces\Embalagem\IEmbalagem;
 use App\Repositories\Embalagem\EmbalagemRepository;
+use App\Interfaces\Origem\IOrigem;
+use App\Repositories\Origem\OrigemRepository;
 
 class DependencyProvider {
 
@@ -123,6 +125,12 @@ class DependencyProvider {
             ->set(
                 IEmbalagem::class,
                 new EmbalagemRepository()
+            );
+
+        $this->container
+            ->set(
+                IOrigem::class,
+                new OrigemRepository()
             );
 
     }

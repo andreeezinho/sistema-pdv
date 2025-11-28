@@ -77,6 +77,17 @@ class ProdutoRepository implements IProduto {
                     estoque = :estoque,
                     tipo = :tipo,
                     grupo_produto_id = :grupo_produto_id,
+                    entrada_produto_id = :entrada_produto_id,
+                    saida_produto_id = :saida_produto_id,
+                    icms_id = :icms_id,
+                    ipi_id = :ipi_id,
+                    pis_id = :pis_id,
+                    cofins_id = :cofins_id,
+                    origem_id = :origem_id,
+                    cfop = :cfop,
+                    ncm = :ncm,
+                    cest = :cest,
+                    nat_receita = :nat_receita,
                     ativo = :ativo
             ";
 
@@ -90,6 +101,17 @@ class ProdutoRepository implements IProduto {
                 ':estoque' => $produto->estoque,
                 ':tipo' => $produto->tipo,
                 ':grupo_produto_id' => $produto->grupo_produto_id,
+                ':entrada_produto_id' => $produto->entrada_produto_id,
+                ':saida_produto_id' => $produto->saida_produto_id,
+                ':icms_id' => $produto->icms_id,
+                ':ipi_id' => $produto->ipi_id,
+                ':pis_id' => $produto->pis_id,
+                ':cofins_id' => $produto->cofins_id,
+                ':origem_id' => $produto->origem_id,
+                ':cfop' => 5.102,
+                ':ncm' => $produto->ncm,
+                ':cest' => $produto->cest,
+                ':nat_receita' => $produto->nat_receita,
                 ':ativo' => $produto->ativo ?? 1
             ]);
 
@@ -100,7 +122,7 @@ class ProdutoRepository implements IProduto {
             return $this->findByUuid($produto->uuid);
 
         }catch(\Throwable $th){
-            return $th;
+            return null;
         }finally{
             Database::getInstance()->closeConnection();
         }
@@ -118,6 +140,17 @@ class ProdutoRepository implements IProduto {
                     estoque = :estoque,
                     tipo = :tipo,
                     grupo_produto_id = :grupo_produto_id,
+                    entrada_produto_id = :entrada_produto_id,
+                    saida_produto_id = :saida_produto_id,
+                    icms_id = :icms_id,
+                    ipi_id = :ipi_id,
+                    pis_id = :pis_id,
+                    cofins_id = :cofins_id,
+                    origem_id = :origem_id,
+                    cfop = :cfop,
+                    ncm = :ncm,
+                    cest = :cest,
+                    nat_receita = :nat_receita,
                     ativo = :ativo
                 WHERE 
                     id =:id
@@ -132,6 +165,17 @@ class ProdutoRepository implements IProduto {
                 ':estoque' => $produto->estoque,
                 ':tipo' => $produto->tipo,
                 ':grupo_produto_id' => $produto->grupo_produto_id,
+                ':entrada_produto_id' => $produto->entrada_produto_id,
+                ':saida_produto_id' => $produto->saida_produto_id,
+                ':icms_id' => $produto->icms_id,
+                ':ipi_id' => $produto->ipi_id,
+                ':pis_id' => $produto->pis_id,
+                ':cofins_id' => $produto->cofins_id,
+                ':origem_id' => $produto->origem_id,
+                ':cfop' => 5.102,
+                ':ncm' => $produto->ncm,
+                ':cest' => $produto->cest,
+                ':nat_receita' => $produto->nat_receita,
                 ':ativo' => $produto->ativo,
                 ':id' => $id
             ]);
@@ -143,7 +187,7 @@ class ProdutoRepository implements IProduto {
             return $this->findById($id);
 
         }catch(\Throwable $th){
-            return null;
+            return $th;
         }finally{
             Database::getInstance()->closeConnection();
         }

@@ -556,13 +556,25 @@ insert into saida_produto set uuid="481917f6-8473-4de0-9c30-4c160f3ge7cb", quant
 insert into saida_produto set uuid="481917f6-8473-4de0-9c30-4c16053be7cb", quantidade=4, tipo="SC", ativo=1;
 insert into saida_produto set uuid="0dbf7e2a-61f4-4b4b-af43-cc64cg90brab", quantidade=1, tipo="KG", ativo=1;
 
--- INSERÇÃO DE ORIGENS DOS PRODUTOS
-insert into origem set uuid = "7a1c8288-54c3-4e27-9db0-34c1f548c210", codigo = 0, nome = "Nacional, exceto as indicadas nos códigos 3, 4, 5 e 8", ativo = 1;
-insert into origem set uuid = "b92df96e-6de5-48fc-9e4d-2e0189ab5e2b", codigo = 1, nome = "Estrangeira – Importação direta, exceto a indicada no código 6", ativo = 1;
-insert into origem set uuid = "e4c2a2f0-f92d-4a86-9e0c-0bbd1b7a1329", codigo = 2, nome = "Estrangeira – Adquirida no mercado interno, exceto a indicada no código 7", ativo = 1;
-insert into origem set uuid = "0f9c88f7-0d72-49f6-af68-2d3f0e3d89a1", codigo = 3, nome = "Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40% e inferior ou igual a 70%", ativo = 1;
-insert into origem set uuid = "1dc8b0f1-1e1b-4df7-bb68-998a6fce12fb", codigo = 4, nome = "Nacional, cuja produção tenha sido realizada em conformidade com processos produtivos básicos (PPB)", ativo = 1;
-insert into origem set uuid = "c2d3e2ac-4742-4c83-ac13-6cc89b447fc2", codigo = 5, nome = "Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%", ativo = 1;
-insert into origem set uuid = "3c5949e0-87b7-4c0a-bb13-b7a0d72af326", codigo = 6, nome = "Estrangeira – Importação direta, sem similar nacional, constante na lista CAMEX", ativo = 1;
-insert into origem set uuid = "9b7e1d3f-f4d3-44df-ac07-c96857e946c8", codigo = 7, nome = "Estrangeira – Adquirida no mercado interno, sem similar nacional, constante na lista CAMEX", ativo = 1;
-insert into origem set uuid = "f81cabc9-d7e4-497a-b121-b1d464b5a021", codigo = 8, nome = "Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70%", ativo = 1;
+-- INSERÇÃO DE ORIGEM
+
+insert into origem set codigo=0, nome="Nacional", uuid="7e4c3f1d-0c9f-4af0-b3af-9df6e8e2b4e1", ativo=1;
+insert into origem set codigo=1, nome="Estrangeira – Importação Direta", uuid="c2b3bca4-1df2-4d6e-a93d-8ad7ae601d45", ativo=1;
+insert into origem set codigo=2, nome="Estrangeira – Adquirida no Mercado Interno", uuid="5f7a98aa-c2fe-4e32-a69c-139ef9d3145b", ativo=1;
+insert into origem set codigo=3, nome="Nacional com Conteúdo de Importação > 40%", uuid="d9c35b78-e3fb-4e79-8b98-1576936af7d4", ativo=1;
+insert into origem set codigo=4, nome="Nacional Produzida conforme PPB", uuid="0f3f0c4c-67ad-4e6e-b6be-c6c3b99df2a1", ativo=1;
+insert into origem set codigo=5, nome="Nacional com Conteúdo de Importação ≤ 40%", uuid="b33e6f90-2a90-49cd-8e19-7543b9d9e0ed", ativo=1;
+insert into origem set codigo=6, nome="Estrangeira – Importação Direta sem Similar Nacional", uuid="9a8b4bd7-2fd0-4c62-b06d-2410d62b87ea", ativo=1;
+insert into origem set codigo=7, nome="Estrangeira – Mercado Interno sem Similar Nacional", uuid="fb1d2337-008f-4979-ada6-4fa56735d5d2", ativo=1;
+insert into origem set codigo=8, nome="Nacional – Conteúdo de Importação Indeterminado", uuid="e47241e0-774d-459e-b1b7-a2e8b93fe629", ativo=1;
+
+-- INSERÇÃO DE Natureza da receita
+-- insert into origem set uuid = "7a1c8288-54c3-4e27-9db0-34c1f548c210", codigo = 0, nome = "Nacional, exceto as indicadas nos códigos 3, 4, 5 e 8", ativo = 1;
+-- insert into origem set uuid = "b92df96e-6de5-48fc-9e4d-2e0189ab5e2b", codigo = 1, nome = "Estrangeira – Importação direta, exceto a indicada no código 6", ativo = 1;
+-- insert into origem set uuid = "e4c2a2f0-f92d-4a86-9e0c-0bbd1b7a1329", codigo = 2, nome = "Estrangeira – Adquirida no mercado interno, exceto a indicada no código 7", ativo = 1;
+-- insert into origem set uuid = "0f9c88f7-0d72-49f6-af68-2d3f0e3d89a1", codigo = 3, nome = "Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40% e inferior ou igual a 70%", ativo = 1;
+-- insert into origem set uuid = "1dc8b0f1-1e1b-4df7-bb68-998a6fce12fb", codigo = 4, nome = "Nacional, cuja produção tenha sido realizada em conformidade com processos produtivos básicos (PPB)", ativo = 1;
+-- insert into origem set uuid = "c2d3e2ac-4742-4c83-ac13-6cc89b447fc2", codigo = 5, nome = "Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%", ativo = 1;
+-- insert into origem set uuid = "3c5949e0-87b7-4c0a-bb13-b7a0d72af326", codigo = 6, nome = "Estrangeira – Importação direta, sem similar nacional, constante na lista CAMEX", ativo = 1;
+-- insert into origem set uuid = "9b7e1d3f-f4d3-44df-ac07-c96857e946c8", codigo = 7, nome = "Estrangeira – Adquirida no mercado interno, sem similar nacional, constante na lista CAMEX", ativo = 1;
+-- insert into origem set uuid = "f81cabc9-d7e4-497a-b121-b1d464b5a021", codigo = 8, nome = "Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70%", ativo = 1;

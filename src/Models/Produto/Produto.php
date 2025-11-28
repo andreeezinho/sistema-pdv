@@ -42,6 +42,17 @@ class Produto {
         $produto->estoque = $data['estoque'] ?? null;
         $produto->tipo = $data['tipo'] ?? null;
         $produto->grupo_produto_id = $data['grupo_produto_id'] ?? null;
+        $produto->entrada_produto_id = $data['entrada_produto_id'] ?? null;
+        $produto->saida_produto_id = $data['saida_produto_id'] ?? null;
+        $produto->icms_id = $data['icms_id'] ?? null;
+        $produto->ipi_id = $data['ipi_id'] ?? null;
+        $produto->pis_id = $data['pis_id'] ?? null;
+        $produto->cofins_id = $data['cofins_id'] ?? null;
+        $produto->origem_id = $data['origem_id'] ?? null;
+        $produto->cfop = $data['cfop'] ?? null;
+        $produto->ncm = $data['ncm'] ?? null;
+        $produto->cest = $data['cest'] ?? null;
+        $produto->nat_receita = $data['nat_receita'] ?? null;
         $produto->ativo = (!isset($data['ativo']) || $data['ativo'] == "") ? 1 : $data['ativo'];
         $produto->created_at = $data['created_at'] ?? null;
         $produto->updated_at = $data['updated_at'] ?? null;
