@@ -1,8 +1,3 @@
-<div class="col-span-2">
-    <label for="nome" class="block mb-1 text-sm font-medium text-gray-900">Nome</label>
-    <input type="text" name="nome" id="nome" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $produto->nome ?? null?>" />
-</div>
-
 <?php
     if(isset($edit)){
 ?>
@@ -13,6 +8,11 @@
 <?php
     }
 ?>
+
+<div class="col-span-2">
+    <label for="nome" class="block mb-1 text-sm font-medium text-gray-900">Nome</label>
+    <input type="text" name="nome" id="nome" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $produto->nome ?? null?>" />
+</div>
 
 <div class="col-span-1">
     <label for="codigo" class="block mb-1 text-sm font-medium text-gray-900">Código</label>
@@ -208,7 +208,7 @@
 </div>
 
 <div class="col-span-1">
-    <label for="nat_receita" class="block text-sm/6 font-medium text-gray-900">Origem</label>
+    <label for="nat_receita" class="block text-sm/6 font-medium text-gray-900">Nat. Receita</label>
     <select name="nat_receita" id="nat_receita" class="border-2 border-solid block w-full rounded-md bg-white px-2 p-2.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-600 sm:text-sm/6">
         <option value="" <?= (isset($produto) && $produto->nat_receita == null) ? 'selected' : null ?>>Insira a origem</option>
         <option value=0 <?= (isset($produto) && $produto->nat_receita == 0) ? 'selected' : null ?>>Nacional, exceto as indicadas nos códigos 3, 4, 5 e 8</option>

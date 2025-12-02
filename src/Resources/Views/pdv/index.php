@@ -330,12 +330,13 @@
                 </div>
 
                 <div class="h-2/4 p-3 pt-8">
-                    <form action="/pdv/<?= $venda->uuid ?>/adicionar" method="POST">
                         <div class="grid gap-2 grid-cols-2">
                             <div>
                                 <label for="codigo" class="block mb-1 text-sm font-medium text-gray-900">Código</label>
                                 <div class="flex border border-gray-300 rounded-lg">
-                                    <input type="number" name="codigo" id="codigo" autofocus class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5" required />
+                                    <form action="/pdv/<?= $venda->uuid ?>/adicionar" method="POST">
+                                        <input type="number" name="codigo" id="codigo" autofocus class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5" required />
+                                    </form>
                                     <button type="button" class="bg-gray-800 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded" data-modal-target="pesquisar" data-modal-toggle="pesquisar">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
@@ -345,7 +346,7 @@
                                     <div id="pesquisar" tabindex="-1" class="hidden w-1/2 mx-auto overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                         <div class="relative p-4 w-full max-h-full">
                                             <div class="relative bg-white rounded-lg shadow-sm">
-                                                <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="pesquisar">
+                                                <button type="button" id="drop-modal" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="pesquisar">
                                                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                                     </svg>
@@ -408,7 +409,6 @@
                         <div class="text-center mt-5">
                             <button type="submit" class="w-full bg-gray-800 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">Adicionar</button>
                         </div>
-                    </form>
                 </div>
 
                 <div class="h-1/6 p-3">
@@ -521,9 +521,8 @@
 
         $('#products_table').hide();
 
-        // TODO: (depois que concluir os novos atributos do PRODUTO) botao para adicionar produto na venda
         $('#search-button').on('click', function() {
-            var data = $(this).val();
+            var data = $('#search').val();
 
             $.ajax({
                 type: "GET",
@@ -549,7 +548,7 @@
                             suggestions +=          produto.tipo
                             suggestions += '    </td>'
                             suggestions += '    <td class="px-6 py-4 text-center">'
-                            suggestions += '        <button type="button" class="bg-gray-800 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">'
+                            suggestions += '        <button type="button" data-codigo="'+produto.codigo+'" class="product-button bg-gray-800 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">'
                             suggestions += '            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4">'
                             suggestions += '                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />'
                             suggestions += '            </svg>'
@@ -559,6 +558,14 @@
                         });
 
                         $('#products_table').html(suggestions).show();
+
+                        $('.product-button').on('click', function(){
+                            let codigo = $(this).data('codigo');
+
+                            $('#codigo').val(codigo);
+                            $('#drop-modal').click();
+                            $('#codigo').focus();
+                        });
                     }else{
                         suggestions += '<p class="w-full text-gray-500 text-md mt-5">Nenhum produto encontrado</p>'
 

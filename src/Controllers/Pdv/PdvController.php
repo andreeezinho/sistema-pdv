@@ -90,7 +90,6 @@ class PdvController extends Controller {
         ]);
     }
 
-    // TODO: novo metodo para inserir produto na venda atraves de api
     public function addProductInSale(Request $request, $uuid){
         $pdv = $this->vendaRepository->findByUuid($uuid);
 
