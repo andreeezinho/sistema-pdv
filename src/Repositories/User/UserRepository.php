@@ -126,8 +126,8 @@ class UserRepository implements IUser {
             $conditions[] = "nome LIKE :nome_usuario OR usuario LIKE :nome_usuario";
             $bindings[':nome_usuario'] = "%" . $params['nome_usuario'] . "%" ;
         }
-    
-        if(isset($params['online']) && !empty($params['online'])){
+
+        if(isset($params['online']) && $params['online'] != ""){
             $conditions[] = "online != :online";
             $bindings[':online'] = $params['online'];
         }
@@ -152,7 +152,6 @@ class UserRepository implements IUser {
         }
 
         $sql .= " ORDER BY created_at ASC";
-
         $stmt = $this->conn->prepare($sql);
 
         $stmt->execute($bindings);

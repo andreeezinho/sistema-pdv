@@ -336,6 +336,8 @@
                                 <div class="flex border border-gray-300 rounded-lg">
                                     <form action="/pdv/<?= $venda->uuid ?>/adicionar" method="POST">
                                         <input type="number" name="codigo" id="codigo" autofocus class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5" required />
+                                        <input type="number" name="quantidade" id="quantidade" min="1" max="1000" step="any" class="hidden" value="1" />
+                                        <button type="submit" name="btn-form" id="btn-form" class="hidden"></button>
                                     </form>
                                     <button type="button" class="bg-gray-800 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded" data-modal-target="pesquisar" data-modal-toggle="pesquisar">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4">
@@ -356,7 +358,7 @@
 
                                                     <div class="flex flex-col p-4 w-full">
                                                         <div class="flex border border-gray-300 rounded-lg mb-5">
-                                                            <input type="text" name="search" id="search" placeholder="Insira o nome ou código do produto" class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5" required />
+                                                            <input type="text" name="search" id="search" placeholder="Insira o nome ou código do produto" class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:outline-none block w-full p-2.5" />
                                                             <button type="button" id="search-button" class="bg-gray-800 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4">
                                                                     <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
@@ -396,8 +398,8 @@
                             </div>
 
                             <div>
-                                <label for="quantidade" class="block mb-1 text-sm font-medium text-gray-900">Quant.</label>
-                                <input type="number" name="quantidade" id="quantidade" min="0" max="1000" step="0.01" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required value="1" />
+                                <label for="quantidade-placehoder" class="block mb-1 text-sm font-medium text-gray-900">Quant.</label>
+                                <input type="number" name="quantidade-placehoder" id="quantidade-placehoder" min="0" max="1000" step="any" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="1" />
                             </div>
 
                             <!-- <div>
@@ -407,7 +409,7 @@
                         </div>
 
                         <div class="text-center mt-5">
-                            <button type="submit" class="w-full bg-gray-800 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">Adicionar</button>
+                            <button type="submit" id="button-placeholder" class="w-full bg-gray-800 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">Adicionar</button>
                         </div>
                 </div>
 
@@ -464,6 +466,22 @@
 
 <script>
     $(document).ready(function () {
+
+        $("#quantidade-placehoder").on('input', function(){
+            let quant = $(this).val();
+
+            $("#quantidade").val(quant);
+        });
+
+        $("#codigo").keypress(function(event){
+            if(event.witch === 13){
+                $("#btn-form").click();
+            }
+        });
+
+        $("#button-placeholder").on('click', function(){
+            $("#btn-form").click();
+        });
 
         $('#diarias').click(function (e) {
             $('#dropdown-sale').removeClass("block");

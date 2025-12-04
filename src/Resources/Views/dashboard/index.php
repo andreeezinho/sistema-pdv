@@ -225,7 +225,7 @@
                                                 <?= $user->nome ?>
                                             </p>
                                             <p class="text-sm text-gray-500 truncate">
-                                                <?= ucwords($user->situacao) ?? "" ?>
+                                                <?= (!is_null($user->situacao)) ? ucwords($user->situacao) : null ?>
                                             </p>
                                         </div>
                                         <div class="inline-flex items-center text-base font-semibold text-<?= $user->online == 1 ? "green" : "gray" ?>-500">
