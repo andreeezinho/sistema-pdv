@@ -56,6 +56,66 @@ class UserRepository implements IUser {
         return $user;
     }
 
+    public function setOnline(int $id, int $online){
+        try {
+
+            $sql = "UPDATE " . self::TABLE . " 
+                SET
+                    online = :online
+                WHERE
+                    id = :id
+            ";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $update = $stmt->execute([
+                ':online' => $online,
+                ':id' => $id
+            ]);
+
+            if(!$update){
+                return false;
+            }
+
+            return true;
+
+        }catch(\Throwable $th){
+            return null;
+        }finally{
+            Database::getInstance()->closeConnection();
+        }
+    }
+
+    public function setSituation(int $id, string $situacao){
+        try {
+
+            $sql = "UPDATE " . self::TABLE . " 
+                SET
+                    situacao = :situacao
+                WHERE
+                    id = :id
+            ";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $update = $stmt->execute([
+                ':situacao' => $situacao,
+                ':id' => $id
+            ]);
+
+            if(!$update){
+                return false;
+            }
+
+            return true;
+
+        }catch(\Throwable $th){
+            return null;
+        }finally{
+            Database::getInstance()->closeConnection();
+        }
+    }
+
     public function all(array $params = []){
         $sql = "SELECT * FROM " . self::TABLE;
     
@@ -67,6 +127,11 @@ class UserRepository implements IUser {
             $bindings[':nome_usuario'] = "%" . $params['nome_usuario'] . "%" ;
         }
     
+        if(isset($params['online']) && !empty($params['online'])){
+            $conditions[] = "online != :online";
+            $bindings[':online'] = $params['online'];
+        }
+
         if(isset($params['cpf']) && !empty($params['cpf'])){
             $conditions[] = "cpf = :cpf";
             $bindings[':cpf'] = $params['cpf'];

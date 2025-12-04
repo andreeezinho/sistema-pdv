@@ -2,6 +2,7 @@
 
 namespace App\Config;
 
+use App\Repositories\User\UserRepository;
 use App\Request\Request;
 use App\Config\Auth;
 
@@ -9,6 +10,11 @@ class Router {
 
     protected $routers = [];
     protected $auth = null;
+    protected $user;
+
+    public function __construct(){
+        $this->user = new Auth();
+    }
 
     public function create(string $method, string $path, callable $callback, Auth $auth = null){
         $normalizedPath = $this->normalizePath($path);
@@ -34,6 +40,10 @@ class Router {
 
                 if(preg_match($pattern, $normalizedRequestUri, $matches)){
                     if(!is_null($route['auth']) && !$route['auth']->check()){
+                        if(!is_null($this->user->user())){
+                            $this->user->setOnline($this->user->user()->id, false);
+                        }
+
                         return $this->view('login/login', [
                             'erro' => 'Faça login para continuar'
                         ]);

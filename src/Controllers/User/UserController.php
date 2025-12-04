@@ -134,6 +134,8 @@ class UserController extends Controller {
         $user = $this->userRepository->login($data['usuario'], $data['senha']);
 
         if($this->auth->login($user)){
+            $this->userRepository->setSituation($user->id, 'em servico');
+
             return $this->router->redirect('dashboard');
         }
 
