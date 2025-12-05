@@ -24,6 +24,14 @@ use App\Interfaces\Cliente\ICliente;
 use App\Repositories\Cliente\ClienteRepository;
 use App\Interfaces\Venda\IVendaCliente;
 use App\Repositories\Venda\VendaClienteRepository;
+use App\Interfaces\Grupo\IGrupo;
+use App\Repositories\Grupo\GrupoRepository;
+use App\Interfaces\Tributacao\ITributacao;
+use App\Repositories\Tributacao\TributacaoRepository;
+use App\Interfaces\Embalagem\IEmbalagem;
+use App\Repositories\Embalagem\EmbalagemRepository;
+use App\Interfaces\Origem\IOrigem;
+use App\Repositories\Origem\OrigemRepository;
 
 class DependencyProvider {
 
@@ -99,6 +107,30 @@ class DependencyProvider {
             ->set(
                 IVendaCliente::class,
                 new VendaClienteRepository()
+            );
+
+        $this->container
+            ->set(
+                IGrupo::class,
+                new GrupoRepository()
+            );
+
+        $this->container
+            ->set(
+                ITributacao::class,
+                new TributacaoRepository()
+            );
+
+        $this->container
+            ->set(
+                IEmbalagem::class,
+                new EmbalagemRepository()
+            );
+
+        $this->container
+            ->set(
+                IOrigem::class,
+                new OrigemRepository()
             );
 
     }

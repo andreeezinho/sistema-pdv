@@ -302,4 +302,33 @@ class VendaRepository implements IVenda {
         }
     }
 
+    public function updateDate(string $date, int $id){
+        try{
+            $sql = "UPDATE " . self::TABLE . "
+                SET
+                    created_at = :date
+                WHERE
+                    id = :id
+            ";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $update = $stmt->execute([
+                ':date' => $date,
+                ':id' => $id
+            ]);
+
+            if(!$update){
+                return null;
+            }
+
+            return $this->findById($id);
+
+        }catch(\Throwable $th){
+            return $th;
+        }finally{
+            Database::getInstance()->closeConnection();
+        }
+    }
+
 }

@@ -1,5 +1,5 @@
 <aside id="logo-sidebar" class="fixed top-0 z-40 left-0 w-64 h-screen pt-20 transition-transform -translate-x-full bg-gray-800 border-r border-gray-200 sm:translate-x-0" aria-label="Sidebar">
-   <div class="h-full px-3 pb-4 overflow-y-auto bg-gray-800">
+   <div class="h-full px-3 pb-4 overflow-y-auto bg-gray-800 flex flex-col justify-between">
       <ul class="space-y-2 font-medium">
          <li>
             <a href="/pdv" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-400 group">
@@ -59,24 +59,40 @@
                   </svg>
             </button>
             <ul id="dropdown-fiscal" class="hidden py-2 space-y-2">
-                  <li>
-                     <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Relatórios</a>
-                  </li>
-                  <li>
-                     <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Entradas</a>
-                  </li>
-                  <li>
-                     <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Saídas</a>
-                  </li>
+                <li>
+                    <a href="/tributacoes" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Tributação</a>
+                </li>
+                <li>
+                 <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Relatórios</a>
+                </li>
+                <li>
+                 <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Entradas</a>
+                </li>
+                <li>
+                 <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Saídas</a>
+                </li>
             </ul>
          </li>
          <li>
-            <a href="/produtos" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-400 group">
-               <svg class="shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                  <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"/>
-               </svg>
-               <span class="flex-1 ms-3 whitespace-nowrap">Produtos</span>
-            </a>
+             <button type="button" class="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-gray-400 dark:group-hover:text-white" aria-controls="dropdown-produto" data-collapse-toggle="dropdown-produto">
+                  <svg class="shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                     <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"/>
+                  </svg>
+                  
+                  <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Produtos</span>
+                  
+                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                  </svg>
+            </button>
+            <ul id="dropdown-produto" class="hidden py-2 space-y-2">
+                  <li>
+                     <a href="/produtos" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Produtos</a>
+                  </li>
+                  <li>
+                     <a href="/grupos" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Grupo de Produtos</a>
+                  </li>
+            </ul>
          </li>
          <li>
             <a href="/vendas" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-400 group">
@@ -88,13 +104,15 @@
          </li>
       </ul>
 
-      <div class="absolute bottom-[20px]">
-         <a href="/logout" class="flex items-center p-2 text-white rounded-lg bg-red-400 hover:bg-red-500 group">
+      <div class="mt-10">
+         <a href="/logout" class="flex items-center p-2 text-white rounded-lg bg-gray-400 hover:bg-red-400 group w-auto">
             <svg class="shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/>
             </svg>
             <span class="flex-1 ms-3 whitespace-nowrap">Sair</span>
          </a>
+
+         <span class="text-gray-600 text-xs">&copy; <?= date('Y'); ?>, Desenvolvido por <a href="http://github.com/andreeezinho" class="text-gray-400 hover:underline">André Victor</a></span>
       </div>
    </div>
 </aside>

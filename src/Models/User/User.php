@@ -16,6 +16,8 @@ class User {
     public $cpf;
     public $telefone;
     public $senha;
+    public $online;
+    public $situacao;
     public $cargo;
     public $is_admin;
     public $ativo;

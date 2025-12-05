@@ -119,7 +119,7 @@
                                     Tipo
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Quantidade
+                                    Quant
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Preço
@@ -141,7 +141,7 @@
                                     <td class="px-6 py-4">
                                         <?= strtoupper($produto->tipo) ?>
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4 text-center">
                                         <?= $produto->quantidade ?>
                                     </td>
                                     <td class="px-6 py-4">

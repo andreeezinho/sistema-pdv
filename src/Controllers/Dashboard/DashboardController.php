@@ -28,6 +28,8 @@ class DashboardController extends Controller {
 
         $usuarios = $this->userRepository->all();
 
+        $usuarios_online = $this->userRepository->all(['online' => 0]);
+
         $vendas = $this->vendaRepository->all();
 
         $faturamento = $this->vendaRepository->getInvoicing(['data' => date("Y-m-d"), 'situacao' => 'concluida']);
@@ -83,6 +85,7 @@ class DashboardController extends Controller {
         return $this->router->view('dashboard/index', [
             'user' => $user,
             'usuarios' => $usuarios,
+            'usuarios_online' => $usuarios_online,
             'vendas' => $vendas,
             'faturamento' => $faturamento,
             'produtos' => $produtos,

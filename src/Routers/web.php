@@ -16,7 +16,9 @@ use App\Controllers\Pdv\PdvController;
 use App\Controllers\Produto\ProdutoController;
 use App\Controllers\Pagamento\PagamentoController;
 use App\Controllers\Cliente\ClienteController;
-
+use App\Controllers\Grupo\GrupoController;
+use App\Controllers\NotaFiscal\NotaFiscalController;
+use App\Controllers\Tributacao\TributacaoController;
 
 $router = new Router();
 $auth = new Auth();
@@ -37,6 +39,9 @@ $pdvController = $container->get(PdvController::class);
 $produtoController = $container->get(ProdutoController::class);
 $pagamentoController = $container->get(PagamentoController::class);
 $clienteController = $container->get(ClienteController::class);
+$grupoController = $container->get(GrupoController::class);
+$notaFiscalController = $container->get(NotaFiscalController::class);
+$tributacaoController = $container->get(TributacaoController::class);
 
 //rotas
 
@@ -115,11 +120,17 @@ $router->create("POST", "/pdv/{uuid}/remover/{uuid_produto}", [$pdvController, '
 
 //produtos
 $router->create("GET", "/produtos", [$produtoController, 'index'], $auth);
+$router->create("GET", "/produtos-api", [$produtoController, 'indexApi'], $auth);
 $router->create("GET", "/produtos/cadastro", [$produtoController, 'create'], $auth);
 $router->create("POST", "/produtos/cadastro", [$produtoController, 'store'], $auth);
 $router->create("GET", "/produtos/{uuid}/editar", [$produtoController, 'edit'], $auth);
 $router->create("POST", "/produtos/{uuid}/editar", [$produtoController, 'update'], $auth);
 $router->create("POST", "/produtos/{uuid}/deletar", [$produtoController, 'destroy'], $auth);
+
+//tributacao
+$router->create("GET", "/tributacoes", [$tributacaoController, 'index'], $auth);
+$router->create("POST", "/tributacoes/cadastro", [$tributacaoController, 'store'], $auth);
+$router->create("POST", "/tributacoes/{uuid}/deletar", [$tributacaoController, 'destroy'], $auth);
 
 //formas-de-pagamentos
 $router->create("GET", "/pagamentos", [$pagamentoController, 'index'], $auth);
@@ -136,5 +147,17 @@ $router->create("POST", "/clientes/cadastro", [$clienteController, 'store'], $au
 $router->create("GET", "/clientes/{uuid}/editar", [$clienteController, 'edit'], $auth);
 $router->create("POST", "/clientes/{uuid}/editar", [$clienteController, 'update'], $auth);
 $router->create("POST", "/clientes/{uuid}/deletar", [$clienteController, 'destroy'], $auth);
+
+//grupo-produtos
+$router->create("GET", "/grupos", [$grupoController, 'index'], $auth);
+$router->create("GET", "/grupos/cadastro", [$grupoController, 'create'], $auth);
+$router->create("POST", "/grupos/cadastro", [$grupoController, 'store'], $auth);
+$router->create("GET", "/grupos/{uuid}/editar", [$grupoController, 'edit'], $auth);
+$router->create("POST", "/grupos/{uuid}/editar", [$grupoController, 'update'], $auth);
+$router->create("POST", "/grupos/{uuid}/deletar", [$grupoController, 'destroy'], $auth);
+
+//nota-fiscal
+$router->create("GET", "/gerar-xml", [$notaFiscalController, 'generateXml'], $auth);
+$router->create("GET", "/transmitir-nfe", [$notaFiscalController, 'transmitNFe'], $auth);
 
 return $router;

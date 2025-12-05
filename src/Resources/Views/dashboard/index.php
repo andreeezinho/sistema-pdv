@@ -109,13 +109,13 @@
                     <thead class="text-xs text-white uppercase bg-gray-800">
                         <tr>
                             <th scope="col" class="px-6 py-3">
-                                Nome
+                                N°
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Código
+                                Vendedor
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Tipo
+                                Total
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Troco
@@ -132,10 +132,10 @@
                                     <?= $venda->id ?>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?= $venda->desconto ?>
+                                    <?= $venda->usuario ?>
                                 </td>
                                 <td class="px-6 py-4">
-                                    R$ <?= number_format($venda->preco ?? 0,2,",",".") ?>
+                                    R$ <?= number_format($venda->total ?? 0,2,",",".") ?>
                                 </td>
                                 <td class="px-6 py-4">
                                     R$ <?= number_format($venda->troco ?? 0,2,",",".") ?>
@@ -211,68 +211,34 @@
 
                     <div class="bg-neutral-50 border border-gray-300 max-w-sm w-full h-full max-h-[380px] rounded-lg shadow-sm md:px-6 md:py-2 shadow shadow-lg mx-auto overflow-y-scroll">
                         <ul class="max-w-md divide-y divide-gray-200">
-                            <li class="py-3 sm:pb-4">
-                                <div class="flex items-center space-x-4 rtl:space-x-reverse">
-                                    <div class="shrink-0">
-                                        <img class="w-8 h-8 rounded-full" src="/public/img/user/icons/default.png" alt="Neil image">
+                            <?php
+                                if(count($usuarios_online) > 0){
+                                    foreach($usuarios_online as $user){
+                            ?>
+                                <li class="py-3 sm:pb-4">
+                                    <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                                        <div class="shrink-0">
+                                            <img class="w-8 h-8 rounded-full" src="/public/img/user/icons/<?= $user->icone ?>" alt="User icone">
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-medium text-gray-900 truncate">
+                                                <?= $user->nome ?>
+                                            </p>
+                                            <p class="text-sm text-gray-500 truncate">
+                                                <?= (!is_null($user->situacao)) ? ucwords($user->situacao) : null ?>
+                                            </p>
+                                        </div>
+                                        <div class="inline-flex items-center text-base font-semibold text-<?= $user->online == 1 ? "green" : "gray" ?>-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 mx-auto">
+                                                <path fill-rule="evenodd" d="M4.5 7.5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3v-9Z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
                                     </div>
-                                    <div class="flex-1 min-w-0">
-                                        <p class="text-sm font-medium text-gray-900 truncate">
-                                        André Adm
-                                        </p>
-                                        <p class="text-sm text-gray-500 truncate">
-                                        Em Serviço
-                                        </p>
-                                    </div>
-                                    <div class="inline-flex items-center text-base font-semibold text-green-500">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 mx-auto">
-                                            <path fill-rule="evenodd" d="M4.5 7.5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3v-9Z" clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="py-3 sm:pb-4">
-                                <div class="flex items-center space-x-4 rtl:space-x-reverse">
-                                    <div class="shrink-0">
-                                        <img class="w-8 h-8 rounded-full" src="/public/img/user/icons/default.png" alt="Neil image">
-                                    </div>
-                                    <div class="flex-1 min-w-0">
-                                        <p class="text-sm font-medium text-gray-900 truncate">
-                                        Maria Luiza
-                                        </p>
-                                        <p class="text-sm text-gray-500 truncate">
-                                        Banheiro
-                                        </p>
-                                    </div>
-                                    <div class="inline-flex items-center text-base font-semibold text-gray-500">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 mx-auto">
-                                            <path fill-rule="evenodd" d="M4.5 7.5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3v-9Z" clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="py-3 sm:pb-4">
-                                <div class="flex items-center space-x-4 rtl:space-x-reverse">
-                                    <div class="shrink-0">
-                                        <img class="w-8 h-8 rounded-full" src="/public/img/user/icons/default.png" alt="Neil image">
-                                    </div>
-                                    <div class="flex-1 min-w-0">
-                                        <p class="text-sm font-medium text-gray-900 truncate">
-                                        Poliana Pimentel
-                                        </p>
-                                        <p class="text-sm text-gray-500 truncate">
-                                        Em Serviço
-                                        </p>
-                                    </div>
-                                    <div class="inline-flex items-center text-base font-semibold text-green-500">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 mx-auto">
-                                            <path fill-rule="evenodd" d="M4.5 7.5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3v-9Z" clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
+                            <?php
+                                    }
+                                }
+                            ?>
                         </ul>
 
                     </div>

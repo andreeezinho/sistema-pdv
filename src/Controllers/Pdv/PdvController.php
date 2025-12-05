@@ -105,6 +105,12 @@ class PdvController extends Controller {
             return $this->router->redirect('pdv');
         }
 
+        $allProductsInSale = $this->vendaProdutoRepository->allProductsOnSale($pdv->id);
+
+        if(empty($allProductsInSale)){
+            $this->vendaRepository->updateDate(date("Y-m-d H:i:s"), $pdv->id);
+        }
+
         $addProduct = $this->vendaProdutoRepository->create($data, $pdv->id, $produto->id);
 
         if(!$addProduct){

@@ -23,19 +23,27 @@ class ProdutoRepository implements IProduto {
     }
 
     public function all(array $params = []){
-        $sql = "SELECT * FROM " . self::TABLE;
+        $sql = "SELECT p.*, g.nome AS nome_grupo FROM " . self::TABLE . " p
+            JOIN
+                grupo_produto g ON grupo_produto_id = g.id
+        ";
     
         $conditions = [];
         $bindings = [];
 
         if(isset($params['nome_codigo']) && !empty($params['nome_codigo'])){
-            $conditions[] = "nome LIKE :nome_codigo OR codigo LIKE :nome_codigo";
+            $conditions[] = "p.nome LIKE :nome_codigo OR p.codigo LIKE :nome_codigo";
             $bindings[':nome_codigo'] = "%" . $params['nome_codigo'] . "%";
         }
 
         if(isset($params['tipo']) && $params['tipo'] != ""){
             $conditions[] = "tipo = :tipo";
             $bindings[':tipo'] = $params['tipo'];
+        }
+
+        if(isset($params['grupo']) && $params['grupo'] != ""){
+            $conditions[] = "nome_grupo = :grupo";
+            $bindings[':grupo'] = $params['grupo'];
         }
     
         if(isset($params['ativo']) && $params['ativo'] != ""){
@@ -68,6 +76,18 @@ class ProdutoRepository implements IProduto {
                     preco = :preco,
                     estoque = :estoque,
                     tipo = :tipo,
+                    grupo_produto_id = :grupo_produto_id,
+                    entrada_produto_id = :entrada_produto_id,
+                    saida_produto_id = :saida_produto_id,
+                    icms_id = :icms_id,
+                    ipi_id = :ipi_id,
+                    pis_id = :pis_id,
+                    cofins_id = :cofins_id,
+                    origem_id = :origem_id,
+                    cfop = :cfop,
+                    ncm = :ncm,
+                    cest = :cest,
+                    nat_receita = :nat_receita,
                     ativo = :ativo
             ";
 
@@ -80,6 +100,18 @@ class ProdutoRepository implements IProduto {
                 ':preco' => $produto->preco,
                 ':estoque' => $produto->estoque,
                 ':tipo' => $produto->tipo,
+                ':grupo_produto_id' => $produto->grupo_produto_id,
+                ':entrada_produto_id' => $produto->entrada_produto_id,
+                ':saida_produto_id' => $produto->saida_produto_id,
+                ':icms_id' => $produto->icms_id,
+                ':ipi_id' => $produto->ipi_id,
+                ':pis_id' => $produto->pis_id,
+                ':cofins_id' => $produto->cofins_id,
+                ':origem_id' => $produto->origem_id,
+                ':cfop' => 5.102,
+                ':ncm' => $produto->ncm,
+                ':cest' => $produto->cest,
+                ':nat_receita' => $produto->nat_receita,
                 ':ativo' => $produto->ativo ?? 1
             ]);
 
@@ -107,6 +139,18 @@ class ProdutoRepository implements IProduto {
                     preco = :preco,
                     estoque = :estoque,
                     tipo = :tipo,
+                    grupo_produto_id = :grupo_produto_id,
+                    entrada_produto_id = :entrada_produto_id,
+                    saida_produto_id = :saida_produto_id,
+                    icms_id = :icms_id,
+                    ipi_id = :ipi_id,
+                    pis_id = :pis_id,
+                    cofins_id = :cofins_id,
+                    origem_id = :origem_id,
+                    cfop = :cfop,
+                    ncm = :ncm,
+                    cest = :cest,
+                    nat_receita = :nat_receita,
                     ativo = :ativo
                 WHERE 
                     id =:id
@@ -120,6 +164,18 @@ class ProdutoRepository implements IProduto {
                 ':preco' => $produto->preco,
                 ':estoque' => $produto->estoque,
                 ':tipo' => $produto->tipo,
+                ':grupo_produto_id' => $produto->grupo_produto_id,
+                ':entrada_produto_id' => $produto->entrada_produto_id,
+                ':saida_produto_id' => $produto->saida_produto_id,
+                ':icms_id' => $produto->icms_id,
+                ':ipi_id' => $produto->ipi_id,
+                ':pis_id' => $produto->pis_id,
+                ':cofins_id' => $produto->cofins_id,
+                ':origem_id' => $produto->origem_id,
+                ':cfop' => 5.102,
+                ':ncm' => $produto->ncm,
+                ':cest' => $produto->cest,
+                ':nat_receita' => $produto->nat_receita,
                 ':ativo' => $produto->ativo,
                 ':id' => $id
             ]);
@@ -131,7 +187,7 @@ class ProdutoRepository implements IProduto {
             return $this->findById($id);
 
         }catch(\Throwable $th){
-            return null;
+            return $th;
         }finally{
             Database::getInstance()->closeConnection();
         }

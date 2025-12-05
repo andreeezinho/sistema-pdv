@@ -4,3 +4,4 @@ src/env/app.php
 .phpunit.cache
 vendor
 vendor/**
+src/Services/NFe/certificado.pfx
