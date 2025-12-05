@@ -109,13 +109,13 @@
                     <thead class="text-xs text-white uppercase bg-gray-800">
                         <tr>
                             <th scope="col" class="px-6 py-3">
-                                Nome
+                                N°
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Código
+                                Vendedor
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Tipo
+                                Total
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Troco
@@ -132,10 +132,10 @@
                                     <?= $venda->id ?>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?= $venda->desconto ?>
+                                    <?= $venda->usuario ?>
                                 </td>
                                 <td class="px-6 py-4">
-                                    R$ <?= number_format($venda->preco ?? 0,2,",",".") ?>
+                                    R$ <?= number_format($venda->total ?? 0,2,",",".") ?>
                                 </td>
                                 <td class="px-6 py-4">
                                     R$ <?= number_format($venda->troco ?? 0,2,",",".") ?>

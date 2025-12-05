@@ -59,15 +59,18 @@
                   </svg>
             </button>
             <ul id="dropdown-fiscal" class="hidden py-2 space-y-2">
-                  <li>
-                     <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Relatórios</a>
-                  </li>
-                  <li>
-                     <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Entradas</a>
-                  </li>
-                  <li>
-                     <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Saídas</a>
-                  </li>
+                <li>
+                    <a href="/tributacoes" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Tributação</a>
+                </li>
+                <li>
+                 <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Relatórios</a>
+                </li>
+                <li>
+                 <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Entradas</a>
+                </li>
+                <li>
+                 <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Saídas</a>
+                </li>
             </ul>
          </li>
          <li>
@@ -88,9 +91,6 @@
                   </li>
                   <li>
                      <a href="/grupos" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Grupo de Produtos</a>
-                  </li>
-                  <li>
-                     <a href="/tributacoes" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Tributação</a>
                   </li>
             </ul>
          </li>
