@@ -32,6 +32,8 @@ use App\Interfaces\Embalagem\IEmbalagem;
 use App\Repositories\Embalagem\EmbalagemRepository;
 use App\Interfaces\Origem\IOrigem;
 use App\Repositories\Origem\OrigemRepository;
+use App\Interfaces\Fornecedor\IFornecedor;
+use App\Repositories\Fornecedor\FornecedorRepository;
 
 class DependencyProvider {
 
@@ -131,6 +133,12 @@ class DependencyProvider {
             ->set(
                 IOrigem::class,
                 new OrigemRepository()
+            );
+
+        $this->container
+            ->set(
+                IFornecedor::class,
+                new FornecedorRepository()
             );
 
     }
