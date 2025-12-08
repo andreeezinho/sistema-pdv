@@ -8,36 +8,6 @@ function readImage(){
     }
 }
 
-async function searchAddress(){
-    var cep = document.getElementById("cep").value
-    var endereco
-
-    try{
-        const response = await fetch("https://viacep.com.br/ws/"+cep+"/json/", {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-              }
-        })
-
-        endereco = await response.json()
-    }catch(error){
-        console.log("Requisição não encontrada")
-    }
-
-    if(endereco != null){
-        insertAddressValues(endereco)
-    }
-}
-
-function insertAddressValues(endereco){
-    console.log(endereco)
-    document.getElementById("rua").value=(endereco.logradouro) ?? null
-    document.getElementById("cidade").value=(endereco.localidade) ?? null
-    document.getElementById("estado").value=(endereco.estado) ?? null
-}
-
-
 if(document.getElementById("cpf")){
     function maskCpf(i, max){
         var v = i.value;
@@ -93,10 +63,6 @@ if(document.getElementById("password-eye")){
 
 if(document.getElementById("icone")){
     document.getElementById("icone").addEventListener("change", readImage, false);
-}
-
-if(document.getElementById("cep")){
-    document.getElementById("cep").addEventListener("blur", searchAddress, false);
 }
 
 if(document.getElementById("password-eye")){

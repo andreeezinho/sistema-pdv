@@ -35,7 +35,7 @@ class FornecedorController extends Controller {
         $data = $request->getBodyParams();
 
         $create = $this->fornecedorRepository->create($data);
-
+        
         if(is_null($create)){
             return $this->router->view('fornecedor/create', [
                 'erro' => 'Não foi possível cadastrar fornecedor'

@@ -94,7 +94,7 @@ class FornecedorRepository implements IFornecedor {
             return $this->findByUuid($fornecedor->uuid);
 
         }catch(\Throwable $th){
-            return null;
+            return $th;
         }finally{
             Database::getInstance()->closeConnection();
         }
