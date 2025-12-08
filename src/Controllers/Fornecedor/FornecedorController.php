@@ -15,11 +15,35 @@ class FornecedorController extends Controller {
         $this->fornecedorRepository = $fornecedorRepository;
     }
 
-    public function index(Request $request){}
+    public function index(Request $request){
+        $params = $request->getQueryParams();
 
-    public function create(Request $request){}
+        $fornecedores = $this->fornecedorRepository->all($params);
 
-    public function store(Request $request){}
+        return $this->router->view('fornecedor/index', [
+            'fornecedores' => $fornecedores,
+            'nome_razao' => $params['nome_razao'] ?? null,
+            'ativo' => $params['ativo'] ?? null
+        ]);
+    }
+
+    public function create(Request $request){
+        return $this->router->view('fornecedor/create', []);
+    }
+
+    public function store(Request $request){
+        $data = $request->getBodyParams();
+
+        $create = $this->fornecedorRepository->create($data);
+
+        if(is_null($create)){
+            return $this->router->view('fornecedor/create', [
+                'erro' => 'Não foi possível cadastrar fornecedor'
+            ]);
+        }
+
+        return $this->router->redirect('fornecedores');
+    }
 
     public function edit(Request $request, $uuid){}
 

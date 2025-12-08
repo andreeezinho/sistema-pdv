@@ -23,7 +23,9 @@ class FornecedorRepository implements IFornecedor {
     }
 
     public function all(array $params = []){
-        $sql = "SELECT f.*, e.* FROM " . self::TABLE . " f
+        $sql = "SELECT f.*, 
+            e.id as end_id, e.uuid as end_uuid, e.cep as cep, e.uf as uf, e.codigo as codigo, e.cidade as cidade, e.rua as rua, e.bairro as bairro, e.numero as numero, e.complemento as complemento
+            FROM " . self::TABLE . " f
             JOIN
                 enderecos e 
             ON 
@@ -33,9 +35,9 @@ class FornecedorRepository implements IFornecedor {
         $conditions = [];
         $bindings = [];
     
-        if(isset($params['nome_fantasia']) && !empty($params['nome_fantasia'])){
-            $conditions[] = "nome_fantasia LIKE :nome_fantasia";
-            $bindings[':nome_fantasia'] = "%" . $params['nome_fantasia'] . "%" ;
+        if(isset($params['nome_razao']) && !empty($params['nome_razao'])){
+            $conditions[] = "nome_fantasia LIKE :nome_razao";
+            $bindings[':nome_razao'] = "%" . $params['nome_razao'] . "%" ;
         }
     
         if(isset($params['ativo']) && $params['ativo'] != ""){

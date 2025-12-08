@@ -16,6 +16,16 @@ class Fornecedor {
     public $ie_rg;
     public $num_serie_nfe;
     public $enderecos_id;
+    public $end_id;
+    public $end_uuid;
+    public $cep;
+    public $uf;
+    public $codigo;
+    public $cidade;
+    public $rua;
+    public $bairro;
+    public $numero;
+    public $complemento;
     public $ativo;
     public $created_at;
     public $updated_at;
