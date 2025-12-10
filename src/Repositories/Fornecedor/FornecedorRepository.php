@@ -111,7 +111,6 @@ class FornecedorRepository implements IFornecedor {
                     documento = :documento,
                     ie_rg = :ie_rg,
                     num_serie_nfe = :num_serie_nfe,
-                    enderecos_id = :enderecos_id,
                     ativo = :ativo
                 WHERE 
                     id =:id
@@ -125,7 +124,6 @@ class FornecedorRepository implements IFornecedor {
                 ':documento' => $fornecedor->documento,
                 ':ie_rg' => $fornecedor->ie_rg,
                 ':num_serie_nfe' => $fornecedor->num_serie_nfe,
-                ':enderecos_id' => $fornecedor->enderecos_id,
                 ':ativo' => $fornecedor->ativo ?? 1,
                 ':id' => $id
             ]);

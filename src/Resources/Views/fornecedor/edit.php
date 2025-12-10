@@ -37,7 +37,7 @@
 
             <div class="md:w-2/3 mt-5 mx-auto">
                 <form action="/fornecedores/<?= $fornecedor->uuid ?>/editar" method="POST">
-                    <div class="grid grid-cols-1 gap-2">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-2">
                         <?php 
                             include_once('form.php');
                         ?>

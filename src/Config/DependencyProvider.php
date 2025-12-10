@@ -34,6 +34,8 @@ use App\Interfaces\Origem\IOrigem;
 use App\Repositories\Origem\OrigemRepository;
 use App\Interfaces\Fornecedor\IFornecedor;
 use App\Repositories\Fornecedor\FornecedorRepository;
+use App\Interfaces\Endereco\IEndereco;
+use App\Repositories\Endereco\EnderecoRepository;
 
 class DependencyProvider {
 
@@ -140,6 +142,13 @@ class DependencyProvider {
                 IFornecedor::class,
                 new FornecedorRepository()
             );
+
+        $this->container
+            ->set(
+                IEndereco::class,
+                new EnderecoRepository()
+            );
+
 
     }
 

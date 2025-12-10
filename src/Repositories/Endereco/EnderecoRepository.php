@@ -10,7 +10,7 @@ use App\Repositories\Traits\Find;
 class EnderecoRepository implements IEndereco {
 
     const CLASS_NAME = Endereco::class;
-    const TABLE = 'enederecos';
+    const TABLE = 'enderecos';
 
     use Find;
 
