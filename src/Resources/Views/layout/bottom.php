@@ -21,7 +21,7 @@
                 dataType: "JSON",
                 success: function(response){
                     $('#uf').val(response.uf);
-                    $('#codigo').val(response.ibge);
+                    $('#ibge').val(response.ibge);
                     $('#cidade').val(response.localidade);
                     $('#rua').val(response.logradouro);
                     $('#bairro').val(response.bairro);
@@ -42,6 +42,7 @@
                     $('#razao_social').val(response.razao_social);
                     $('#nome_fantasia').val(response.nome_fanntasia);
                     $('#ie_rg').val(response.estabelecimento.inscricoes_estaduais[0].inscricao_estadual);
+                    $('#codigo').val(response.estabelecimento.estado.ibge_id);
                 }
             });
         });

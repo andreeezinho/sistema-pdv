@@ -49,8 +49,13 @@
 </div>
 
 <div class="mt-4 col-span-1">
-    <label for="codigo" class="block mb-1 text-sm font-medium text-gray-900">Código</label>
+    <label for="ibge" class="block mb-1 text-sm font-medium text-gray-900">Código UF</label>
     <input type="number" name="codigo" id="codigo" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $fornecedor->codigo ?? null ?>" />
+</div>
+
+<div class="mt-4 col-span-1">
+    <label for="ibge" class="block mb-1 text-sm font-medium text-gray-900">Código IBGE</label>
+    <input type="number" name="ibge" id="ibge" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required value="<?= $fornecedor->ibge ?? null ?>" />
 </div>
 
 <div class="mt-4 col-span-1">

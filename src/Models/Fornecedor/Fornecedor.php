@@ -21,6 +21,7 @@ class Fornecedor {
     public $cep;
     public $uf;
     public $codigo;
+    public $ibge;
     public $cidade;
     public $rua;
     public $bairro;
