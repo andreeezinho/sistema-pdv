@@ -25,7 +25,9 @@ class ProdutoRepository implements IProduto {
     public function all(array $params = []){
         $sql = "SELECT p.*, g.nome AS nome_grupo FROM " . self::TABLE . " p
             JOIN
-                grupo_produto g ON grupo_produto_id = g.id
+                grupo_produto g 
+            ON 
+                grupo_produto_id = g.id
         ";
     
         $conditions = [];
@@ -236,7 +238,7 @@ class ProdutoRepository implements IProduto {
 
             return $update;
 
-        }catch(\Thorwable $th){
+        }catch(\Throwable $th){
             return null;
         }finally{
             Database::getInstance()->closeConnection();

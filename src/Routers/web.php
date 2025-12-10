@@ -19,6 +19,7 @@ use App\Controllers\Cliente\ClienteController;
 use App\Controllers\Grupo\GrupoController;
 use App\Controllers\NotaFiscal\NotaFiscalController;
 use App\Controllers\Tributacao\TributacaoController;
+use App\Controllers\Fornecedor\FornecedorController;
 
 $router = new Router();
 $auth = new Auth();
@@ -42,6 +43,7 @@ $clienteController = $container->get(ClienteController::class);
 $grupoController = $container->get(GrupoController::class);
 $notaFiscalController = $container->get(NotaFiscalController::class);
 $tributacaoController = $container->get(TributacaoController::class);
+$fornecedorController = $container->get(FornecedorController::class);
 
 //rotas
 
@@ -155,6 +157,14 @@ $router->create("POST", "/grupos/cadastro", [$grupoController, 'store'], $auth);
 $router->create("GET", "/grupos/{uuid}/editar", [$grupoController, 'edit'], $auth);
 $router->create("POST", "/grupos/{uuid}/editar", [$grupoController, 'update'], $auth);
 $router->create("POST", "/grupos/{uuid}/deletar", [$grupoController, 'destroy'], $auth);
+
+//fornecedores
+$router->create("GET", "/fornecedores", [$fornecedorController, 'index'], $auth);
+$router->create("GET", "/fornecedores/cadastro", [$fornecedorController, 'create'], $auth);
+$router->create("POST", "/fornecedores/cadastro", [$fornecedorController, 'store'], $auth);
+$router->create("GET", "/fornecedores/{uuid}/editar", [$fornecedorController, 'edit'], $auth);
+$router->create("POST", "/fornecedores/{uuid}/editar", [$fornecedorController, 'update'], $auth);
+$router->create("POST", "/fornecedores/{uuid}/deletar", [$fornecedorController, 'destroy'], $auth);
 
 //nota-fiscal
 $router->create("GET", "/gerar-xml", [$notaFiscalController, 'generateXml'], $auth);

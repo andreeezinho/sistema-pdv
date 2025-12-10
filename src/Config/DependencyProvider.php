@@ -32,6 +32,10 @@ use App\Interfaces\Embalagem\IEmbalagem;
 use App\Repositories\Embalagem\EmbalagemRepository;
 use App\Interfaces\Origem\IOrigem;
 use App\Repositories\Origem\OrigemRepository;
+use App\Interfaces\Fornecedor\IFornecedor;
+use App\Repositories\Fornecedor\FornecedorRepository;
+use App\Interfaces\Endereco\IEndereco;
+use App\Repositories\Endereco\EnderecoRepository;
 
 class DependencyProvider {
 
@@ -132,6 +136,19 @@ class DependencyProvider {
                 IOrigem::class,
                 new OrigemRepository()
             );
+
+        $this->container
+            ->set(
+                IFornecedor::class,
+                new FornecedorRepository()
+            );
+
+        $this->container
+            ->set(
+                IEndereco::class,
+                new EnderecoRepository()
+            );
+
 
     }
 
