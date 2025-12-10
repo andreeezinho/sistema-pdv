@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Repositories\Fornecedor;
+namespace App\Repositories\Endereco;
 
 use App\Config\Database;
-use App\Interfaces\Fornecedor\IFornecedor;
-use App\Models\Fornecedor\Fornecedor;
+use App\Interfaces\Endereco\IEndereco;
+use App\Models\Endereco\Endereco;
 use App\Repositories\Traits\Find;
 
-class FornecedorRepository implements IFornecedor {
+class EnderecoRepository implements IEndereco {
 
-    const CLASS_NAME = Fornecedor::class;
-    const TABLE = 'emitente';
+    const CLASS_NAME = Endereco::class;
+    const TABLE = 'enederecos';
 
     use Find;
 
@@ -19,25 +19,18 @@ class FornecedorRepository implements IFornecedor {
 
     public function __construct(){
         $this->conn = Database::getInstance()->getConnection();
-        $this->model = new Fornecedor();
+        $this->model = new Endereco();
     }
 
     public function all(array $params = []){
-        $sql = "SELECT f.*, 
-            e.id as end_id, e.uuid as end_uuid, e.cep as cep, e.uf as uf, e.codigo as codigo, e.ibge as ibge, e.cidade as cidade, e.rua as rua, e.bairro as bairro, e.numero as numero, e.complemento as complemento
-            FROM " . self::TABLE . " f
-            JOIN
-                enderecos e 
-            ON 
-                enderecos_id = e.id
-        ";
+        $sql = "SELECT * FROM " . self::TABLE;
     
         $conditions = [];
         $bindings = [];
     
-        if(isset($params['nome_razao']) && !empty($params['nome_razao'])){
-            $conditions[] = "nome_fantasia LIKE :nome_razao";
-            $bindings[':nome_razao'] = "%" . $params['nome_razao'] . "%" ;
+        if(isset($params['nome']) && !empty($params['nome'])){
+            $conditions[] = "nome LIKE :nome";
+            $bindings[':nome'] = "%" . $params['nome'] . "%" ;
         }
     
         if(isset($params['ativo']) && $params['ativo'] != ""){
@@ -59,59 +52,68 @@ class FornecedorRepository implements IFornecedor {
     }
 
     public function create(array $data){
-        $fornecedor = $this->model->create($data);
+        $endereco = $this->model->create($data);
         
         try{
             $sql = "INSERT INTO " . self::TABLE . "
                 SET
                     uuid = :uuid,
-                    razao_social = :razao_social,
-                    nome_fantasia = :nome_fantasia,
-                    documento = :documento,
-                    ie_rg = :ie_rg,
-                    num_serie_nfe = :num_serie_nfe,
-                    enderecos_id = :enderecos_id,
+                    cep = :cep,
+                    uf = :uf,
+                    codigo = :codigo,
+                    ibge = :ibge,
+                    cidade = :cidade,
+                    rua = :rua,
+                    bairro = :bairro,
+                    numero = :numero,
+                    complemento = :complemento,
                     ativo = :ativo
             ";
 
             $stmt = $this->conn->prepare($sql);
 
             $create = $stmt->execute([
-                ':uuid' => $fornecedor->uuid,
-                ':razao_social' => $fornecedor->razao_social,
-                ':nome_fantasia' => $fornecedor->nome_fantasia,
-                ':documento' => $fornecedor->documento,
-                ':ie_rg' => $fornecedor->ie_rg,
-                ':num_serie_nfe' => $fornecedor->num_serie_nfe,
-                ':enderecos_id' => $fornecedor->enderecos_id,
-                ':ativo' => $fornecedor->ativo ?? 1
+                ':uuid' => $endereco->uuid,
+                ':cep' => $endereco->cep,
+                ':uf' => $endereco->uf,
+                ':codigo' => $endereco->codigo,
+                ':ibge' => $endereco->ibge,
+                ':cidade' => $endereco->cidade,
+                ':rua' => $endereco->rua,
+                ':bairro' => $endereco->bairro,
+                ':numero' => $endereco->numero,
+                ':complemento' => $endereco->complemento,
+                ':ativo' => $endereco->ativo ?? 1
             ]);
 
             if(!$create){
                 return null;
             }
 
-            return $this->findByUuid($fornecedor->uuid);
+            return $this->findByUuid($endereco->uuid);
 
         }catch(\Throwable $th){
-            return $th;
+            return null;
         }finally{
             Database::getInstance()->closeConnection();
         }
     }
 
     public function update(array $data, int $id){
-        $fornecedor = $this->model->create($data);
+        $endereco = $this->model->create($data);
 
         try{
             $sql = "UPDATE " . self::TABLE . "
                 SET
-                    razao_social = :razao_social,
-                    nome_fantasia = :nome_fantasia,
-                    documento = :documento,
-                    ie_rg = :ie_rg,
-                    num_serie_nfe = :num_serie_nfe,
-                    enderecos_id = :enderecos_id,
+                    cep = :cep,
+                    uf = :uf,
+                    codigo = :codigo,
+                    ibge = :ibge,
+                    cidade = :cidade,
+                    rua = :rua,
+                    bairro = :bairro,
+                    numero = :numero,
+                    complemento = :complemento,
                     ativo = :ativo
                 WHERE 
                     id =:id
@@ -120,13 +122,16 @@ class FornecedorRepository implements IFornecedor {
             $stmt = $this->conn->prepare($sql);
 
             $update = $stmt->execute([
-                ':razao_social' => $fornecedor->razao_social,
-                ':nome_fantasia' => $fornecedor->nome_fantasia,
-                ':documento' => $fornecedor->documento,
-                ':ie_rg' => $fornecedor->ie_rg,
-                ':num_serie_nfe' => $fornecedor->num_serie_nfe,
-                ':enderecos_id' => $fornecedor->enderecos_id,
-                ':ativo' => $fornecedor->ativo ?? 1,
+                ':cep' => $endereco->cep,
+                ':uf' => $endereco->uf,
+                ':codigo' => $endereco->codigo,
+                ':ibge' => $endereco->ibge,
+                ':cidade' => $endereco->cidade,
+                ':rua' => $endereco->rua,
+                ':bairro' => $endereco->bairro,
+                ':numero' => $endereco->numero,
+                ':complemento' => $endereco->complemento,
+                ':ativo' => $endereco->ativo,
                 ':id' => $id
             ]);
 
