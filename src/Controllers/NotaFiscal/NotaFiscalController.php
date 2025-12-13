@@ -6,15 +6,18 @@ use App\Request\Request;
 use App\Controllers\Controller;
 use App\Services\NFe\NFeService;
 use App\Interfaces\Cliente\ICliente;
+use App\Interfaces\Fornecedor\IFornecedor;
 use App\Interfaces\Venda\IVenda;
 
 class NotaFiscalController extends Controller {
     protected $clienteRepository;
+    protected $fornecedorRepository;
     protected $vendaRepository;
 
-    public function __construct(ICliente $clienteRepository, IVenda $vendaRepository){
+    public function __construct(ICliente $clienteRepository, IVenda $vendaRepository, IFornecedor $fornecedorRepository){
         parent::__construct();
         $this->clienteRepository = $clienteRepository;
+        $this->fornecedorRepository = $fornecedorRepository;
         $this->vendaRepository = $vendaRepository;
     }
 

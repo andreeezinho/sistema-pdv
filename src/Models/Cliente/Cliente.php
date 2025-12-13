@@ -12,6 +12,9 @@ class Cliente {
     public $uuid;
     public $nome;
     public $email;
+    public $ie_rg;
+    public $contribuinte;
+    public $enderecos_id;
     public $documento;
     public $telefone;
     public $endereco;
