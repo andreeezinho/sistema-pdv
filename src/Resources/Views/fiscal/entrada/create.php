@@ -63,7 +63,7 @@
         if($("#searchNF").length){
             $("#searchNF").on('click', function(){
                 var fileInput = document.getElementById("file");
-                var file = fileInput.files[0]; // Pega o primeiro arquivo selecionado
+                var file = fileInput.files[0];
                 console.log(file);
                 if (!file) {
                     alert('Por favor, selecione um arquivo.');
@@ -77,12 +77,27 @@
                     type: "POST",
                     url: "/fiscal/entradas/search",
                     data: formData,
-                    dataType: 'json',
+                    dataType: 'JSON',
                     processData: false,
                     contentType: false,
                     success: function(response) {
-                        console.log(response.infNFe);
-                        // console.log(response.infNFe.ide.cUF[0]);
+                        $("#nNF").val(response.infNFe.ide.nNF[0]);
+                        $("#cNF").val(response.infNFe.ide.cNF[0]);
+                        $("#dhEmi").val(response.infNFe.ide.dhEmi[0]);
+
+                        $("#vBC").val(response.infNFe.total.ICMSTot.vBC[0]);
+                        $("#vICMS").val(response.infNFe.total.ICMSTot.vICMS[0]);
+                        $("#vBCST").val(response.infNFe.total.ICMSTot.vBCST[0]);
+                        $("#vST").val(response.infNFe.total.ICMSTot.vST[0]);
+                        $("#vFCP").val(response.infNFe.total.ICMSTot.vFCP[0]);
+                        $("#vFCPST").val(response.infNFe.total.ICMSTot.vFCP[0]);
+                        $("#vProd").val(response.infNFe.total.ICMSTot.vProd[0]);
+                        $("#vFrete").val(response.infNFe.total.ICMSTot.vFrete[0]);
+                        $("#vSeg").val(response.infNFe.total.ICMSTot.vSeg[0]);
+                        $("#vDesc").val(response.infNFe.total.ICMSTot.vDesc[0]);
+                        $("#vIPI").val(response.infNFe.total.ICMSTot.vIPI[0]);
+                        $("#vCOFINS").val(response.infNFe.total.ICMSTot.vCOFINS[0]);
+                        $("#vNF").val(response.infNFe.total.ICMSTot.vNF[0]);
                     },
                     error: function(error){
                         console.error('Erro na requisição:', error);
