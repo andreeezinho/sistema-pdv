@@ -240,6 +240,78 @@ class NFeService {
 		$std->pIPI = 5.00;
 		$std->vIPI = number_format($std->vBC * ($std->pIPI / 100), 2, '.', '');;
 		$nfe->tagIPI($std);
+		///
+
+		$stdProd = new \stdClass();
+		$stdProd->item = 789001273;
+
+		$cod = 'SEM GTIN';
+
+		$stdProd->cEAN = $cod;
+		$stdProd->cEANTrib = $cod;
+		$stdProd->cProd = 31;
+		$stdProd->xProd = 'Outro produto de teste';
+
+		$ncm = '1902.19.00';
+		$ncm = str_replace(".", "", $ncm);
+		$stdProd->NCM = $ncm;
+
+		$stdProd->CFOP = 5405;
+
+		$stdProd->uCom = 'UN';
+		$stdProd->qCom = '10.000';
+		$stdProd->vUnCom = '12.5000';
+		$stdProd->vProd = '20.00';
+		$stdProd->uTrib = 'UN';
+		$stdProd->qTrib = '6.000';
+		$stdProd->vUnTrib = '13.000';
+		$stdProd->indTot = 1;
+		$prod = $nfe->tagprod($stdProd);
+
+		$stdImposto = new \stdClass();
+		$stdImposto->item = 789001273;
+		$imposto = $nfe->tagimposto($stdImposto);
+
+		//ICMS
+		$stdICMS = new \stdClass();
+		$stdICMS->item = 789001273; 
+		$stdICMS->orig = 0;
+		$stdICMS->CSOSN = 101;
+		$stdICMS->modBC = 0;
+		$stdICMS->vBC = $stdProd->vProd;
+		$stdICMS->pICMS = '18.00';
+		$stdICMS->vICMS = $stdICMS->vBC * ($stdICMS->pICMS/100);
+		$stdICMS->pCredSN = '1.65';
+		$stdICMS->vCredICMSSN = '1.65';
+		$ICMS = $nfe->tagICMSSN($stdICMS);
+
+		//PIS
+		$stdPIS = new \stdClass();
+		$stdPIS->item = 789001273; 
+		$stdPIS->CST = '01';
+		$stdPIS->vBC = '100.00';
+		$stdPIS->pPIS = '21.50';
+		$stdPIS->vPIS = '1.65';
+		$PIS = $nfe->tagPIS($stdPIS);
+
+		//COFINS
+		$stdCOFINS = new \stdClass();
+		$stdCOFINS->item = 789001273; 
+		$stdCOFINS->CST = '01';
+		$stdCOFINS->vBC = 100.00;
+		$stdCOFINS->pCOFINS = 7.60;
+		$stdCOFINS->vCOFINS = number_format($stdCOFINS->vBC * ($stdCOFINS->pCOFINS / 100), 2, '.', '');
+		$COFINS = $nfe->tagCOFINS($stdCOFINS);
+
+		//IPI
+		$std = new \stdClass();
+		$std->item = 789001273; 
+		$std->cEnq = '999'; 
+		$std->CST = '50';
+		$std->vBC = 100.00;
+		$std->pIPI = 5.00;
+		$std->vIPI = number_format($std->vBC * ($std->pIPI / 100), 2, '.', '');;
+		$nfe->tagIPI($std);
 		///FIM DO FOREACH dos produtos
 
 

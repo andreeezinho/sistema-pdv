@@ -14,11 +14,22 @@ class XmlService {
         $result = [];
 
         foreach ($xml as $key => $value) {
-            $result[$key] = $value;
+            $convertedValue = ($value->count() > 0) ? $this->convertXml($value) : (string) $value;
 
-            if ($value->count() > 0) {
-                $result[$key] = $this->convertXml($value);
+            if (!isset($result[$key])) {
+                $result[$key] = $convertedValue;
+                continue;
             }
+
+            if (!is_array($result[$key]) || !array_is_list($result[$key])) {
+                $result[$key] = [$result[$key]];
+            }
+
+            $result[$key][] = $convertedValue;
+        }
+
+        foreach ($xml->attributes() as $attrKey => $attrValue) {
+            $result['@attributes'][$attrKey] = (string) $attrValue;
         }
 
         return $result;

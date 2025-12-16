@@ -81,23 +81,24 @@
                     processData: false,
                     contentType: false,
                     success: function(response) {
-                        $("#nNF").val(response.infNFe.ide.nNF[0]);
-                        $("#cNF").val(response.infNFe.ide.cNF[0]);
-                        $("#dhEmi").val(response.infNFe.ide.dhEmi[0]);
+                        console.log(response.infNFe);
+                        $("#nNF").val(response.infNFe.ide.nNF);
+                        $("#cNF").val(response.infNFe['@attributes'].Id);
+                        $("#dhEmi").val(response.infNFe.ide.dhEmi.substring(0, 10));
 
-                        $("#vBC").val(response.infNFe.total.ICMSTot.vBC[0]);
-                        $("#vICMS").val(response.infNFe.total.ICMSTot.vICMS[0]);
-                        $("#vBCST").val(response.infNFe.total.ICMSTot.vBCST[0]);
-                        $("#vST").val(response.infNFe.total.ICMSTot.vST[0]);
-                        $("#vFCP").val(response.infNFe.total.ICMSTot.vFCP[0]);
-                        $("#vFCPST").val(response.infNFe.total.ICMSTot.vFCP[0]);
-                        $("#vProd").val(response.infNFe.total.ICMSTot.vProd[0]);
-                        $("#vFrete").val(response.infNFe.total.ICMSTot.vFrete[0]);
-                        $("#vSeg").val(response.infNFe.total.ICMSTot.vSeg[0]);
-                        $("#vDesc").val(response.infNFe.total.ICMSTot.vDesc[0]);
-                        $("#vIPI").val(response.infNFe.total.ICMSTot.vIPI[0]);
-                        $("#vCOFINS").val(response.infNFe.total.ICMSTot.vCOFINS[0]);
-                        $("#vNF").val(response.infNFe.total.ICMSTot.vNF[0]);
+                        $("#vBC").val(response.infNFe.total.ICMSTot.vBC);
+                        $("#vICMS").val(response.infNFe.total.ICMSTot.vICMS);
+                        $("#vBCST").val(response.infNFe.total.ICMSTot.vBCST);
+                        $("#vST").val(response.infNFe.total.ICMSTot.vST);
+                        $("#vFCP").val(response.infNFe.total.ICMSTot.vFCP);
+                        $("#vFCPST").val(response.infNFe.total.ICMSTot.vFCP);
+                        $("#vProd").val(response.infNFe.total.ICMSTot.vProd);
+                        $("#vFrete").val(response.infNFe.total.ICMSTot.vFrete);
+                        $("#vSeg").val(response.infNFe.total.ICMSTot.vSeg);
+                        $("#vDesc").val(response.infNFe.total.ICMSTot.vDesc);
+                        $("#vIPI").val(response.infNFe.total.ICMSTot.vIPI);
+                        $("#vCOFINS").val(response.infNFe.total.ICMSTot.vCOFINS);
+                        $("#vNF").val(response.infNFe.total.ICMSTot.vNF);
                     },
                     error: function(error){
                         console.error('Erro na requisição:', error);

@@ -26,7 +26,7 @@
 
 <div class="mt-4 col-span-2">
     <label for="cNF" class="block mb-1 text-sm font-medium text-gray-900">Chave do Doc. Eletrônico</label>
-    <input type="number" name="cNF" id="cNF" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    <input type="text" name="cNF" id="cNF" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
 </div>
 
 <div class="mt-4">
