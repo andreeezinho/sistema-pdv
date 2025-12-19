@@ -64,15 +64,16 @@
             $("#searchNF").on('click', function(){
                 var fileInput = document.getElementById("file");
                 var file = fileInput.files[0];
-                console.log(file);
+
                 if (!file) {
-                    alert('Por favor, selecione um arquivo.');
                     return;
                 }
 
                 var formData = new FormData();
                 formData.append('file', file);
+
                 console.log('formData aqui: ' + formData);
+                
                 $.ajax({
                     type: "POST",
                     url: "/fiscal/entradas/search",
