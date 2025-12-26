@@ -1,4 +1,4 @@
-<div class="col-span-full border-1 border-b border-gray-800 pb-4">
+<div class="col-span-full border-1 border-b border-gray-300 pb-4">
     <h3 class="text-gray-800 text-2xl mt-3">Inserir NF</h3>
     <h3 class="text-gray-500 text-sm mt-1">Insira um arquivo .xml <b>ou</b> a chave de acesso da NF</h3>
 
@@ -9,8 +9,8 @@
         </div>
 
         <div class="mt-4 col-span-2">
-            <label for="nome" class="block mb-1 text-sm font-medium text-gray-900">N° da NF</label>
-            <input type="text" name="nome" id="nome" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+            <label for="n-NFe" class="block mb-1 text-sm font-medium text-gray-900">N° da NF</label>
+            <input type="text" name="n-NFe" id="n-NFe" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
         </div>
 
         <div class="mt-2">
@@ -26,75 +26,75 @@
 
 <div class="mt-4 col-span-2">
     <label for="cNF" class="block mb-1 text-sm font-medium text-gray-900">Chave do Doc. Eletrônico</label>
-    <input type="text" name="cNF" id="cNF" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    <input type="text" name="cNF" id="cNF" step="any" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
 </div>
 
 <div class="mt-4">
     <label for="dhEmi" class="block mb-1 text-sm font-medium text-gray-900">Data Emissão</label>
-    <input type="date" name="dhEmi" id="dhEmi" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    <input type="date" name="dhEmi" id="dhEmi" step="any" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
 </div>
 
 <div class="mt-4">
     <label for="vBC" class="block mb-1 text-sm font-medium text-gray-900">Base Cálc. ICMS</label>
-    <input type="number" name="vBC" id="vBC" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    <input type="number" name="vBC" id="vBC" step="any" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
 </div>
 
 <div class="mt-4">
     <label for="vICMS" class="block mb-1 text-sm font-medium text-gray-900">Valor do ICMS</label>
-    <input type="number" name="vICMS" id="vICMS" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    <input type="number" name="vICMS" id="vICMS" step="any" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
 </div>
 
 <div class="mt-4">
     <label for="vBCST" class="block mb-1 text-sm font-medium text-gray-900">Base Cálc. ICMS ST</label>
-    <input type="number" name="vBCST" id="vBCST" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    <input type="number" name="vBCST" id="vBCST" step="any" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
 </div>
 
 <div class="mt-4">
     <label for="vST" class="block mb-1 text-sm font-medium text-gray-900">Valor ICMS ST</label>
-    <input type="number" name="vST" id="vST" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    <input type="number" name="vST" id="vST" step="any" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
 </div>
 
 <div class="mt-4">
     <label for="vFCP" class="block mb-1 text-sm font-medium text-gray-900">Valor do FCP</label>
-    <input type="number" name="vFCP" id="vFCP" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    <input type="number" name="vFCP" id="vFCP" step="any" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
 </div>
 
 <div class="mt-4">
     <label for="vFCPST" class="block mb-1 text-sm font-medium text-gray-900">Valor do FCP ST</label>
-    <input type="number" name="vFCPST" id="vFCPST" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    <input type="number" name="vFCPST" id="vFCPST" step="any" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
 </div>
 
 <div class="mt-4">
     <label for="vProd" class="block mb-1 text-sm font-medium text-gray-900">Valor dos Produtos</label>
-    <input type="number" name="vProd" id="vProd" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    <input type="number" name="vProd" id="vProd" step="any" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
 </div>
 
 <div class="mt-4">
     <label for="vFrete" class="block mb-1 text-sm font-medium text-gray-900">Valor do Frete</label>
-    <input type="number" name="vFrete" id="vFrete" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    <input type="number" name="vFrete" id="vFrete" step="any" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
 </div>
 
 <div class="mt-4">
     <label for="vSeg" class="block mb-1 text-sm font-medium text-gray-900">Valor do Seguro</label>
-    <input type="number" name="vSeg" id="vSeg" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    <input type="number" name="vSeg" id="vSeg" step="any" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
 </div>
 
 <div class="mt-4">
     <label for="vDesc" class="block mb-1 text-sm font-medium text-gray-900">Desconto Contábil</label>
-    <input type="number" name="vDesc" id="vDesc" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    <input type="number" name="vDesc" id="vDesc" step="any" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
 </div>
 
 <div class="mt-4">
     <label for="vIPI" class="block mb-1 text-sm font-medium text-gray-900">Valor do IPI</label>
-    <input type="number" name="vIPI" id="vIPI" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    <input type="number" name="vIPI" id="vIPI" step="any" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
 </div>
 
 <div class="mt-4">
     <label for="vCOFINS" class="block mb-1 text-sm font-medium text-gray-900">Valor do COFINS</label>
-    <input type="number" name="vCOFINS" id="vCOFINS" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    <input type="number" name="vCOFINS" id="vCOFINS" step="any" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
 </div>
 
 <div class="mt-4">
     <label for="vNF" class="block mb-1 text-sm font-medium text-gray-900">Total da NF</label>
-    <input type="number" name="vNF" id="vNF" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    <input type="number" name="vNF" id="vNF" step="any" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
 </div>

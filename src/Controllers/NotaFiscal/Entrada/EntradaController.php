@@ -48,4 +48,12 @@ class EntradaController extends Controller {
         exit();
     }
 
+    public function store(Request $request){
+        $data = $request->getBodyParams();
+
+        echo json_encode($data);
+
+        exit();
+    }
+
 }

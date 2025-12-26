@@ -176,5 +176,6 @@ $router->create("GET", "/transmitir-nfe", [$notaFiscalController, 'transmitNFe']
 $router->create("GET", "/fiscal/entradas", [$entradaController, 'index'], $auth);
 $router->create("GET", "/fiscal/entradas/cadastro", [$entradaController, 'create'], $auth);
 $router->create("POST", "/fiscal/entradas/search", [$entradaController, 'searchNF'], $auth);
+$router->create("POST", "/fiscal/entradas/cadastro", [$entradaController, 'store'], $auth);
 
 return $router;
