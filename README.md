@@ -71,7 +71,7 @@ app
 git clone https://github.com/andreeezinho/sistema-pdv.git
 ```
 
-### 2 - Remover '.example' de `/env/app.example.php`
+### 2 - Remover '.example.' de `/env/app.example.php`
 
 ### 3 - Inserir valores nas variáveis
 ```bash
@@ -88,9 +88,9 @@ const EMAIL = 'seuemail@gmail.com';
 const EMAIL_PASSWORD = 'gfte esjt eqes qhmm'; ## Senha do SMTP que precisa cadastrar
 ```
 
-### Copiar `bd.sql` para o seu banco de dados
+### 4 - Copiar `bd.sql` para o seu banco de dados
 
-### Executar projeto
+### 5 - Executar projeto
 ```bash
 php -S localhost:8888 -t ./
 ```
