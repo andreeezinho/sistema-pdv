@@ -1,12 +1,96 @@
-# Estrutura MVC 
+# sysGV (Sistema Gestor de Vendas)
 
-#### Base de uma estrutura utilizando MVC
+Sistema de gestão de vendas e ponto de caixa desenvolvido com **PHP Puro/Sem Frameworks**, que busca seguir boas práticas no desenvolvimento e sua arquitetura. 
+O projeto busca implementar tecnologias e padrões que garantem a organização, escalabilidade e manutenções futuras.
 
+---
 
-## Features
+## Tecnologias, Padrões e Arquiteturas
 
-- POO
-- SOLID
-- Clean Code
-- Singleton
+- **PHP Puro**
+- **Arquitetura MVC**
+- **Organização de rotas personalizadas**
+- **Clean Code**
+- **Princípios SOLID**
+- **Padrão Singleton**
+- **TailwindCSS** (Front-end)
 
+---
+
+## Funcionalidades do Sistema
+
+- Gerenciamento de Usuários com cargos (Administrador, Frente de Caixa, Repositor, Entregador)
+- Gerenciamento de Clientes e Fornecedores
+- Gerenciamento de Produtos e Estoques e suas Tributações
+- Painel do Ponto de Caixa para realizar venda dos produtos
+- Painal administrativo para gerenciamento do sistema utilizando gráficos resposivos com Charts Flowbite
+- Gerenciamento de Notas Ficais (Entrada, Saída, Tributações)
+- Geração de Relatórios personalizados de vendas e produtos
+- Rotas dinâmicas e personalizadas
+- Customização de variáveis de ambiente via `/env/app.php`
+
+---
+
+## Estrutura de Pastas
+
+```plaintext
+app
+├── bd.sql
+├── composer.json
+├── composer.lock
+├── .gitignore
+├── index.php
+├── phpunit.xml
+├── public
+│   ├── css
+│   ├── img
+│   └── js
+├── README.md
+├── src
+│   ├── Config
+│   ├── Controllers
+│   ├── env
+│   ├── Interfaces
+│   ├── Models
+│   ├── Repositories
+│   ├── Request
+│   ├── Resources
+│   ├── Routers
+│   ├── Services
+│   └── Utils
+├── tests
+```
+
+---
+
+## Execução do Projeto
+
+### 1 - Clonar repositório
+
+```bash
+git clone https://github.com/andreeezinho/sistema-pdv.git
+```
+
+### 2 - Remover '.example' de `/env/app.example.php`
+
+### 3 - Inserir valores nas variáveis
+```bash
+const SITE_NAME = 'Sistema Gestor de Vendas';
+const URL_SITE = '';
+const LOGO = '/public/img/site/logo.png';
+const COLORED_LOGO = '/public/img/site/logo-colorida.png';
+const DB_HOST = 'mysql';
+const DB_NAME = 'db';
+const DB_USER = 'root';
+const DB_PASSWORD = '12345';
+
+const EMAIL = 'seuemail@gmail.com';
+const EMAIL_PASSWORD = 'gfte esjt eqes qhmm'; ## Senha do SMTP que precisa cadastrar
+```
+
+### Copiar `bd.sql` para o seu banco de dados
+
+### Executar projeto
+```bash
+php -S localhost:8888 -t ./
+```
