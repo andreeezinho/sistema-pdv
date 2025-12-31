@@ -299,7 +299,7 @@
                                 <td class="px-6 py-4"><?= $produto->codigo ?></td>
                                 <td class="px-6 py-4"><?= strtoupper($produto->tipo) ?></td>
                                 <td class="px-6 py-4 text-center"><?= $produto->quantidade ?></td>
-                                <td class="px-6 py-4 text-center">R$ <?=  number_format(($produto->preco * $produto->quantidade) ?? 0,2,",",".") ?></td>
+                                <td class="px-6 py-4 text-center"><?=  number_format(($produto->preco * $produto->quantidade) ?? 0,2,",",".") ?></td>
                                 <td class="px-6 py-4 text-center">
                                     <form action="/pdv/<?= $venda->uuid ?>/remover/<?= $produto->uuid ?>" method="POST" class="text-center">
                                         <button type="button" class="float-end bg-red-300 hover:bg-red-500 text-white font-bold py-2 px-4 rounded" data-modal-target="popup-modal-<?= $produto->uuid ?>" data-modal-toggle="popup-modal-<?= $produto->uuid ?>">
