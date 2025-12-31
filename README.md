@@ -94,7 +94,7 @@ const EMAIL = 'seuemail@gmail.com';
 const EMAIL_PASSWORD = 'gfte esjt eqes qhmm'; ## Senha do SMTP que precisa cadastrar
 ```
 
-### 4 - Copiar `bd.sql` para o seu banco de dados
+### 4 - Copiar ```db.sql``` para o seu banco de dados
 
 ### 5 - Executar projeto
 ```bash
