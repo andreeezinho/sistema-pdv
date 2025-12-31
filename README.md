@@ -29,6 +29,8 @@ O projeto busca implementar tecnologias e padrões que garantem a organização,
 - Rotas dinâmicas e personalizadas
 - Customização de variáveis de ambiente via `/env/app.php`
 
+<img width="640" height="360" alt="Screenshot from 2025-12-31 13-30-52" src="https://github.com/user-attachments/assets/f9c74e4e-fbcf-4dff-a0b4-7f5cbd3e6dfa" />
+
 ---
 
 ## Estrutura de Pastas
