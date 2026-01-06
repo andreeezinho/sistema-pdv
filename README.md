@@ -92,6 +92,8 @@ const DB_PASSWORD = '12345';
 
 const EMAIL = 'seuemail@gmail.com';
 const EMAIL_PASSWORD = 'gfte esjt eqes qhmm'; ## Senha do SMTP que precisa cadastrar
+
+const CERTIFICATE = '' ## Certificado Digital da Empresa
 ```
 
 ### 4 - Copiar ```db.sql``` para o seu banco de dados
@@ -100,3 +102,12 @@ const EMAIL_PASSWORD = 'gfte esjt eqes qhmm'; ## Senha do SMTP que precisa cadas
 ```bash
 php -S localhost:8888 -t ./
 ```
+
+## Sobre Certificado Digital para Notas Fiscais no Sistema
+
+Deve-se copiar o seu certificado digital para dentro da raiz do projeto, logo depois, adiciona a rota do arquivo para a variável ```CERTIFICATE```.
+```bash
+const CERTIFICATE = '../../seu-certificado.pfx'
+```
+
+Por preferência, use um certificado do tipo ```.pfx``` para que não haja nenhum problema eventual.
