@@ -11,3 +11,6 @@
 
     const EMAIL = '';
     const EMAIL_PASSWORD = '';
+
+    const CERTIFICATE = '';
+    const CERTIFICATE_PASSWORD = '';

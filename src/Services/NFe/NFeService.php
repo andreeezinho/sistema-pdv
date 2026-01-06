@@ -16,7 +16,7 @@ class NFeService {
     protected $tools;
    
     public function __construct(array $config, $issuer){
-        $this->tools = new Tools(json_encode($config), Certificate::readPfx(file_get_contents(__DIR__.'/certificado.pfx'), '123456'));
+        $this->tools = new Tools(json_encode($config), Certificate::readPfx(file_get_contents(__DIR__.CERTIFICATE), CERTIFICATE_PASSWORD));
         $this->tools->model(55);
     }
 
