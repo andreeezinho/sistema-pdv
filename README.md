@@ -29,6 +29,7 @@ O projeto busca implementar tecnologias e padrões que garantem a organização,
 - Rotas dinâmicas e personalizadas
 - Customização de variáveis de ambiente via `/env/app.php`
 
+Algumas Imagens do Projeto:
 <img width="426" height="240" alt="Screenshot from 2025-12-31 13-30-52" src="https://github.com/user-attachments/assets/f9c74e4e-fbcf-4dff-a0b4-7f5cbd3e6dfa" /> <img width="426" height="240" alt="Screenshot from 2025-12-31 13-16-43" src="https://github.com/user-attachments/assets/9b938494-efdf-4f36-bed8-5b11921a7150" />
 
 <img width="426" height="240" alt="Screenshot from 2025-12-31 13-17-59" src="https://github.com/user-attachments/assets/3f9bf076-00d4-4e86-b90e-e320ae68db61" /> <img width="426" height="240" alt="Screenshot from 2025-12-31 13-31-33" src="https://github.com/user-attachments/assets/b32f6095-25e2-4592-bd8c-c3151611d726" />
