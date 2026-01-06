@@ -77,7 +77,7 @@ app
 git clone https://github.com/andreeezinho/sistema-pdv.git
 ```
 
-### 2 - Remover '.example.' de `/env/app.example.php`
+### 2 - Remover '.example.' de `src/env/app.example.php`
 
 ### 3 - Inserir valores nas variáveis
 ```bash
@@ -105,7 +105,7 @@ php -S localhost:8888 -t ./
 
 ## Sobre Certificado Digital para Notas Fiscais no Sistema
 
-Deve-se copiar o seu certificado digital para dentro da raiz do projeto, logo depois, adiciona a rota do arquivo para a variável ```CERTIFICATE```.
+Deve-se copiar o seu certificado digital para dentro da raiz do projeto, logo depois, adiciona a rota do arquivo para a variável `CERTIFICATE` no arquivo `src/env/app.php`.
 ```bash
 const CERTIFICATE = '../../seu-certificado.pfx'
 ```
