@@ -69,7 +69,7 @@
                  <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Relatórios</a>
                 </li>
                 <li>
-                 <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Entradas</a>
+                 <a href="/fiscal/entradas" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Entradas</a>
                 </li>
                 <li>
                  <a href="#" class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-gray-400">Saídas</a>

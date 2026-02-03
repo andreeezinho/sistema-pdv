@@ -18,6 +18,7 @@ use App\Controllers\Pagamento\PagamentoController;
 use App\Controllers\Cliente\ClienteController;
 use App\Controllers\Grupo\GrupoController;
 use App\Controllers\NotaFiscal\NotaFiscalController;
+use App\Controllers\NotaFiscal\Entrada\EntradaController;
 use App\Controllers\Tributacao\TributacaoController;
 use App\Controllers\Fornecedor\FornecedorController;
 
@@ -42,6 +43,7 @@ $pagamentoController = $container->get(PagamentoController::class);
 $clienteController = $container->get(ClienteController::class);
 $grupoController = $container->get(GrupoController::class);
 $notaFiscalController = $container->get(NotaFiscalController::class);
+$entradaController = $container->get(EntradaController::class);
 $tributacaoController = $container->get(TributacaoController::class);
 $fornecedorController = $container->get(FornecedorController::class);
 
@@ -169,5 +171,11 @@ $router->create("POST", "/fornecedores/{uuid}/deletar", [$fornecedorController, 
 //nota-fiscal
 $router->create("GET", "/gerar-xml", [$notaFiscalController, 'generateXml'], $auth);
 $router->create("GET", "/transmitir-nfe", [$notaFiscalController, 'transmitNFe'], $auth);
+
+//entrada
+$router->create("GET", "/fiscal/entradas", [$entradaController, 'index'], $auth);
+$router->create("GET", "/fiscal/entradas/cadastro", [$entradaController, 'create'], $auth);
+$router->create("POST", "/fiscal/entradas/search", [$entradaController, 'searchNF'], $auth);
+$router->create("POST", "/fiscal/entradas/cadastro", [$entradaController, 'store'], $auth);
 
 return $router;

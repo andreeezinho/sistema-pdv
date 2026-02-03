@@ -8,6 +8,7 @@ class Request{
     protected $uri;
     protected $queryParams;
     protected $bodyParams;
+    protected $fileParams;
     protected $headers;
 
     public function __construct(){
@@ -15,6 +16,7 @@ class Request{
         $this->uri = $_SERVER['REQUEST_URI'];
         $this->queryParams = $_GET;
         $this->bodyParams = $_POST;
+        $this->fileParams = $_FILES;
         $this->headers = getallheaders();
     }
 
@@ -32,6 +34,10 @@ class Request{
 
     public function getBodyParams(){
         return $this->bodyParams;
+    }
+
+    public function getFileParams(){
+        return $this->fileParams;
     }
 
     public function getHeaders(){
