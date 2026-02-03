@@ -23,20 +23,30 @@ function userPermission($permissao_nome){
     return false;
 }
 
+function userPermissionChecked($permissao_id, $user_permissoes){
+    foreach($user_permissoes as $permissao){
+        if($permissao->permissoes_id === $permissao_id){
+            return true;
+        }
+    }
+
+    return false;
+}
+
 //enviar imagem para o servidor
 function createImage($arquivo, $dir){
     if(empty($arquivo['name']) || empty($arquivo['tmp_name'])){
         return null;
     }
 
-    if(
-        $arquivo['type'] != 'image/jpeg' &&
-        $arquivo['type'] != 'image/png' &&
-        $arquivo['type'] != 'image/svg*xml' &&
-        $arquivo['type'] != 'image/webp' 
-    ){
-        return null;
-    }
+    // if(
+    //     $arquivo['type'] != 'image/jpeg' &&
+    //     $arquivo['type'] != 'image/png' &&
+    //     $arquivo['type'] != 'image/svg*xml' &&
+    //     $arquivo['type'] != 'image/webp' 
+    // ){
+    //     return null;
+    // }
 
     $root_dir = rtrim($_SERVER['DOCUMENT_ROOT'] . '/public/img' . $dir, "/") . '/';
 
@@ -64,5 +74,26 @@ function createImage($arquivo, $dir){
     }
 
     return null;
+}
 
+function priceWithDiscount(array $products, float $discount = 0){
+    $total = 0;
+
+    foreach($products as $product){
+        if(isset($product->quantidade)){
+            $total += $product->preco * $product->quantidade;
+        }
+
+
+        if(!isset($product->quantidade)){
+            $total = $total + $product->preco;
+        }
+    }
+
+    if($discount > 0){
+        $total -= $discount;
+        $total *= -1;
+    }
+
+    return $total;
 }

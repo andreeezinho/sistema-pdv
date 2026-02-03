@@ -19,24 +19,20 @@ class UserController extends Controller {
     }
 
     public function index(Request $request){
-        if(!userPermission('visualizar usuarios')){
-            return $this->router->redirect('');
-        }
-
         $params = $request->getQueryParams();
 
         $usuarios = $this->userRepository->all($params);
 
         return $this->router->view('user/index', [
-            'usuarios' => $usuarios
+            'usuarios' => $usuarios,
+            'nome_usuario' => $params['nome_usuario'] ?? null,
+            'cpf' => $params['cpf'] ?? null,
+            'cargo' => $params['cargo'] ?? null,
+            'ativo' => $params['ativo'] ?? null
         ]);
     }
 
     public function create(Request $request){
-        if(!userPermission('cadastrar usuarios')){
-            return $this->router->redirect('');
-        }
-
         return $this->router->view('user/create', [
             'perfil' => false
         ]);
@@ -65,10 +61,6 @@ class UserController extends Controller {
     }
 
     public function edit(Request $request, $uuid){
-        if(!userPermission('editar usuarios')){
-            return $this->router->redirect('');
-        }
-        
         $usuario = $this->userRepository->findByUuid($uuid);
 
         if(!$usuario){
@@ -92,15 +84,17 @@ class UserController extends Controller {
 
         if($data['nome'] == "" || $data['email'] == "" || $data['cpf'] == ""){
             return $this->router->view('user/edit', [
-                'erro' => 'Campo obrigatório em branco'
+                'erro' => 'Campo obrigatório em branco',
+                'usuario' => $usuario
             ]);
         }
 
         $update = $this->userRepository->update($data, $usuario->id);
 
         if(is_null($update)){
-            return $this->router->view('user/index', [
-                'erro' => 'Não foi possível editar usuário'
+            return $this->router->view('user/edit', [
+                'erro' => 'Não foi possível editar usuário',
+                'usuario' => $usuario
             ]);
         }
 
@@ -109,12 +103,6 @@ class UserController extends Controller {
     }
 
     public function destroy(Request $request, $uuid){
-        if(!userPermission('deletar usuarios')){
-            return $this->router->view('user/index', [
-                'erro' => 'Você não tem as permissões necessárias'
-            ]);
-        }
-
         $usuario = $this->userRepository->findByUuid($uuid);
 
         if(!$usuario){
@@ -143,15 +131,18 @@ class UserController extends Controller {
     public function auth(Request $request){
         $data = $request->getBodyParams();
 
-        $user = $this->userRepository->login($data['email'], $data['senha']);
+        $user = $this->userRepository->login($data['usuario'], $data['senha']);
 
         if($this->auth->login($user)){
+            $this->userRepository->setOnline($user->id, 1);
+            $this->userRepository->setSituation($user->id, 'em servico');
+
             return $this->router->redirect('dashboard');
         }
 
         return $this->router->view('login/login', [
             'erro' => 'Usuário não encontrado',
-            'email' => $data['email'] ?? null
+            'usuario' => $data['usuario'] ?? null
         ]);
     }
 

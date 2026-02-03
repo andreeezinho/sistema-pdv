@@ -25,7 +25,9 @@ class PermissaoController extends Controller {
         $permissoes = $this->permissaoRepository->all($params);
 
         return $this->router->view('permissao/index', [
-            'permissoes' => $permissoes
+            'permissoes' => $permissoes,
+            'nome' => $params['nome'] ?? null,
+            'ativo' => $params['ativo'] ?? null
         ]);
     }
 

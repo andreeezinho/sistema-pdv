@@ -1,10 +1,55 @@
-</section>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-<script src="<?= URL_SITE ?>/public/js/script.js"></script>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="https://unpkg.com/flowbite@1.6.6/dist/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.46.0/dist/apexcharts.min.js"></script>
+    <script src="<?= URL_SITE ?>/public/js/script.js"></script>
 </body>
 </html>
+
+<script>
+    $('#cep').mask('00000-000');
+    $('#cpf').mask('000.000.000-00');
+    $('#telefone').mask('(00) 00000-0000');
+
+    if($('#cep')){
+        $('#cep').blur(function() {
+            $.ajax({
+                type: "GET",
+                url: "https://viacep.com.br/ws/"+$(this).val()+"/json/",
+                dataType: "JSON",
+                success: function(response){
+                    $('#uf').val(response.uf);
+                    $('#ibge').val(response.ibge);
+                    $('#cidade').val(response.localidade);
+                    $('#rua').val(response.logradouro);
+                    $('#bairro').val(response.bairro);
+                    $('#complemento').val(response.complemento);
+                }
+            });
+        });
+    }
+
+    if($('#documento')){
+        $('#documento').blur(function() {
+            console.log("https://api.opencnpj.org/{CNPJ}/"+$(this).val());
+            $.ajax({
+                type: "GET",
+                url: "https://publica.cnpj.ws/cnpj/"+$(this).val(),
+                dataType: "JSON",
+                success: function(response){
+                    $('#razao_social').val(response.razao_social);
+                    $('#nome_fantasia').val(response.nome_fanntasia);
+                    $('#ie_rg').val(response.estabelecimento.inscricoes_estaduais[0].inscricao_estadual);
+                    $('#codigo').val(response.estabelecimento.estado.ibge_id);
+                }
+            });
+        });
+    }
+
+    $(window).on("beforeunload", function() {
+        navigator.sendBeacon("/logout");
+    });
+
+</script>

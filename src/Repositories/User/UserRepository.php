@@ -22,14 +22,14 @@ class UserRepository implements IUser {
         $this->model = new User();
     }
 
-    public function login(string $email, string $senha){
-        if(empty($email) || empty($senha)){
+    public function login(string $usuario, string $senha){
+        if(empty($usuario) || empty($senha)){
             return null;
         }
 
         $sql = "SELECT * FROM " . self::TABLE . "
             WHERE 
-                email = :email
+                usuario = :usuario
             AND
                 ativo = 1
         ";
@@ -37,7 +37,7 @@ class UserRepository implements IUser {
         $stmt = $this->conn->prepare($sql);
 
         $stmt->execute([
-            ':email' => $email
+            ':usuario' => $usuario
         ]);
 
         $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, self::CLASS_NAME);
@@ -56,25 +56,90 @@ class UserRepository implements IUser {
         return $user;
     }
 
+    public function setOnline(int $id, int $online){
+        try {
+
+            $sql = "UPDATE " . self::TABLE . " 
+                SET
+                    online = :online
+                WHERE
+                    id = :id
+            ";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $update = $stmt->execute([
+                ':online' => $online,
+                ':id' => $id
+            ]);
+
+            if(!$update){
+                return false;
+            }
+
+            return true;
+
+        }catch(\Throwable $th){
+            return null;
+        }finally{
+            Database::getInstance()->closeConnection();
+        }
+    }
+
+    public function setSituation(int $id, string $situacao){
+        try {
+
+            $sql = "UPDATE " . self::TABLE . " 
+                SET
+                    situacao = :situacao
+                WHERE
+                    id = :id
+            ";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $update = $stmt->execute([
+                ':situacao' => $situacao,
+                ':id' => $id
+            ]);
+
+            if(!$update){
+                return false;
+            }
+
+            return true;
+
+        }catch(\Throwable $th){
+            return null;
+        }finally{
+            Database::getInstance()->closeConnection();
+        }
+    }
+
     public function all(array $params = []){
         $sql = "SELECT * FROM " . self::TABLE;
     
         $conditions = [];
         $bindings = [];
     
-        if(isset($params['nome_email']) && !empty($params['nome_email'])){
-            $conditions[] = "nome LIKE :nome_email OR email LIKE :nome_email";
-            $bindings[':nome_email'] = "%" . $params['nome_email'] . "%" ;
+        if(isset($params['nome_usuario']) && !empty($params['nome_usuario'])){
+            $conditions[] = "nome LIKE :nome_usuario OR usuario LIKE :nome_usuario";
+            $bindings[':nome_usuario'] = "%" . $params['nome_usuario'] . "%" ;
         }
-    
+
+        if(isset($params['online']) && $params['online'] != ""){
+            $conditions[] = "online != :online";
+            $bindings[':online'] = $params['online'];
+        }
+
         if(isset($params['cpf']) && !empty($params['cpf'])){
             $conditions[] = "cpf = :cpf";
             $bindings[':cpf'] = $params['cpf'];
         }
     
-        if(isset($params['telefone']) && !empty($params['telefone'])){
-            $conditions[] = "telefone = :telefone";
-            $bindings[':telefone'] = $params['telefone'];
+        if(isset($params['cargo']) && !empty($params['cargo'])){
+            $conditions[] = "cargo = :cargo";
+            $bindings[':cargo'] = $params['cargo'];
         }
     
         if(isset($params['ativo']) && $params['ativo'] != ""){
@@ -86,8 +151,7 @@ class UserRepository implements IUser {
             $sql .= " WHERE " . implode(" AND ", $conditions);
         }
 
-        $sql .= " ORDER BY created_at DESC";
-
+        $sql .= " ORDER BY created_at ASC";
         $stmt = $this->conn->prepare($sql);
 
         $stmt->execute($bindings);
@@ -135,11 +199,14 @@ class UserRepository implements IUser {
             $sql = "INSERT INTO " . self::TABLE . "
                 SET
                     uuid = :uuid,
+                    usuario = :usuario,
                     nome = :nome,
                     email = :email,
                     cpf = :cpf,
                     telefone = :telefone,
                     senha = :senha,
+                    cargo = :cargo,
+                    is_admin = :is_admin,
                     ativo = :ativo,
                     icone = :icone
                 ";
@@ -148,11 +215,14 @@ class UserRepository implements IUser {
 
             $create = $stmt->execute([
                 ':uuid' => $usuario->uuid,
+                ':usuario' => $usuario->usuario,
                 ':nome' => $usuario->nome,
                 ':email' => $usuario->email,
                 ':cpf' => $usuario->cpf,
                 ':telefone' => $usuario->telefone,
                 ':senha' => $usuario->senha,
+                ':cargo' => $usuario->cargo,
+                ':is_admin' => $usuario->is_admin,
                 ':ativo' => $usuario->ativo,
                 ':icone' => $usuario->icone
             ]);
@@ -171,16 +241,20 @@ class UserRepository implements IUser {
     }
 
     public function update(array $data, int $id){
+        $data = array_merge($data, ['senha' => 'senha123']);
         $usuario = $this->model->create($data);
 
         try{
 
             $sql = "UPDATE " .self::TABLE . "
                 SET
+                    usuario = :usuario,
                     nome = :nome,
                     email = :email,
                     cpf = :cpf,
                     telefone = :telefone,
+                    cargo = :cargo,
+                    is_admin = :is_admin,
                     ativo = :ativo
                 WHERE
                     id = :id
@@ -189,10 +263,13 @@ class UserRepository implements IUser {
             $stmt = $this->conn->prepare($sql);
 
             $update = $stmt->execute([
+                ':usuario' => $usuario->usuario,
                 ':nome' => $usuario->nome,
                 ':email' => $usuario->email,
                 ':cpf' => $usuario->cpf,
                 ':telefone' => $usuario->telefone,
+                ':cargo' => $usuario->cargo,
+                ':is_admin' => $usuario->is_admin,
                 ':ativo' => $usuario->ativo,
                 ':id' => $id
             ]);
@@ -201,13 +278,10 @@ class UserRepository implements IUser {
                 return null;
             }
 
-            $update = $this->findById($id);
-
-            return $update;
+            return $this->findById($id);
 
         }catch(\Throwable $th){
-            echo($th);
-            return null;
+            return $th;
         }finally{
             Database::getInstance()->closeConnection();
         }
@@ -244,6 +318,46 @@ class UserRepository implements IUser {
 
         }catch(\Throwable $th){
             return null;
+        }finally{
+            Database::getInstance()->closeConnection();
+        }
+    }
+
+    public function updatePerfil(array $data, int $id){
+        $usuario = $this->model->updatePerfil($data);
+
+        try{
+
+            $sql = "UPDATE " .self::TABLE . "
+                SET
+                    usuario = :usuario,
+                    nome = :nome,
+                    email = :email,
+                    cpf = :cpf,
+                    telefone = :telefone
+                WHERE
+                    id = :id
+            ";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $update = $stmt->execute([
+                ':usuario' => $usuario->usuario,
+                ':nome' => $usuario->nome,
+                ':email' => $usuario->email,
+                ':cpf' => $usuario->cpf,
+                ':telefone' => $usuario->telefone,
+                ':id' => $id
+            ]);
+
+            if(!$update){
+                return null;
+            }
+
+            return $this->findById($id);
+
+        }catch(\Throwable $th){
+            return $th;
         }finally{
             Database::getInstance()->closeConnection();
         }

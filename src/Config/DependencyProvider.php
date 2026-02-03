@@ -10,6 +10,32 @@ use App\Interfaces\Permissao\IPermissao;
 use App\Repositories\Permissao\PermissaoRepository;
 use App\Interfaces\Permissao\IPermissaoUser;
 use App\Repositories\Permissao\PermissaoUserRepository;
+use App\Interfaces\Venda\IVenda;
+use App\Repositories\Venda\VendaRepository;
+use App\Interfaces\Venda\IVendaProduto;
+use App\Repositories\Venda\VendaProdutoRepository;
+use App\Interfaces\Produto\IProduto;
+use App\Repositories\Produto\ProdutoRepository;
+use App\Interfaces\Pagamento\IPagamento;
+use App\Repositories\Pagamento\PagamentoRepository;
+use App\Interfaces\Venda\IVendaPagamento;
+use App\Repositories\Venda\VendaPagamentoRepository;
+use App\Interfaces\Cliente\ICliente;
+use App\Repositories\Cliente\ClienteRepository;
+use App\Interfaces\Venda\IVendaCliente;
+use App\Repositories\Venda\VendaClienteRepository;
+use App\Interfaces\Grupo\IGrupo;
+use App\Repositories\Grupo\GrupoRepository;
+use App\Interfaces\Tributacao\ITributacao;
+use App\Repositories\Tributacao\TributacaoRepository;
+use App\Interfaces\Embalagem\IEmbalagem;
+use App\Repositories\Embalagem\EmbalagemRepository;
+use App\Interfaces\Origem\IOrigem;
+use App\Repositories\Origem\OrigemRepository;
+use App\Interfaces\Fornecedor\IFornecedor;
+use App\Repositories\Fornecedor\FornecedorRepository;
+use App\Interfaces\Endereco\IEndereco;
+use App\Repositories\Endereco\EnderecoRepository;
 
 class DependencyProvider {
 
@@ -44,6 +70,85 @@ class DependencyProvider {
                 IRecoveryPassword::class,
                 new RecoveryPasswordRepository()
             );
+
+        $this->container
+            ->set(
+                IVenda::class,
+                new VendaRepository()
+            );
+
+        $this->container
+            ->set(
+                IVendaProduto::class,
+                new VendaProdutoRepository()
+            );
+        
+        $this->container
+            ->set(
+                IProduto::class,
+                new ProdutoRepository()
+            );
+
+        $this->container
+            ->set(
+                IPagamento::class,
+                new PagamentoRepository()
+            );
+
+        $this->container
+            ->set(
+                IVendaPagamento::class,
+                new VendaPagamentoRepository()
+            );
+
+        $this->container
+            ->set(
+                ICliente::class,
+                new ClienteRepository()
+            );
+
+        $this->container
+            ->set(
+                IVendaCliente::class,
+                new VendaClienteRepository()
+            );
+
+        $this->container
+            ->set(
+                IGrupo::class,
+                new GrupoRepository()
+            );
+
+        $this->container
+            ->set(
+                ITributacao::class,
+                new TributacaoRepository()
+            );
+
+        $this->container
+            ->set(
+                IEmbalagem::class,
+                new EmbalagemRepository()
+            );
+
+        $this->container
+            ->set(
+                IOrigem::class,
+                new OrigemRepository()
+            );
+
+        $this->container
+            ->set(
+                IFornecedor::class,
+                new FornecedorRepository()
+            );
+
+        $this->container
+            ->set(
+                IEndereco::class,
+                new EnderecoRepository()
+            );
+
 
     }
 

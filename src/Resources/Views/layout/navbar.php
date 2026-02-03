@@ -1,51 +1,45 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark px-0 px-md-5">
-    <div class="container-fluid">
-        <a class="navbar-brand ml-5" href="/dashboard">
-            <img src="<?= URL_SITE ?>/public/img/site/logo.png" alt="Logo" class="logo">
+<nav class="fixed top-0 w-full bg-gray-800 z-50">
+  <div class="px-3 py-3 lg:px-5 lg:pl-3">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center justify-start rtl:justify-end">
+        <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+               <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
+            </svg>
+         </button>
+        <a href="/" class="flex ms-2 md:me-24">
+          <img src="<?= LOGO ?>" class="h-8 me-3" alt="Site Logo" />
+          <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-white"><?= SITE_NAME ?></span>
         </a>
+      </div>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">    
-            </ul>
-
-            <ul class="navbar-nav d-flex">
-                <li class="nav-item dropdown d-block d-md-none">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown-usuario" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="<?= URL_SITE ?>/public/img/user/icons/<?= $_SESSION['user']->icone ?>" alt="User Icone" class="user-icone rounded-circle">
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdown-usuario">
-                        <li><a class="dropdown-item" href="/perfil">Perfil</a></li>
-                        <li><a class="dropdown-item" href="/logout">Sair</a></li>
-                    </ul>
+      <div class="flex items-center">
+          <div class="flex items-center ms-3">
+            <div>
+              <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300" aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                <img class="w-8 h-8 rounded-full" src="/public/img/user/icons/<?= $_SESSION['user']->icone ?>" alt="user photo">
+              </button>
+            </div>
+            <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-sm shadow-sm" id="dropdown-user">
+              <div class="px-4 py-3" role="none">
+                <p class="text-sm text-gray-900" role="none">
+                  <?= $_SESSION['user']->usuario ?>
+                </p>
+                <p class="text-sm font-medium text-gray-900 truncate" role="none">
+                  <?= $_SESSION['user']->email ?>
+                </p>
+              </div>
+              <ul class="py-1" role="none">
+                <li>
+                  <a href="/perfil" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Perfil</a>
                 </li>
-
-                <li class="nav-item d-none d-md-block">
-                    <a href="/dashboard" class="nav-link">Home</a>
+                <li>
+                  <a href="/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Sair</a>
                 </li>
-
-                <li class="nav-item dropdown">
-                    <span class="nav-link dropdown-toggle" href="#" id="dropdown-usuarios" data-bs-toggle="dropdown" aria-expanded="false">Site</span>
-                    <ul class="dropdown-menu" aria-labelledby="dropdown-usuarios">
-                        <li><a class="dropdown-item" href="/usuarios">Usuarios</a></li>
-                        <li><a class="dropdown-item" href="/permissoes">Permissões</a></li>
-                        <li><a class="dropdown-item" href="#">Clientes</a></li>
-                    </ul>
-                </li>
-
-                <li class="nav-item dropdown d-none d-md-block me-5">
-                    <span class="nav-link dropdown-toggle" href="#" id="dropdown-usuario" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="<?= URL_SITE ?>/public/img/user/icons/<?= $_SESSION['user']->icone ?>" alt="User Icone" class="user-icone rounded-circle">
-                    </span>
-                    <ul class="dropdown-menu" aria-labelledby="dropdown-usuario">
-                        <li><a class="dropdown-item" href="/perfil">Perfil</a></li>
-                        <li><a class="dropdown-item" href="/logout">Sair</a></li>
-                    </ul>
-                </li>
-            </ul>
+              </ul>
+            </div>
+          </div>
         </div>
     </div>
+  </div>
 </nav>

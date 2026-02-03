@@ -10,10 +10,17 @@
             "src/Utils/helpers.php"
         ]
     },
+
+    "minimum-stability": "dev",
+
     "require-dev": {
         "phpunit/phpunit": "^12.1"
     },
+
     "require": {
-        "phpmailer/phpmailer": "^6.10"
+        "phpmailer/phpmailer": "^6.10",
+        "dompdf/dompdf": "^3.1",
+        "nfephp-org/sped-da": "dev-master",
+        "nfephp-org/sped-nfe": "^5.0"
     }
 }
